@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate benchmark item files for the Christian Moral Attention project."""
+"""Validate benchmark item files for the moral attention reallocation project."""
 
 from __future__ import annotations
 

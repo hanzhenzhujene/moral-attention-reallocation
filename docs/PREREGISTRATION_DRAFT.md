@@ -2,7 +2,7 @@
 
 ## Title
 
-Christian Framing as Moral Attention Reallocation in Language Models
+Moral Attention Reallocation under Framing Conditions in Language Models
 
 ## Main Question
 

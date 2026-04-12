@@ -109,7 +109,7 @@ def bar_row(x: int, y: int, label: str, value: float, color: str) -> str:
 def model_panel(x: int, y: int, model: str, metrics: Dict[str, Dict[str, float]], swap_gaps: Dict[str, float]) -> str:
     labels = [
         ("baseline", "Baseline", BASELINE),
-        ("christian_heart", "Christian", CHRISTIAN),
+        ("christian_heart", "Heart-focused", CHRISTIAN),
         ("secular_matched", "Secular", SECULAR),
     ]
     hss_rows = []
@@ -171,7 +171,7 @@ def main(argv: Sequence[str]) -> int:
         if row["task_b_swap_accuracy_gap"] is not None
     )
     hero_subtitle_lines = wrap_text(
-        "Held-out v11 pilot: multi-pass Task B removes same-heart overreach, but swap-gap still blocks freeze.",
+        "Held-out v11 pilot: multi-pass Task B removes same-heart overreach under the heart-focused condition, but swap-gap still blocks freeze.",
         WIDTH - 112,
         18,
     )
@@ -184,7 +184,7 @@ def main(argv: Sequence[str]) -> int:
     canvas_height = note_y + note_h + 24
 
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="{WIDTH}" height="{canvas_height}" viewBox="0 0 {WIDTH} {canvas_height}" role="img" aria-labelledby="title desc">
-  <title id="title">Christian Moral Attention Reallocation: held-out v11 pilot overview</title>
+  <title id="title">Moral Attention Reallocation in Language Models: held-out v11 pilot overview</title>
   <desc id="desc">Held-out v11 pilot summary showing zero parse failures, perfect same-heart control behavior, zero heart overreach, and residual Task B swap-gap concentrated in same-act different-motive pairs.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
@@ -193,7 +193,7 @@ def main(argv: Sequence[str]) -> int:
     </linearGradient>
   </defs>
   <rect width="{WIDTH}" height="{canvas_height}" fill="url(#bg)" />
-  <text x="56" y="74" font-size="40" font-weight="800" fill="{TEXT}">Christian Moral Attention Reallocation</text>
+  <text x="56" y="74" font-size="40" font-weight="800" fill="{TEXT}">Moral Attention Reallocation in Language Models</text>
   {multiline_text(56, 108, hero_subtitle_lines, 18, 22, MUTED)}
 
   {card(56, cards_y, 250, cards_h, "Valid Pilot Calls", f"{valid_records}/{expected_total}", "Both Qwen models completed every held-out job.", "good")}
@@ -205,7 +205,7 @@ def main(argv: Sequence[str]) -> int:
   {model_panel(596, panel_y, "Qwen-1.5B-Instruct", metrics["Qwen-1.5B-Instruct"], swap_gaps["Qwen-1.5B-Instruct"])}
 
   {note_panel(56, note_y, 540, note_h, "What held", ["Zero held-out heart overreach.", "Same-heart controls stayed perfect under all conditions."], "good")}
-  {note_panel(604, note_y, 540, note_h, "What still blocks freeze", ["Swap-gap is concentrated in same-act / different-motive pairs.", "Christian effect is model-dependent rather than uniform."], "warn")}
+  {note_panel(604, note_y, 540, note_h, "What still blocks freeze", ["Swap-gap is concentrated in same-act / different-motive pairs.", "Condition effects are model-dependent rather than uniform."], "warn")}
 </svg>
 """
 

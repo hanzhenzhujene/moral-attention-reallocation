@@ -223,6 +223,9 @@ def stage_guardrail(x: int, y: int, w: int, h: int) -> str:
     )
 
 
+CONDITION_LABEL = "Heart-focused"
+
+
 def compare_card(
     x: int,
     y: int,
@@ -239,7 +242,7 @@ def compare_card(
         f'{multiline_text(x + 18, y + 30, wrap_text(title, w - 36, 18), 18, 20, TEXT, 800)}'
         f'<text x="{x + 18}" y="{y + 82}" font-size="12" font-weight="800" fill="{MUTED}">Baseline</text>'
         f'<text x="{x + 18}" y="{y + 126}" font-size="34" font-weight="900" fill="{TEXT}">{esc(baseline_value)}</text>'
-        f'<text x="{x + w - 18}" y="{y + 82}" font-size="12" font-weight="800" fill="{MUTED}" text-anchor="end">Christian</text>'
+        f'<text x="{x + w - 18}" y="{y + 82}" font-size="12" font-weight="800" fill="{MUTED}" text-anchor="end">{CONDITION_LABEL}</text>'
         f'<text x="{x + w - 18}" y="{y + 126}" font-size="34" font-weight="900" fill="{TEAL}" text-anchor="end">{esc(christian_value)}</text>'
         f'<line x1="{x + 98}" y1="{y + 112}" x2="{x + w - 98}" y2="{y + 112}" stroke="{LINE}" stroke-width="3" />'
         f'<polygon points="{x + w / 2 + 16},{y + 112} {x + w / 2 - 4},{y + 100} {x + w / 2 - 4},{y + 124}" fill="{LINE}" />'
@@ -255,7 +258,7 @@ def trust_card(x: int, y: int, w: int, h: int, title: str, baseline_value: str, 
         f'{multiline_text(x + 16, y + 26, wrap_text(title, w - 24, 15), 15, 16, TEXT, 800)}'
         f'<text x="{x + 16}" y="{y + 66}" font-size="12" font-weight="800" fill="{MUTED}">Baseline</text>'
         f'<text x="{x + 16}" y="{y + 102}" font-size="30" font-weight="900" fill="{TEXT}">{esc(baseline_value)}</text>'
-        f'<text x="{x + w - 16}" y="{y + 66}" font-size="12" font-weight="800" fill="{MUTED}" text-anchor="end">Christian</text>'
+        f'<text x="{x + w - 16}" y="{y + 66}" font-size="12" font-weight="800" fill="{MUTED}" text-anchor="end">{CONDITION_LABEL}</text>'
         f'<text x="{x + w - 16}" y="{y + 102}" font-size="30" font-weight="900" fill="{TEAL}" text-anchor="end">{esc(christian_value)}</text>'
         f'{pill(x + 16, y + 114, w - 32, 28, footer, TEAL_FILL, TEAL_STROKE, TEAL, 13, 800)}'
     )
@@ -294,16 +297,16 @@ def main(argv: Sequence[str] | None = None) -> int:
     same_act = next(row for row in robustness["contrasts"] if row["slice"] == "same_act_different_motive")["metrics"]
 
     subtitle_lines = wrap_text(
-        "Christian heart-focused framing may reallocate moral attention toward inward motive on a clean same-act confirmation slice, without increasing same-heart overreach.",
+        "Current confirmation slice: a Christian heart-focused condition may reallocate moral attention toward inward motive without increasing same-heart overreach.",
         WIDTH - 112,
         22,
     )
 
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="{WIDTH}" height="{HEIGHT}" viewBox="0 0 {WIDTH} {HEIGHT}" role="img" aria-labelledby="title desc">
-  <title id="title">Christian moral attention reallocation overview</title>
+  <title id="title">Moral attention reallocation in language models overview</title>
   <desc id="desc">Two-panel figure showing benchmark logic on the left and the confirmation result summary on the right.</desc>
   <rect width="{WIDTH}" height="{HEIGHT}" fill="{BG}" />
-  <text x="56" y="68" font-size="50" font-weight="900" fill="{TEXT}">Christian Moral Attention Reallocation</text>
+  <text x="56" y="68" font-size="50" font-weight="900" fill="{TEXT}">Moral Attention Reallocation in Language Models</text>
   {multiline_text(56, 106, subtitle_lines, 22, 26, MUTED, 600)}
 
   {panel_shell(56, 186, 648, 842, "Benchmark Logic", "What is held fixed, what changes, and why the guardrail matters.")}

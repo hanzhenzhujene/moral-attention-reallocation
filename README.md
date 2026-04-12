@@ -1,15 +1,15 @@
-# Christian Moral Attention Reallocation
+# Moral Attention Reallocation in Language Models
 
-![Release](https://img.shields.io/github/v/release/hanzhenzhujene/christian-moral-attention-reallocation?style=flat-square)
+![Release](https://img.shields.io/github/v/release/hanzhenzhujene/moral-attention-reallocation?style=flat-square)
 ![Status](https://img.shields.io/badge/status-pre--freeze%20confirmation%20artifact-0f766e?style=flat-square)
 ![Public Scope](https://img.shields.io/badge/public%20scope-Qwen--1.5B%20confirmation%20slice-12805c?style=flat-square)
 ![License](https://img.shields.io/badge/license-Apache--2.0-2563eb?style=flat-square)
 
-> This repo does not show that Christian prompting makes LLMs more moral overall. It shows that, on a clean same-act confirmation slice, Christian heart-focused framing directionally improves inward-motive judgment without increasing same-heart overreach.
+> This repo does not show that any single framing condition makes LLMs more moral overall. It shows that, on a clean same-act confirmation slice, a Christian heart-focused condition directionally improves inward-motive judgment without increasing same-heart overreach.
 
 ## Abstract
 
-This repository studies a narrow mechanistic question about moral cognition in language models: not whether Christian prompting makes a model "more moral" overall, but whether Christian heart-focused framing changes what the model treats as morally diagnostic. The benchmark logic centers on pairwise moral cases with three tasks: overall moral verdict (Task A), inward-orientation judgment (Task B), and reason focus (Task C). The key design uses same-act-different-motive pairs together with same-heart controls, so motive sensitivity can be separated from false projection of outwardly worse action into inwardly worse heart. On a 63-item Qwen-1.5B-Instruct confirmation slice, Christian heart-focused framing improved Task B accuracy from `0.8889` to `0.9524` and heart-sensitivity score from `0.6957` to `0.8696`, while same-heart control accuracy remained `1.0` and heart-overreach remained `0.0`. Under conservative paired testing this is a directional confirmation result, not yet a final decisive main-benchmark claim. The broader project design includes matched secular controls, but the current public artifact is intentionally narrower: a pre-freeze confirmation slice with honest reproducibility boundaries.
+This repository studies a narrow mechanistic question about moral cognition in language models: whether framing changes what the model treats as morally diagnostic. The current public confirmation slice uses a Christian heart-focused condition as the main probe against a baseline prompt. The benchmark logic centers on pairwise moral cases with three tasks: overall moral verdict (Task A), inward-orientation judgment (Task B), and reason focus (Task C). The key design uses same-act-different-motive pairs together with same-heart controls, so motive sensitivity can be separated from false projection of outwardly worse action into inwardly worse heart. On a 63-item Qwen-1.5B-Instruct confirmation slice, the Christian heart-focused condition improved Task B accuracy from `0.8889` to `0.9524` and heart-sensitivity score from `0.6957` to `0.8696`, while same-heart control accuracy remained `1.0` and heart-overreach remained `0.0`. Under conservative paired testing this is a directional confirmation result, not yet a final decisive main-benchmark claim. The broader project design includes matched secular controls, but the current public artifact is intentionally narrower: a pre-freeze confirmation slice with honest reproducibility boundaries.
 
 ![Two-panel overview of benchmark logic and same-act confirmation result](assets/same-act-confirmation-overview.svg)
 
@@ -41,15 +41,15 @@ Same-heart controls are the guardrail. They hold inward orientation fixed while 
 
 ## What We Can Claim
 
-- On the current public confirmation slice, Christian heart-focused framing directionally improves inward-motive judgment.
+- On the current public confirmation slice, the Christian heart-focused condition directionally improves inward-motive judgment.
 - The strongest movement is in Task B and heart-sensitivity, not in first-pass Task A verdicts.
 - That gain does not come with higher same-heart overreach or longer explanations on this slice.
 
 ## What We Cannot Yet Claim
 
-- We cannot claim that Christian prompting improves moral judgment overall across models or benchmarks.
+- We cannot claim that any single religious framing improves moral judgment overall across models or benchmarks.
 - We cannot yet claim a freeze-grade decisive result for the full paper benchmark.
-- We cannot yet claim that the current public confirmation result is uniquely Christian rather than semantic reorientation, because the canonical public slice here is a baseline-vs-Christian comparison.
+- We cannot yet claim that the current public confirmation result is uniquely Christian rather than a more general semantic reorientation, because the canonical public slice here is a baseline-vs-Christian comparison.
 
 ## Status
 
@@ -116,17 +116,17 @@ Expected outputs:
 
 Use the GitHub release artifact for citation when referencing this repository:
 
-- Release: [v0.1-confirmation](https://github.com/hanzhenzhujene/christian-moral-attention-reallocation/releases/tag/v0.1-confirmation)
+- Release: [v0.1-confirmation](https://github.com/hanzhenzhujene/moral-attention-reallocation/releases/tag/v0.1-confirmation)
 - Citation metadata: [CITATION.cff](CITATION.cff)
 - Preprint: no public preprint is linked yet
 
 ```bibtex
-@software{zhu_2026_christian_moral_attention,
+@software{zhu_2026_moral_attention_reallocation,
   author = {Zhu, Hanzhen},
-  title = {Christian Moral Attention Reallocation},
+  title = {Moral Attention Reallocation in Language Models},
   year = {2026},
   version = {v0.1-confirmation},
-  url = {https://github.com/hanzhenzhujene/christian-moral-attention-reallocation},
+  url = {https://github.com/hanzhenzhujene/moral-attention-reallocation},
   note = {Pre-freeze confirmation artifact}
 }
 ```
