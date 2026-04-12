@@ -1,9 +1,9 @@
 {
   "name": "paper_first_pilot_execution_v12_fullpilot_mps",
-  "study_config_path": "/Users/hanzhenzhu/Desktop/Christian_MoralAttention/configs/paper_first_study_v1.json",
-  "benchmark_path": "/Users/hanzhenzhu/Desktop/Christian_MoralAttention/data/study/paper_first_pilot_v1.json",
-  "jobs_path": "/Users/hanzhenzhu/Desktop/Christian_MoralAttention/results/pilot_v12_fullpilot_jobs.jsonl",
-  "prompt_dir": "/Users/hanzhenzhu/Desktop/Christian_MoralAttention/prompts/pilot_v12",
+  "study_config_path": "/Users/hanzhenzhu/Desktop/moral-attention-reallocation/configs/paper_first_study_v1.json",
+  "benchmark_path": "/Users/hanzhenzhu/Desktop/moral-attention-reallocation/data/study/paper_first_pilot_v1.json",
+  "jobs_path": "/Users/hanzhenzhu/Desktop/moral-attention-reallocation/results/pilot_v12_fullpilot_jobs.jsonl",
+  "prompt_dir": "/Users/hanzhenzhu/Desktop/moral-attention-reallocation/prompts/pilot_v12",
   "task_b_copy_mode": "benchmark_summary",
   "task_b_order_mode": "canonical_source",
   "conditions": [
@@ -32,6 +32,6 @@
     "dtype": "auto"
   },
   "outputs": {
-    "run_dir": "/Users/hanzhenzhu/Desktop/Christian_MoralAttention/results/pilot_live_v12_fullpilot_mps"
+    "run_dir": "/Users/hanzhenzhu/Desktop/moral-attention-reallocation/results/pilot_live_v12_fullpilot_mps"
   }
 }
