@@ -11,7 +11,7 @@
 
 This repository studies a narrow mechanistic question about moral cognition in language models: not whether Christian prompting makes a model "more moral" overall, but whether Christian heart-focused framing changes what the model treats as morally diagnostic. The benchmark logic centers on pairwise moral cases with three tasks: overall moral verdict (Task A), inward-orientation judgment (Task B), and reason focus (Task C). The key design uses same-act-different-motive pairs together with same-heart controls, so motive sensitivity can be separated from false projection of outwardly worse action into inwardly worse heart. On a 63-item Qwen-1.5B-Instruct confirmation slice, Christian heart-focused framing improved Task B accuracy from `0.8889` to `0.9524` and heart-sensitivity score from `0.6957` to `0.8696`, while same-heart control accuracy remained `1.0` and heart-overreach remained `0.0`. Under conservative paired testing this is a directional confirmation result, not yet a final decisive main-benchmark claim. The broader project design includes matched secular controls, but the current public artifact is intentionally narrower: a pre-freeze confirmation slice with honest reproducibility boundaries.
 
-![Same-act confirmation overview](assets/same-act-confirmation-overview.png)
+![Two-panel overview of benchmark logic and same-act confirmation result](assets/same-act-confirmation-overview.png)
 
 ## Main Result At A Glance
 
