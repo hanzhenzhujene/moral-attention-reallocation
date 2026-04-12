@@ -1,0 +1,180 @@
+{
+  "bootstrap_samples": 1000,
+  "seed": 7,
+  "summaries": [
+    {
+      "model": "Qwen-1.5B-Instruct",
+      "condition": "baseline",
+      "n_items": 63,
+      "metrics": {
+        "task_a_accuracy": {
+          "point": 0.5079,
+          "ci_low": 0.381,
+          "ci_high": 0.6194
+        },
+        "task_b_accuracy": {
+          "point": 0.8889,
+          "ci_low": 0.7937,
+          "ci_high": 0.9524
+        },
+        "heart_sensitivity_score": {
+          "point": 0.6957,
+          "ci_low": 0.5,
+          "ci_high": 0.875
+        },
+        "surface_overweighting_index": {
+          "point": 0.0435,
+          "ci_low": 0.0,
+          "ci_high": 0.1482
+        },
+        "p_reason_motive": {
+          "point": 0.4127,
+          "ci_low": 0.3016,
+          "ci_high": 0.5238
+        },
+        "cross_task_consistency": {
+          "point": 0.1111,
+          "ci_low": 0.0472,
+          "ci_high": 0.1905
+        },
+        "motive_cross_task_consistency": {
+          "point": 0.3043,
+          "ci_low": 0.125,
+          "ci_high": 0.5153
+        },
+        "same_heart_control_accuracy": {
+          "point": 1.0,
+          "ci_low": 1.0,
+          "ci_high": 1.0
+        },
+        "heart_overreach_rate": {
+          "point": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0
+        },
+        "mean_explanation_chars": {
+          "point": 111.5397,
+          "ci_low": 105.3016,
+          "ci_high": 117.9095
+        }
+      }
+    },
+    {
+      "model": "Qwen-1.5B-Instruct",
+      "condition": "christian_heart",
+      "n_items": 63,
+      "metrics": {
+        "task_a_accuracy": {
+          "point": 0.5079,
+          "ci_low": 0.3964,
+          "ci_high": 0.6349
+        },
+        "task_b_accuracy": {
+          "point": 0.9524,
+          "ci_low": 0.8889,
+          "ci_high": 1.0
+        },
+        "heart_sensitivity_score": {
+          "point": 0.8696,
+          "ci_low": 0.7143,
+          "ci_high": 1.0
+        },
+        "surface_overweighting_index": {
+          "point": 0.0435,
+          "ci_low": 0.0,
+          "ci_high": 0.1579
+        },
+        "p_reason_motive": {
+          "point": 0.4762,
+          "ci_low": 0.3492,
+          "ci_high": 0.5877
+        },
+        "cross_task_consistency": {
+          "point": 0.1587,
+          "ci_low": 0.0794,
+          "ci_high": 0.254
+        },
+        "motive_cross_task_consistency": {
+          "point": 0.4348,
+          "ci_low": 0.25,
+          "ci_high": 0.6364
+        },
+        "same_heart_control_accuracy": {
+          "point": 1.0,
+          "ci_low": 1.0,
+          "ci_high": 1.0
+        },
+        "heart_overreach_rate": {
+          "point": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0
+        },
+        "mean_explanation_chars": {
+          "point": 109.1587,
+          "ci_low": 103.0472,
+          "ci_high": 115.1774
+        }
+      }
+    }
+  ],
+  "contrasts": [
+    {
+      "model": "Qwen-1.5B-Instruct",
+      "left_condition": "baseline",
+      "right_condition": "christian_heart",
+      "n_shared_items": 63,
+      "metrics": {
+        "task_a_accuracy": {
+          "delta": 0.0,
+          "ci_low": -0.1587,
+          "ci_high": 0.1746
+        },
+        "task_b_accuracy": {
+          "delta": 0.0635,
+          "ci_low": 0.0159,
+          "ci_high": 0.127
+        },
+        "heart_sensitivity_score": {
+          "delta": 0.1739,
+          "ci_low": 0.0476,
+          "ci_high": 0.3478
+        },
+        "surface_overweighting_index": {
+          "delta": 0.0,
+          "ci_low": -0.1304,
+          "ci_high": 0.1334
+        },
+        "p_reason_motive": {
+          "delta": 0.0635,
+          "ci_low": -0.0159,
+          "ci_high": 0.1429
+        },
+        "cross_task_consistency": {
+          "delta": 0.0476,
+          "ci_low": -0.0635,
+          "ci_high": 0.1587
+        },
+        "motive_cross_task_consistency": {
+          "delta": 0.1304,
+          "ci_low": -0.174,
+          "ci_high": 0.4211
+        },
+        "same_heart_control_accuracy": {
+          "delta": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0
+        },
+        "heart_overreach_rate": {
+          "delta": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0
+        },
+        "mean_explanation_chars": {
+          "delta": -2.381,
+          "ci_low": -8.9897,
+          "ci_high": 4.6357
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="1020" viewBox="0 0 1280 1020" role="img" aria-labelledby="title desc">
+  <title id="title">Same-act confirmation result overview</title>
+  <desc id="desc">Paper-ready project figure summarizing the Qwen-1.5B confirmation run on same-act motive-sensitive items and same-heart controls.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fffdf8" />
+      <stop offset="100%" stop-color="#f3f7fb" />
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="1020" fill="url(#bg)" />
+  <text x="56" y="72" font-size="40" font-weight="900" fill="#122033">Christian Moral Attention Reallocation</text>
+  <text x="56" y="110" font-size="20" font-weight="700" fill="#122033">Same-Act Confirmation Result</text>
+  <text x="56" y="138" font-size="18" fill="#5c6b7c"><tspan x="56" dy="0">Same-act confirmation shows a clean directional gain in motive sensitivity under Christian framing on Qwen-1.5B, with stable</tspan><tspan x="56" dy="22">controls and no verbosity inflation.</tspan></text>
+
+
+    <rect x="56" y="174" width="276" height="138" rx="18" fill="#f8fafc" stroke="#d7dee8" />
+    <text x="78" y="204" font-size="18" font-weight="700" fill="#122033">Confirmation Calls</text>
+    <text x="78" y="252" font-size="36" font-weight="800" fill="#0f766e">126/126</text>
+    <text x="78" y="278" font-size="13" fill="#5c6b7c"><tspan x="78" dy="0">Qwen-1.5B completed every baseline</tspan><tspan x="78" dy="16">and Christian job without parse</tspan><tspan x="78" dy="16">failures.</tspan></text>
+
+
+    <rect x="354" y="174" width="276" height="138" rx="18" fill="#f8fafc" stroke="#d7dee8" />
+    <text x="376" y="204" font-size="18" font-weight="700" fill="#122033">HSS Delta</text>
+    <text x="376" y="252" font-size="36" font-weight="800" fill="#0f766e">+0.1739</text>
+    <text x="376" y="278" font-size="13" fill="#5c6b7c"><tspan x="376" dy="0">Heart-sensitivity rose on the</tspan><tspan x="376" dy="16">63-item confirmation pack.</tspan></text>
+
+
+    <rect x="652" y="174" width="276" height="138" rx="18" fill="#f8fafc" stroke="#d7dee8" />
+    <text x="674" y="204" font-size="18" font-weight="700" fill="#122033">Guardrails</text>
+    <text x="674" y="252" font-size="36" font-weight="800" fill="#0f766e">1.0 / 0.0</text>
+    <text x="674" y="278" font-size="13" fill="#5c6b7c"><tspan x="674" dy="0">Same-heart control accuracy stayed</tspan><tspan x="674" dy="16">perfect and heart overreach stayed</tspan><tspan x="674" dy="16">at zero.</tspan></text>
+
+
+    <rect x="950" y="174" width="274" height="138" rx="18" fill="#f8fafc" stroke="#d7dee8" />
+    <text x="972" y="204" font-size="18" font-weight="700" fill="#122033">Paired Threshold</text>
+    <text x="972" y="252" font-size="36" font-weight="800" fill="#b45309">p=0.0625</text>
+    <text x="972" y="278" font-size="13" fill="#5c6b7c"><tspan x="972" dy="0">Exact one-sided sign test is near</tspan><tspan x="972" dy="16">threshold, directional but not yet</tspan><tspan x="972" dy="16">decisive.</tspan></text>
+
+
+
+    <rect x="56" y="338" width="546" height="470" rx="22" fill="#f8fafc" stroke="#d7dee8" />
+    <text x="82" y="376" font-size="24" font-weight="800" fill="#122033">Mechanism Signal</text>
+    <text x="82" y="402" font-size="14" fill="#5c6b7c">Qwen-1.5B-Instruct on the 63-item same-act confirmation pack.</text>
+
+            <text x="82" y="426" font-size="17" font-weight="700" fill="#122033">Heart-Sensitivity Score</text>
+            <text x="82" y="446" font-size="13" fill="#5c6b7c">higher is better</text>
+
+            <text x="82" y="474" font-size="15" font-weight="700" fill="#122033">Baseline</text>
+            <rect x="186" y="460" width="320" height="16" rx="8" fill="#e8edf4" />
+            <rect x="186" y="460" width="222" height="16" rx="8" fill="#5166d6" />
+            <text x="524" y="474" font-size="15" fill="#122033" text-anchor="end">0.6957</text>
+
+            <text x="82" y="500" font-size="15" font-weight="700" fill="#122033">Christian</text>
+            <rect x="186" y="486" width="320" height="16" rx="8" fill="#e8edf4" />
+            <rect x="186" y="486" width="278" height="16" rx="8" fill="#12805c" />
+            <text x="524" y="500" font-size="15" fill="#122033" text-anchor="end">0.8696</text>
+
+            <text x="82" y="518" font-size="17" font-weight="700" fill="#122033">Task B Accuracy</text>
+            <text x="82" y="538" font-size="13" fill="#5c6b7c">higher is better</text>
+
+            <text x="82" y="566" font-size="15" font-weight="700" fill="#122033">Baseline</text>
+            <rect x="186" y="552" width="320" height="16" rx="8" fill="#e8edf4" />
+            <rect x="186" y="552" width="284" height="16" rx="8" fill="#5166d6" />
+            <text x="524" y="566" font-size="15" fill="#122033" text-anchor="end">0.8889</text>
+
+            <text x="82" y="592" font-size="15" font-weight="700" fill="#122033">Christian</text>
+            <rect x="186" y="578" width="320" height="16" rx="8" fill="#e8edf4" />
+            <rect x="186" y="578" width="304" height="16" rx="8" fill="#12805c" />
+            <text x="524" y="592" font-size="15" fill="#122033" text-anchor="end">0.9524</text>
+
+            <text x="82" y="610" font-size="17" font-weight="700" fill="#122033">P(reason = motive)</text>
+            <text x="82" y="630" font-size="13" fill="#5c6b7c">higher is better</text>
+
+            <text x="82" y="658" font-size="15" font-weight="700" fill="#122033">Baseline</text>
+            <rect x="186" y="644" width="320" height="16" rx="8" fill="#e8edf4" />
+            <rect x="186" y="644" width="132" height="16" rx="8" fill="#5166d6" />
+            <text x="524" y="658" font-size="15" fill="#122033" text-anchor="end">0.4127</text>
+
+            <text x="82" y="684" font-size="15" font-weight="700" fill="#122033">Christian</text>
+            <rect x="186" y="670" width="320" height="16" rx="8" fill="#e8edf4" />
+            <rect x="186" y="670" width="152" height="16" rx="8" fill="#12805c" />
+            <text x="524" y="684" font-size="15" fill="#122033" text-anchor="end">0.4762</text>
+
+            <text x="82" y="702" font-size="17" font-weight="700" fill="#122033">Task B Swap-Gap</text>
+            <text x="82" y="722" font-size="13" fill="#5c6b7c">lower is better</text>
+
+            <text x="82" y="750" font-size="15" font-weight="700" fill="#122033">Baseline</text>
+            <rect x="186" y="736" width="320" height="16" rx="8" fill="#e8edf4" />
+            <rect x="186" y="736" width="117" height="16" rx="8" fill="#5166d6" />
+            <text x="524" y="750" font-size="15" fill="#122033" text-anchor="end">0.1842</text>
+
+            <text x="82" y="776" font-size="15" font-weight="700" fill="#122033">Christian</text>
+            <rect x="186" y="762" width="320" height="16" rx="8" fill="#e8edf4" />
+            <rect x="186" y="762" width="50" height="16" rx="8" fill="#12805c" />
+            <text x="524" y="776" font-size="15" fill="#122033" text-anchor="end">0.0789</text>
+
+
+
+    <rect x="628" y="338" width="596" height="470" rx="22" fill="#f8fafc" stroke="#d7dee8" />
+    <text x="652" y="376" font-size="24" font-weight="800" fill="#122033">Paired Evidence</text>
+    <text x="652" y="400" font-size="14" fill="#5c6b7c">This slice holds outward action fixed and varies inward motive.</text>
+    <text x="652" y="418" font-size="17" fill="#122033">HSS delta: 0.1739 [0.0435, 0.3478]</text><text x="652" y="448" font-size="17" fill="#122033">Task B delta: 0.1739 [0.0435, 0.3478]</text><text x="652" y="478" font-size="17" fill="#122033">Exact sign counts: 4 better, 0 worse, 19 ties</text><text x="652" y="508" font-size="17" fill="#122033">Exact sign p: one-sided 0.0625, two-sided 0.125</text>
+    <line x1="652" y1="544" x2="1200" y2="544" stroke="#d7dee8" />
+    <text x="652" y="574" font-size="17" fill="#122033">Bootstrap intervals stay positive for the same-act HSS delta.</text><text x="652" y="602" font-size="17" fill="#122033">Christian framing improves motive-sensitive Task B without extra explanation length.</text><text x="652" y="630" font-size="17" fill="#122033">Christian swap-gap falls to 0.0789; baseline still blocks full freeze.</text>
+
+
+
+    <rect x="56" y="840" width="568" height="150" rx="22" fill="#f8fafc" stroke="#d7dee8" />
+    <rect x="56" y="840" width="8" height="150" rx="22" fill="#0f766e" />
+    <text x="84" y="878" font-size="22" font-weight="800" fill="#122033">What This Supports</text>
+    <text x="84" y="912" font-size="16" fill="#122033">A heart-focused Christian frame can improve</text><text x="84" y="936" font-size="16" fill="#122033">inward-orientation judgment before it changes Task A</text><text x="84" y="960" font-size="16" fill="#122033">verdicts.</text><text x="84" y="992" font-size="16" fill="#122033">The gain here is mechanistic: better motive</text><text x="84" y="1016" font-size="16" fill="#122033">discrimination with no guardrail regression.</text>
+
+
+    <rect x="656" y="840" width="568" height="150" rx="22" fill="#f8fafc" stroke="#d7dee8" />
+    <rect x="656" y="840" width="8" height="150" rx="22" fill="#b45309" />
+    <text x="684" y="878" font-size="22" font-weight="800" fill="#122033">What Still Needs Work</text>
+    <text x="684" y="912" font-size="16" fill="#122033">Baseline still has residual same-act order sensitivity,</text><text x="684" y="936" font-size="16" fill="#122033">so freeze remains blocked.</text><text x="684" y="968" font-size="16" fill="#122033">This slice is strong enough for a paper-quality</text><text x="684" y="992" font-size="16" fill="#122033">directional result, but not yet a final decisive main</text><text x="684" y="1016" font-size="16" fill="#122033">claim.</text>
+
+</svg>

@@ -1,0 +1,59 @@
+{
+  "summary": {
+    "n_items": 63,
+    "benchmark_source": {
+      "HeartBench": 23,
+      "MoralStories": 40
+    },
+    "pair_type": {
+      "same_act_different_motive": 23,
+      "same_intention_moral_vs_immoral_action": 40
+    },
+    "primary_diagnostic_dimension": {
+      "consequence": 9,
+      "motive": 23,
+      "outward_act": 13,
+      "rule": 18
+    },
+    "domain": {
+      "caregiving": 2,
+      "church": 1,
+      "community": 11,
+      "family": 12,
+      "friendship": 12,
+      "online": 3,
+      "public_life": 3,
+      "school": 8,
+      "workplace": 11
+    },
+    "difficulty": {
+      "easy": 30,
+      "hard": 1,
+      "medium": 32
+    },
+    "gold_task_a": {
+      "A": 9,
+      "B": 54
+    },
+    "gold_task_b": {
+      "A": 9,
+      "B": 14,
+      "Same": 40
+    },
+    "gold_task_c": {
+      "consequence": 9,
+      "motive": 23,
+      "outward_act": 13,
+      "rule": 18
+    },
+    "text_length": {
+      "min_chars": 104,
+      "max_chars": 467,
+      "mean_chars": 262.83
+    }
+  },
+  "invariant_violations": [],
+  "primary_reason_alignment_warnings": [],
+  "leakage_term_flags": [],
+  "cross_item_duplicate_outward_act_summaries": {}
+}

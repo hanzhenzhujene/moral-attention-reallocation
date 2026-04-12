@@ -30,6 +30,7 @@ TASK_B_FILENAMES = {
 COPY_FILENAME = "copy_intentions_prompt.txt"
 RELATION_FILENAME = "relation_prompt.txt"
 AB_ONLY = {"A", "B"}
+FIRST_SECOND_ONLY = {"first", "second"}
 
 
 def load_json(path: Path) -> Any:
@@ -74,6 +75,35 @@ def normalize_ab_same(value: Any) -> str | None:
     if value.lower() in {"a", "b"}:
         return value.upper()
     return None
+
+
+def normalize_first_second(value: Any) -> str | None:
+    if not isinstance(value, str):
+        return None
+    normalized = re.sub(r"[\s_-]+", " ", value.strip().lower())
+    synonyms = {
+        "1": "first",
+        "1st": "first",
+        "a": "first",
+        "case a": "first",
+        "first": "first",
+        "intention 1": "first",
+        "intention one": "first",
+        "one": "first",
+        "option 1": "first",
+        "option one": "first",
+        "2": "second",
+        "2nd": "second",
+        "b": "second",
+        "case b": "second",
+        "second": "second",
+        "intention 2": "second",
+        "intention two": "second",
+        "two": "second",
+        "option 2": "second",
+        "option two": "second",
+    }
+    return synonyms.get(normalized)
 
 
 def normalize_reason(value: Any) -> str | None:
@@ -172,14 +202,22 @@ def parse_relation_response(text: str) -> Tuple[str | None, str | None]:
     return relation, None
 
 
-def parse_task_b_response(text: str) -> Tuple[str | None, str | None]:
+def parse_task_b_response(text: str, label_mode: str = "presented_ab") -> Tuple[str | None, str | None]:
     parsed, error = parse_json_object(text)
     if parsed is None:
         return None, error
-    label = normalize_ab_same(parsed.get("task_b_worse_inward_orientation"))
-    if label not in AB_ONLY:
-        return None, "invalid_task_b_worse_inward_orientation"
-    return label, None
+    raw_value = parsed.get("task_b_worse_inward_orientation")
+    if label_mode == "presented_ab":
+        label = normalize_ab_same(raw_value)
+        if label not in AB_ONLY:
+            return None, "invalid_task_b_worse_inward_orientation"
+        return label, None
+    if label_mode == "canonical_first_second":
+        label = normalize_first_second(raw_value)
+        if label not in FIRST_SECOND_ONLY:
+            return None, "invalid_task_b_worse_inward_orientation"
+        return label, None
+    raise ValueError(f"Unsupported Task B label mode: {label_mode}")
 
 
 def normalize_intention_copy(text: str) -> str:
@@ -214,7 +252,62 @@ def prompt_replacements(case_a: Dict[str, Any], case_b: Dict[str, Any]) -> Dict[
         "{{case_b_rule_summary}}": case_b["rule_summary"],
         "{{case_a_written_intention_copy}}": "",
         "{{case_b_written_intention_copy}}": "",
+        "{{comparison_first_written_intention_copy}}": "",
+        "{{comparison_second_written_intention_copy}}": "",
     }
+
+
+def source_to_presented_label(job: Dict[str, Any], source: str) -> str:
+    if job["presented_case_a_source"] == source:
+        return "A"
+    if job["presented_case_b_source"] == source:
+        return "B"
+    raise ValueError(f"Source '{source}' is not present in job '{job['job_id']}'")
+
+
+def build_task_b_comparison(
+    order_mode: str,
+    *,
+    job: Dict[str, Any],
+    item: Dict[str, Any],
+    copy_response: Dict[str, str],
+) -> Dict[str, str]:
+    if order_mode == "presented_ab":
+        return {
+            "comparison_first_source": job["presented_case_a_source"],
+            "comparison_second_source": job["presented_case_b_source"],
+            "comparison_first_text": copy_response["case_a_written_intention_copy"],
+            "comparison_second_text": copy_response["case_b_written_intention_copy"],
+            "task_b_parse_mode": "presented_ab",
+        }
+    if order_mode == "canonical_source":
+        return {
+            "comparison_first_source": "case_a",
+            "comparison_second_source": "case_b",
+            "comparison_first_text": item["case_a"]["motive_summary"],
+            "comparison_second_text": item["case_b"]["motive_summary"],
+            "task_b_parse_mode": "canonical_first_second",
+        }
+    raise ValueError(f"Unsupported task_b_order_mode '{order_mode}'")
+
+
+def remap_task_b_label(
+    order_mode: str,
+    *,
+    job: Dict[str, Any],
+    task_b_response: str,
+    comparison: Dict[str, str],
+) -> str:
+    if order_mode == "presented_ab":
+        return task_b_response
+    if order_mode == "canonical_source":
+        worse_source = (
+            comparison["comparison_first_source"]
+            if task_b_response == "first"
+            else comparison["comparison_second_source"]
+        )
+        return source_to_presented_label(job, worse_source)
+    raise ValueError(f"Unsupported task_b_order_mode '{order_mode}'")
 
 
 def generate_prompt_text(
@@ -347,6 +440,16 @@ def build_arg_parser() -> argparse.ArgumentParser:
     return parser
 
 
+def quiet_greedy_generation_config(model: AutoModelForCausalLM) -> None:
+    generation_config = getattr(model, "generation_config", None)
+    if generation_config is None:
+        return
+    generation_config.do_sample = False
+    for field in ("temperature", "top_p", "top_k"):
+        if hasattr(generation_config, field):
+            setattr(generation_config, field, None)
+
+
 def main(argv: Sequence[str]) -> int:
     parser = build_arg_parser()
     args = parser.parse_args(argv)
@@ -382,9 +485,6 @@ def main(argv: Sequence[str]) -> int:
     tokenizer = AutoTokenizer.from_pretrained(model_entry["hf_model_id"])
     if tokenizer.pad_token_id is None:
         tokenizer.pad_token_id = tokenizer.eos_token_id
-    model = AutoModelForCausalLM.from_pretrained(model_entry["hf_model_id"], dtype=dtype)
-    model.to(device)
-    model.eval()
 
     task_ac_templates = {condition: load_prompt(prompt_dir / filename) for condition, filename in TASK_AC_FILENAMES.items()}
     task_b_templates = {condition: load_prompt(prompt_dir / filename) for condition, filename in TASK_B_FILENAMES.items()}
@@ -393,12 +493,22 @@ def main(argv: Sequence[str]) -> int:
     copy_mode = config.get("task_b_copy_mode", "model_copy")
     if copy_mode not in {"model_copy", "benchmark_summary"}:
         raise SystemExit(f"Unsupported task_b_copy_mode '{copy_mode}'")
+    task_b_order_mode = config.get("task_b_order_mode", "presented_ab")
+    if task_b_order_mode not in {"presented_ab", "canonical_source"}:
+        raise SystemExit(f"Unsupported task_b_order_mode '{task_b_order_mode}'")
+    if task_b_order_mode == "canonical_source" and copy_mode != "benchmark_summary":
+        raise SystemExit("task_b_order_mode=canonical_source requires task_b_copy_mode=benchmark_summary")
 
     max_attempts = int(inference.get("max_attempts", 2))
     prompt_mode = inference.get("prompt_mode", "chat")
     max_new_tokens = int(inference["max_new_tokens"])
     temperature = float(inference["temperature"])
     top_p = float(inference["top_p"])
+    model = AutoModelForCausalLM.from_pretrained(model_entry["hf_model_id"], torch_dtype=dtype)
+    model.to(device)
+    model.eval()
+    if temperature == 0.0:
+        quiet_greedy_generation_config(model)
 
     if not args.resume:
         output_path.write_text("", encoding="utf-8")
@@ -481,6 +591,12 @@ def main(argv: Sequence[str]) -> int:
         copy_a_normalized = normalize_intention_copy(copy_response["case_a_written_intention_copy"])
         copy_b_normalized = normalize_intention_copy(copy_response["case_b_written_intention_copy"])
         copy_exact_match = bool(copy_a_normalized and copy_a_normalized == copy_b_normalized)
+        comparison = build_task_b_comparison(
+            task_b_order_mode,
+            job=job,
+            item=item,
+            copy_response=copy_response,
+        )
 
         relation_response: str | None = None
         relation_raw: List[str] = []
@@ -497,6 +613,8 @@ def main(argv: Sequence[str]) -> int:
                 **replacements,
                 "{{case_a_written_intention_copy}}": copy_response["case_a_written_intention_copy"],
                 "{{case_b_written_intention_copy}}": copy_response["case_b_written_intention_copy"],
+                "{{comparison_first_written_intention_copy}}": comparison["comparison_first_text"],
+                "{{comparison_second_written_intention_copy}}": comparison["comparison_second_text"],
             }
             relation_prompt = render_template(relation_template, relation_replacements)
             relation_response, relation_raw, relation_error = generate_and_parse(
@@ -533,7 +651,7 @@ def main(argv: Sequence[str]) -> int:
                 task_b_prompt = render_template(task_b_templates[job["condition"]], relation_replacements)
                 task_b_response, task_b_raw, task_b_error = generate_and_parse(
                     task_b_prompt,
-                    parse_task_b_response,
+                    lambda text: parse_task_b_response(text, comparison["task_b_parse_mode"]),
                     model=model,
                     tokenizer=tokenizer,
                     device=device,
@@ -557,7 +675,12 @@ def main(argv: Sequence[str]) -> int:
                     )
                     failure_count += 1
                     continue
-                task_b_label = task_b_response
+                task_b_label = remap_task_b_label(
+                    task_b_order_mode,
+                    job=job,
+                    task_b_response=task_b_response,
+                    comparison=comparison,
+                )
                 gate_source = "inward_worse_pass"
 
         response = {
@@ -609,12 +732,18 @@ def main(argv: Sequence[str]) -> int:
                 "gold": job["gold"],
                 "expected_relation": pass_expected_relation(job),
                 "copy_mode": copy_mode,
+                "task_b_order_mode": task_b_order_mode,
                 "gate_source": gate_source,
                 "copy_exact_match": copy_exact_match,
                 "case_a_written_intention_copy": copy_response["case_a_written_intention_copy"],
                 "case_b_written_intention_copy": copy_response["case_b_written_intention_copy"],
                 "case_a_written_intention_copy_normalized": copy_a_normalized,
                 "case_b_written_intention_copy_normalized": copy_b_normalized,
+                "comparison_first_source": comparison["comparison_first_source"],
+                "comparison_second_source": comparison["comparison_second_source"],
+                "comparison_first_written_intention_copy": comparison["comparison_first_text"],
+                "comparison_second_written_intention_copy": comparison["comparison_second_text"],
+                "task_b_pass_label_mode": comparison["task_b_parse_mode"],
                 "relation_response": relation_response,
                 "task_b_pass_response": task_b_response,
                 "final_response": response,

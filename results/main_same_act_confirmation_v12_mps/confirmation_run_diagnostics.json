@@ -1,0 +1,83 @@
+[
+  {
+    "model": "Qwen-1.5B-Instruct",
+    "condition": "baseline",
+    "n_items": 63,
+    "task_a_answer_distribution": {
+      "B": 1.0
+    },
+    "task_b_answer_distribution": {
+      "A": 0.254,
+      "B": 0.1111,
+      "Same": 0.6349
+    },
+    "task_a_gold_distribution": {
+      "A": 0.4921,
+      "B": 0.5079
+    },
+    "task_b_gold_distribution": {
+      "A": 0.1429,
+      "B": 0.2222,
+      "Same": 0.6349
+    },
+    "task_b_written_motive_relation_distribution": {},
+    "task_b_relation_consistency_rate": null,
+    "task_a_excess_a_rate": -0.4921,
+    "task_b_excess_a_rate": 0.1111,
+    "reason_distribution": {
+      "consequence": 0.0476,
+      "motive": 0.4127,
+      "outward_act": 0.5397
+    },
+    "task_a_accuracy_swapped_false": 0.96,
+    "task_a_accuracy_swapped_true": 0.2105,
+    "task_b_accuracy_swapped_false": 1.0,
+    "task_b_accuracy_swapped_true": 0.8158,
+    "task_a_select_a_rate_swapped_false": null,
+    "task_a_select_a_rate_swapped_true": null,
+    "task_b_select_a_rate_swapped_false": 0.04,
+    "task_b_select_a_rate_swapped_true": 0.3947,
+    "same_rate_task_a": 0.0,
+    "same_rate_task_b": 0.6349
+  },
+  {
+    "model": "Qwen-1.5B-Instruct",
+    "condition": "christian_heart",
+    "n_items": 63,
+    "task_a_answer_distribution": {
+      "B": 1.0
+    },
+    "task_b_answer_distribution": {
+      "A": 0.2063,
+      "B": 0.1587,
+      "Same": 0.6349
+    },
+    "task_a_gold_distribution": {
+      "A": 0.4921,
+      "B": 0.5079
+    },
+    "task_b_gold_distribution": {
+      "A": 0.1587,
+      "B": 0.2063,
+      "Same": 0.6349
+    },
+    "task_b_written_motive_relation_distribution": {},
+    "task_b_relation_consistency_rate": null,
+    "task_a_excess_a_rate": -0.4921,
+    "task_b_excess_a_rate": 0.0476,
+    "reason_distribution": {
+      "motive": 0.4762,
+      "outward_act": 0.5238
+    },
+    "task_a_accuracy_swapped_false": 0.96,
+    "task_a_accuracy_swapped_true": 0.2105,
+    "task_b_accuracy_swapped_false": 1.0,
+    "task_b_accuracy_swapped_true": 0.9211,
+    "task_a_select_a_rate_swapped_false": null,
+    "task_a_select_a_rate_swapped_true": null,
+    "task_b_select_a_rate_swapped_false": 0.04,
+    "task_b_select_a_rate_swapped_true": 0.3158,
+    "same_rate_task_a": 0.0,
+    "same_rate_task_b": 0.6349
+  }
+]

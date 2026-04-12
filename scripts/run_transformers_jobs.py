@@ -293,6 +293,16 @@ def build_arg_parser() -> argparse.ArgumentParser:
     return parser
 
 
+def quiet_greedy_generation_config(model: AutoModelForCausalLM) -> None:
+    generation_config = getattr(model, "generation_config", None)
+    if generation_config is None:
+        return
+    generation_config.do_sample = False
+    for field in ("temperature", "top_p", "top_k"):
+        if hasattr(generation_config, field):
+            setattr(generation_config, field, None)
+
+
 def main(argv: Sequence[str]) -> int:
     parser = build_arg_parser()
     args = parser.parse_args(argv)
@@ -328,15 +338,16 @@ def main(argv: Sequence[str]) -> int:
     tokenizer = AutoTokenizer.from_pretrained(hf_model_id)
     if tokenizer.pad_token_id is None:
         tokenizer.pad_token_id = tokenizer.eos_token_id
-    model = AutoModelForCausalLM.from_pretrained(hf_model_id, dtype=dtype)
-    model.to(device)
-    model.eval()
-
     max_attempts = int(inference.get("max_attempts", 2))
     prompt_mode = inference.get("prompt_mode", "chat")
     max_new_tokens = int(inference["max_new_tokens"])
     temperature = float(inference["temperature"])
     top_p = float(inference["top_p"])
+    model = AutoModelForCausalLM.from_pretrained(hf_model_id, torch_dtype=dtype)
+    model.to(device)
+    model.eval()
+    if temperature == 0.0:
+        quiet_greedy_generation_config(model)
 
     if not args.resume:
         output_path.write_text("", encoding="utf-8")

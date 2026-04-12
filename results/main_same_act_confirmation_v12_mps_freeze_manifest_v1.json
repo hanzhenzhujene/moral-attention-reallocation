@@ -1,0 +1,101 @@
+{
+  "name": "paper_first_main_partial_preview_v12_mps",
+  "models": [
+    {
+      "alias": "Qwen-0.5B-Instruct",
+      "hf_model_id": "Qwen/Qwen2.5-0.5B-Instruct"
+    },
+    {
+      "alias": "Qwen-1.5B-Instruct",
+      "hf_model_id": "Qwen/Qwen2.5-1.5B-Instruct"
+    }
+  ],
+  "inference": {
+    "prompt_mode": "chat",
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "n": 1,
+    "max_new_tokens": 120,
+    "max_attempts": 2,
+    "device": "mps",
+    "dtype": "auto"
+  },
+  "frozen_files": [
+    {
+      "path": "/Users/hanzhenzhu/Desktop/Christian_MoralAttention/configs/preview_execution_v12_main_partial_mps.json",
+      "sha256": "aebbc98e8cc846ff4f08d087da248707cb4c4f6158655f2b15f09fbaba8cba37"
+    },
+    {
+      "path": "/Users/hanzhenzhu/Desktop/Christian_MoralAttention/configs/paper_first_study_v1.json",
+      "sha256": "3a5540036d32b27a8b02337fdeb62f335bc86347cdff698dfc34f96715a4ab45"
+    },
+    {
+      "path": "/Users/hanzhenzhu/Desktop/Christian_MoralAttention/data/study/paper_first_main_same_act_confirmation_v0.json",
+      "sha256": "c3a296ae31edaed638102c4ce6c96e99b0c26a7cb3ff71b84eb5225c45920c0c"
+    },
+    {
+      "path": "/Users/hanzhenzhu/Desktop/Christian_MoralAttention/results/paper_first_main_same_act_confirmation_jobs_v1.jsonl",
+      "sha256": "c3f5c94351d48e47a71b83a422e7a7e402561d542c32efad4b60042ec916594a"
+    },
+    {
+      "path": "/Users/hanzhenzhu/Desktop/Christian_MoralAttention/schemas/run_record_decomposed.schema.json",
+      "sha256": "ccb345764fbf025ea8d9a6214fe7bc944f5060235994868dbd269a7367c78dff"
+    },
+    {
+      "path": "/Users/hanzhenzhu/Desktop/Christian_MoralAttention/schemas/model_response_decomposed.schema.json",
+      "sha256": "840d2cdd384dff04f847316f1673ffc9bda80599313376311fd74eed61c05806"
+    },
+    {
+      "path": "/Users/hanzhenzhu/Desktop/Christian_MoralAttention/prompts/baseline_prompt.txt",
+      "sha256": "61c50efb18ad8eda380453b289b36e526e4dece2d371cf157757637bda26f22a"
+    },
+    {
+      "path": "/Users/hanzhenzhu/Desktop/Christian_MoralAttention/prompts/christian_heart_prompt.txt",
+      "sha256": "4ae2574dcf6fdd7ac75062fca1885c01abefd025ae398d8512069e7fd4927c6b"
+    },
+    {
+      "path": "/Users/hanzhenzhu/Desktop/Christian_MoralAttention/prompts/pilot_v12/baseline_prompt.txt",
+      "sha256": "1a324743d393dec3efe59301151c0a17d304481d5f5df38a614f6844f21ba2c6"
+    },
+    {
+      "path": "/Users/hanzhenzhu/Desktop/Christian_MoralAttention/prompts/pilot_v12/christian_heart_prompt.txt",
+      "sha256": "1a324743d393dec3efe59301151c0a17d304481d5f5df38a614f6844f21ba2c6"
+    },
+    {
+      "path": "/Users/hanzhenzhu/Desktop/Christian_MoralAttention/prompts/pilot_v12/copy_intentions_prompt.txt",
+      "sha256": "0d7859b7ed8eca2d5fc9282490f67baf400222232294f019a13e6a0535f289eb"
+    },
+    {
+      "path": "/Users/hanzhenzhu/Desktop/Christian_MoralAttention/prompts/pilot_v12/relation_prompt.txt",
+      "sha256": "ab0538529136e90ac7c9e175fa114cc02468b631d0f25383b60a2013e04d0eb9"
+    },
+    {
+      "path": "/Users/hanzhenzhu/Desktop/Christian_MoralAttention/prompts/pilot_v12/secular_matched_prompt.txt",
+      "sha256": "1a324743d393dec3efe59301151c0a17d304481d5f5df38a614f6844f21ba2c6"
+    },
+    {
+      "path": "/Users/hanzhenzhu/Desktop/Christian_MoralAttention/prompts/pilot_v12/task_ac_baseline_prompt.txt",
+      "sha256": "be9a4ca2761897796a9550b2fb23da1df22c19b1f50d6d3af411d9b405ac830c"
+    },
+    {
+      "path": "/Users/hanzhenzhu/Desktop/Christian_MoralAttention/prompts/pilot_v12/task_ac_christian_heart_prompt.txt",
+      "sha256": "f6262f1770495bd98d6cf6df49e1ef7dedc67309f32fab82f78c580e07624c4d"
+    },
+    {
+      "path": "/Users/hanzhenzhu/Desktop/Christian_MoralAttention/prompts/pilot_v12/task_ac_secular_matched_prompt.txt",
+      "sha256": "b5727a4eed984c38ef095ac323505138e42769806264404d1ab97d5b4caacd9f"
+    },
+    {
+      "path": "/Users/hanzhenzhu/Desktop/Christian_MoralAttention/prompts/pilot_v12/task_b_baseline_prompt.txt",
+      "sha256": "0e5a1af6f3115dca668408ff625567c5c60b1c2d458c325d1c20df7e8e2a3b06"
+    },
+    {
+      "path": "/Users/hanzhenzhu/Desktop/Christian_MoralAttention/prompts/pilot_v12/task_b_christian_heart_prompt.txt",
+      "sha256": "8a2279b29fbdd6022cc8a0edca7d4b510f5ede30aaf0e87a1d595a3c46c1f489"
+    },
+    {
+      "path": "/Users/hanzhenzhu/Desktop/Christian_MoralAttention/prompts/pilot_v12/task_b_secular_matched_prompt.txt",
+      "sha256": "a0c7a9d2e15edcdfa2e940e13b84f2c140206591671b019eb8d638e1094d20b5"
+    }
+  ]
+}

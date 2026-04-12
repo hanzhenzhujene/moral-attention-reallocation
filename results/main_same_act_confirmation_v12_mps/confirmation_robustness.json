@@ -1,0 +1,1801 @@
+{
+  "bootstrap_samples": 400,
+  "seed": 7,
+  "alpha": 0.05,
+  "target_power": 0.8,
+  "power_two_sided": false,
+  "summaries": [
+    {
+      "model": "Qwen-1.5B-Instruct",
+      "condition": "baseline",
+      "slice": "all_items",
+      "slice_description": "All benchmark items.",
+      "n_items": 63,
+      "metrics": {
+        "task_a_accuracy": {
+          "point": 0.5079,
+          "ci_low": 0.381,
+          "ci_high": 0.619
+        },
+        "task_b_accuracy": {
+          "point": 0.8889,
+          "ci_low": 0.7937,
+          "ci_high": 0.9524
+        },
+        "heart_sensitivity_score": {
+          "point": 0.6957,
+          "ci_low": 0.4814,
+          "ci_high": 0.88
+        },
+        "surface_overweighting_index": {
+          "point": 0.0435,
+          "ci_low": 0.0,
+          "ci_high": 0.15
+        },
+        "p_reason_motive": {
+          "point": 0.4127,
+          "ci_low": 0.2857,
+          "ci_high": 0.5397
+        },
+        "cross_task_consistency": {
+          "point": 0.1111,
+          "ci_low": 0.0472,
+          "ci_high": 0.1905
+        },
+        "motive_cross_task_consistency": {
+          "point": 0.3043,
+          "ci_low": 0.125,
+          "ci_high": 0.5005
+        },
+        "same_heart_control_accuracy": {
+          "point": 1.0,
+          "ci_low": 1.0,
+          "ci_high": 1.0
+        },
+        "heart_overreach_rate": {
+          "point": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0
+        },
+        "mean_explanation_chars": {
+          "point": 111.5397,
+          "ci_low": 105.3012,
+          "ci_high": 117.8893
+        }
+      }
+    },
+    {
+      "model": "Qwen-1.5B-Instruct",
+      "condition": "baseline",
+      "slice": "motive_sensitive",
+      "slice_description": "Items where inward motive should matter.",
+      "n_items": 23,
+      "metrics": {
+        "task_a_accuracy": {
+          "point": 0.6087,
+          "ci_low": 0.4348,
+          "ci_high": 0.7826
+        },
+        "task_b_accuracy": {
+          "point": 0.6957,
+          "ci_low": 0.5217,
+          "ci_high": 0.8696
+        },
+        "heart_sensitivity_score": {
+          "point": 0.6957,
+          "ci_low": 0.5217,
+          "ci_high": 0.8696
+        },
+        "surface_overweighting_index": {
+          "point": 0.0435,
+          "ci_low": 0.0,
+          "ci_high": 0.1304
+        },
+        "p_reason_motive": {
+          "point": 0.9565,
+          "ci_low": 0.8696,
+          "ci_high": 1.0
+        },
+        "cross_task_consistency": {
+          "point": 0.3043,
+          "ci_low": 0.1304,
+          "ci_high": 0.5217
+        },
+        "motive_cross_task_consistency": {
+          "point": 0.3043,
+          "ci_low": 0.1304,
+          "ci_high": 0.5217
+        },
+        "same_heart_control_accuracy": {
+          "point": null,
+          "ci_low": null,
+          "ci_high": null
+        },
+        "heart_overreach_rate": {
+          "point": null,
+          "ci_low": null,
+          "ci_high": null
+        },
+        "mean_explanation_chars": {
+          "point": 109.7391,
+          "ci_low": 100.4717,
+          "ci_high": 120.1793
+        }
+      }
+    },
+    {
+      "model": "Qwen-1.5B-Instruct",
+      "condition": "baseline",
+      "slice": "same_heart_controls",
+      "slice_description": "Controls where Task B gold stays Same.",
+      "n_items": 40,
+      "metrics": {
+        "task_a_accuracy": {
+          "point": 0.45,
+          "ci_low": 0.3,
+          "ci_high": 0.6
+        },
+        "task_b_accuracy": {
+          "point": 1.0,
+          "ci_low": 1.0,
+          "ci_high": 1.0
+        },
+        "heart_sensitivity_score": {
+          "point": null,
+          "ci_low": null,
+          "ci_high": null
+        },
+        "surface_overweighting_index": {
+          "point": null,
+          "ci_low": null,
+          "ci_high": null
+        },
+        "p_reason_motive": {
+          "point": 0.1,
+          "ci_low": 0.025,
+          "ci_high": 0.2
+        },
+        "cross_task_consistency": {
+          "point": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0
+        },
+        "motive_cross_task_consistency": {
+          "point": null,
+          "ci_low": null,
+          "ci_high": null
+        },
+        "same_heart_control_accuracy": {
+          "point": 1.0,
+          "ci_low": 1.0,
+          "ci_high": 1.0
+        },
+        "heart_overreach_rate": {
+          "point": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0
+        },
+        "mean_explanation_chars": {
+          "point": 112.575,
+          "ci_low": 104.7456,
+          "ci_high": 121.8506
+        }
+      }
+    },
+    {
+      "model": "Qwen-1.5B-Instruct",
+      "condition": "baseline",
+      "slice": "heartbench",
+      "slice_description": "HeartBench-only slice.",
+      "n_items": 23,
+      "metrics": {
+        "task_a_accuracy": {
+          "point": 0.6087,
+          "ci_low": 0.4348,
+          "ci_high": 0.7826
+        },
+        "task_b_accuracy": {
+          "point": 0.6957,
+          "ci_low": 0.5217,
+          "ci_high": 0.8696
+        },
+        "heart_sensitivity_score": {
+          "point": 0.6957,
+          "ci_low": 0.5217,
+          "ci_high": 0.8696
+        },
+        "surface_overweighting_index": {
+          "point": 0.0435,
+          "ci_low": 0.0,
+          "ci_high": 0.1304
+        },
+        "p_reason_motive": {
+          "point": 0.9565,
+          "ci_low": 0.8696,
+          "ci_high": 1.0
+        },
+        "cross_task_consistency": {
+          "point": 0.3043,
+          "ci_low": 0.1304,
+          "ci_high": 0.5217
+        },
+        "motive_cross_task_consistency": {
+          "point": 0.3043,
+          "ci_low": 0.1304,
+          "ci_high": 0.5217
+        },
+        "same_heart_control_accuracy": {
+          "point": null,
+          "ci_low": null,
+          "ci_high": null
+        },
+        "heart_overreach_rate": {
+          "point": null,
+          "ci_low": null,
+          "ci_high": null
+        },
+        "mean_explanation_chars": {
+          "point": 109.7391,
+          "ci_low": 100.4717,
+          "ci_high": 120.1793
+        }
+      }
+    },
+    {
+      "model": "Qwen-1.5B-Instruct",
+      "condition": "baseline",
+      "slice": "moralstories",
+      "slice_description": "Moral Stories-only slice.",
+      "n_items": 40,
+      "metrics": {
+        "task_a_accuracy": {
+          "point": 0.45,
+          "ci_low": 0.3,
+          "ci_high": 0.6
+        },
+        "task_b_accuracy": {
+          "point": 1.0,
+          "ci_low": 1.0,
+          "ci_high": 1.0
+        },
+        "heart_sensitivity_score": {
+          "point": null,
+          "ci_low": null,
+          "ci_high": null
+        },
+        "surface_overweighting_index": {
+          "point": null,
+          "ci_low": null,
+          "ci_high": null
+        },
+        "p_reason_motive": {
+          "point": 0.1,
+          "ci_low": 0.025,
+          "ci_high": 0.2
+        },
+        "cross_task_consistency": {
+          "point": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0
+        },
+        "motive_cross_task_consistency": {
+          "point": null,
+          "ci_low": null,
+          "ci_high": null
+        },
+        "same_heart_control_accuracy": {
+          "point": 1.0,
+          "ci_low": 1.0,
+          "ci_high": 1.0
+        },
+        "heart_overreach_rate": {
+          "point": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0
+        },
+        "mean_explanation_chars": {
+          "point": 112.575,
+          "ci_low": 104.7456,
+          "ci_high": 121.8506
+        }
+      }
+    },
+    {
+      "model": "Qwen-1.5B-Instruct",
+      "condition": "baseline",
+      "slice": "same_act_different_motive",
+      "slice_description": "Pairs with matched outward action and changed motive.",
+      "n_items": 23,
+      "metrics": {
+        "task_a_accuracy": {
+          "point": 0.6087,
+          "ci_low": 0.4348,
+          "ci_high": 0.7826
+        },
+        "task_b_accuracy": {
+          "point": 0.6957,
+          "ci_low": 0.5217,
+          "ci_high": 0.8696
+        },
+        "heart_sensitivity_score": {
+          "point": 0.6957,
+          "ci_low": 0.5217,
+          "ci_high": 0.8696
+        },
+        "surface_overweighting_index": {
+          "point": 0.0435,
+          "ci_low": 0.0,
+          "ci_high": 0.1304
+        },
+        "p_reason_motive": {
+          "point": 0.9565,
+          "ci_low": 0.8696,
+          "ci_high": 1.0
+        },
+        "cross_task_consistency": {
+          "point": 0.3043,
+          "ci_low": 0.1304,
+          "ci_high": 0.5217
+        },
+        "motive_cross_task_consistency": {
+          "point": 0.3043,
+          "ci_low": 0.1304,
+          "ci_high": 0.5217
+        },
+        "same_heart_control_accuracy": {
+          "point": null,
+          "ci_low": null,
+          "ci_high": null
+        },
+        "heart_overreach_rate": {
+          "point": null,
+          "ci_low": null,
+          "ci_high": null
+        },
+        "mean_explanation_chars": {
+          "point": 109.7391,
+          "ci_low": 100.4717,
+          "ci_high": 120.1793
+        }
+      }
+    },
+    {
+      "model": "Qwen-1.5B-Instruct",
+      "condition": "baseline",
+      "slice": "same_intention_controls",
+      "slice_description": "Same-intention Moral Stories controls.",
+      "n_items": 40,
+      "metrics": {
+        "task_a_accuracy": {
+          "point": 0.45,
+          "ci_low": 0.3,
+          "ci_high": 0.6
+        },
+        "task_b_accuracy": {
+          "point": 1.0,
+          "ci_low": 1.0,
+          "ci_high": 1.0
+        },
+        "heart_sensitivity_score": {
+          "point": null,
+          "ci_low": null,
+          "ci_high": null
+        },
+        "surface_overweighting_index": {
+          "point": null,
+          "ci_low": null,
+          "ci_high": null
+        },
+        "p_reason_motive": {
+          "point": 0.1,
+          "ci_low": 0.025,
+          "ci_high": 0.2
+        },
+        "cross_task_consistency": {
+          "point": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0
+        },
+        "motive_cross_task_consistency": {
+          "point": null,
+          "ci_low": null,
+          "ci_high": null
+        },
+        "same_heart_control_accuracy": {
+          "point": 1.0,
+          "ci_low": 1.0,
+          "ci_high": 1.0
+        },
+        "heart_overreach_rate": {
+          "point": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0
+        },
+        "mean_explanation_chars": {
+          "point": 112.575,
+          "ci_low": 104.7456,
+          "ci_high": 121.8506
+        }
+      }
+    },
+    {
+      "model": "Qwen-1.5B-Instruct",
+      "condition": "christian_heart",
+      "slice": "all_items",
+      "slice_description": "All benchmark items.",
+      "n_items": 63,
+      "metrics": {
+        "task_a_accuracy": {
+          "point": 0.5079,
+          "ci_low": 0.3968,
+          "ci_high": 0.6349
+        },
+        "task_b_accuracy": {
+          "point": 0.9524,
+          "ci_low": 0.8889,
+          "ci_high": 1.0
+        },
+        "heart_sensitivity_score": {
+          "point": 0.8696,
+          "ci_low": 0.7197,
+          "ci_high": 1.0
+        },
+        "surface_overweighting_index": {
+          "point": 0.0435,
+          "ci_low": 0.0,
+          "ci_high": 0.1579
+        },
+        "p_reason_motive": {
+          "point": 0.4762,
+          "ci_low": 0.3492,
+          "ci_high": 0.6032
+        },
+        "cross_task_consistency": {
+          "point": 0.1587,
+          "ci_low": 0.0794,
+          "ci_high": 0.254
+        },
+        "motive_cross_task_consistency": {
+          "point": 0.4348,
+          "ci_low": 0.2497,
+          "ci_high": 0.6364
+        },
+        "same_heart_control_accuracy": {
+          "point": 1.0,
+          "ci_low": 1.0,
+          "ci_high": 1.0
+        },
+        "heart_overreach_rate": {
+          "point": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0
+        },
+        "mean_explanation_chars": {
+          "point": 109.1587,
+          "ci_low": 102.6817,
+          "ci_high": 115.3837
+        }
+      }
+    },
+    {
+      "model": "Qwen-1.5B-Instruct",
+      "condition": "christian_heart",
+      "slice": "motive_sensitive",
+      "slice_description": "Items where inward motive should matter.",
+      "n_items": 23,
+      "metrics": {
+        "task_a_accuracy": {
+          "point": 0.5652,
+          "ci_low": 0.3478,
+          "ci_high": 0.7391
+        },
+        "task_b_accuracy": {
+          "point": 0.8696,
+          "ci_low": 0.7391,
+          "ci_high": 1.0
+        },
+        "heart_sensitivity_score": {
+          "point": 0.8696,
+          "ci_low": 0.7391,
+          "ci_high": 1.0
+        },
+        "surface_overweighting_index": {
+          "point": 0.0435,
+          "ci_low": 0.0,
+          "ci_high": 0.1304
+        },
+        "p_reason_motive": {
+          "point": 0.9565,
+          "ci_low": 0.8696,
+          "ci_high": 1.0
+        },
+        "cross_task_consistency": {
+          "point": 0.4348,
+          "ci_low": 0.2609,
+          "ci_high": 0.6522
+        },
+        "motive_cross_task_consistency": {
+          "point": 0.4348,
+          "ci_low": 0.2609,
+          "ci_high": 0.6522
+        },
+        "same_heart_control_accuracy": {
+          "point": null,
+          "ci_low": null,
+          "ci_high": null
+        },
+        "heart_overreach_rate": {
+          "point": null,
+          "ci_low": null,
+          "ci_high": null
+        },
+        "mean_explanation_chars": {
+          "point": 107.2609,
+          "ci_low": 99.1652,
+          "ci_high": 115.0
+        }
+      }
+    },
+    {
+      "model": "Qwen-1.5B-Instruct",
+      "condition": "christian_heart",
+      "slice": "same_heart_controls",
+      "slice_description": "Controls where Task B gold stays Same.",
+      "n_items": 40,
+      "metrics": {
+        "task_a_accuracy": {
+          "point": 0.475,
+          "ci_low": 0.3244,
+          "ci_high": 0.6256
+        },
+        "task_b_accuracy": {
+          "point": 1.0,
+          "ci_low": 1.0,
+          "ci_high": 1.0
+        },
+        "heart_sensitivity_score": {
+          "point": null,
+          "ci_low": null,
+          "ci_high": null
+        },
+        "surface_overweighting_index": {
+          "point": null,
+          "ci_low": null,
+          "ci_high": null
+        },
+        "p_reason_motive": {
+          "point": 0.2,
+          "ci_low": 0.075,
+          "ci_high": 0.325
+        },
+        "cross_task_consistency": {
+          "point": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0
+        },
+        "motive_cross_task_consistency": {
+          "point": null,
+          "ci_low": null,
+          "ci_high": null
+        },
+        "same_heart_control_accuracy": {
+          "point": 1.0,
+          "ci_low": 1.0,
+          "ci_high": 1.0
+        },
+        "heart_overreach_rate": {
+          "point": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0
+        },
+        "mean_explanation_chars": {
+          "point": 110.25,
+          "ci_low": 102.0956,
+          "ci_high": 118.6525
+        }
+      }
+    },
+    {
+      "model": "Qwen-1.5B-Instruct",
+      "condition": "christian_heart",
+      "slice": "heartbench",
+      "slice_description": "HeartBench-only slice.",
+      "n_items": 23,
+      "metrics": {
+        "task_a_accuracy": {
+          "point": 0.5652,
+          "ci_low": 0.3478,
+          "ci_high": 0.7391
+        },
+        "task_b_accuracy": {
+          "point": 0.8696,
+          "ci_low": 0.7391,
+          "ci_high": 1.0
+        },
+        "heart_sensitivity_score": {
+          "point": 0.8696,
+          "ci_low": 0.7391,
+          "ci_high": 1.0
+        },
+        "surface_overweighting_index": {
+          "point": 0.0435,
+          "ci_low": 0.0,
+          "ci_high": 0.1304
+        },
+        "p_reason_motive": {
+          "point": 0.9565,
+          "ci_low": 0.8696,
+          "ci_high": 1.0
+        },
+        "cross_task_consistency": {
+          "point": 0.4348,
+          "ci_low": 0.2609,
+          "ci_high": 0.6522
+        },
+        "motive_cross_task_consistency": {
+          "point": 0.4348,
+          "ci_low": 0.2609,
+          "ci_high": 0.6522
+        },
+        "same_heart_control_accuracy": {
+          "point": null,
+          "ci_low": null,
+          "ci_high": null
+        },
+        "heart_overreach_rate": {
+          "point": null,
+          "ci_low": null,
+          "ci_high": null
+        },
+        "mean_explanation_chars": {
+          "point": 107.2609,
+          "ci_low": 99.1652,
+          "ci_high": 115.0
+        }
+      }
+    },
+    {
+      "model": "Qwen-1.5B-Instruct",
+      "condition": "christian_heart",
+      "slice": "moralstories",
+      "slice_description": "Moral Stories-only slice.",
+      "n_items": 40,
+      "metrics": {
+        "task_a_accuracy": {
+          "point": 0.475,
+          "ci_low": 0.3244,
+          "ci_high": 0.6256
+        },
+        "task_b_accuracy": {
+          "point": 1.0,
+          "ci_low": 1.0,
+          "ci_high": 1.0
+        },
+        "heart_sensitivity_score": {
+          "point": null,
+          "ci_low": null,
+          "ci_high": null
+        },
+        "surface_overweighting_index": {
+          "point": null,
+          "ci_low": null,
+          "ci_high": null
+        },
+        "p_reason_motive": {
+          "point": 0.2,
+          "ci_low": 0.075,
+          "ci_high": 0.325
+        },
+        "cross_task_consistency": {
+          "point": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0
+        },
+        "motive_cross_task_consistency": {
+          "point": null,
+          "ci_low": null,
+          "ci_high": null
+        },
+        "same_heart_control_accuracy": {
+          "point": 1.0,
+          "ci_low": 1.0,
+          "ci_high": 1.0
+        },
+        "heart_overreach_rate": {
+          "point": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0
+        },
+        "mean_explanation_chars": {
+          "point": 110.25,
+          "ci_low": 102.0956,
+          "ci_high": 118.6525
+        }
+      }
+    },
+    {
+      "model": "Qwen-1.5B-Instruct",
+      "condition": "christian_heart",
+      "slice": "same_act_different_motive",
+      "slice_description": "Pairs with matched outward action and changed motive.",
+      "n_items": 23,
+      "metrics": {
+        "task_a_accuracy": {
+          "point": 0.5652,
+          "ci_low": 0.3478,
+          "ci_high": 0.7391
+        },
+        "task_b_accuracy": {
+          "point": 0.8696,
+          "ci_low": 0.7391,
+          "ci_high": 1.0
+        },
+        "heart_sensitivity_score": {
+          "point": 0.8696,
+          "ci_low": 0.7391,
+          "ci_high": 1.0
+        },
+        "surface_overweighting_index": {
+          "point": 0.0435,
+          "ci_low": 0.0,
+          "ci_high": 0.1304
+        },
+        "p_reason_motive": {
+          "point": 0.9565,
+          "ci_low": 0.8696,
+          "ci_high": 1.0
+        },
+        "cross_task_consistency": {
+          "point": 0.4348,
+          "ci_low": 0.2609,
+          "ci_high": 0.6522
+        },
+        "motive_cross_task_consistency": {
+          "point": 0.4348,
+          "ci_low": 0.2609,
+          "ci_high": 0.6522
+        },
+        "same_heart_control_accuracy": {
+          "point": null,
+          "ci_low": null,
+          "ci_high": null
+        },
+        "heart_overreach_rate": {
+          "point": null,
+          "ci_low": null,
+          "ci_high": null
+        },
+        "mean_explanation_chars": {
+          "point": 107.2609,
+          "ci_low": 99.1652,
+          "ci_high": 115.0
+        }
+      }
+    },
+    {
+      "model": "Qwen-1.5B-Instruct",
+      "condition": "christian_heart",
+      "slice": "same_intention_controls",
+      "slice_description": "Same-intention Moral Stories controls.",
+      "n_items": 40,
+      "metrics": {
+        "task_a_accuracy": {
+          "point": 0.475,
+          "ci_low": 0.3244,
+          "ci_high": 0.6256
+        },
+        "task_b_accuracy": {
+          "point": 1.0,
+          "ci_low": 1.0,
+          "ci_high": 1.0
+        },
+        "heart_sensitivity_score": {
+          "point": null,
+          "ci_low": null,
+          "ci_high": null
+        },
+        "surface_overweighting_index": {
+          "point": null,
+          "ci_low": null,
+          "ci_high": null
+        },
+        "p_reason_motive": {
+          "point": 0.2,
+          "ci_low": 0.075,
+          "ci_high": 0.325
+        },
+        "cross_task_consistency": {
+          "point": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0
+        },
+        "motive_cross_task_consistency": {
+          "point": null,
+          "ci_low": null,
+          "ci_high": null
+        },
+        "same_heart_control_accuracy": {
+          "point": 1.0,
+          "ci_low": 1.0,
+          "ci_high": 1.0
+        },
+        "heart_overreach_rate": {
+          "point": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0
+        },
+        "mean_explanation_chars": {
+          "point": 110.25,
+          "ci_low": 102.0956,
+          "ci_high": 118.6525
+        }
+      }
+    }
+  ],
+  "contrasts": [
+    {
+      "model": "Qwen-1.5B-Instruct",
+      "left_condition": "baseline",
+      "right_condition": "christian_heart",
+      "slice": "all_items",
+      "slice_description": "All benchmark items.",
+      "n_shared_items": 63,
+      "metrics": {
+        "task_a_accuracy": {
+          "delta": 0.0,
+          "ci_low": -0.1433,
+          "ci_high": 0.1905,
+          "usable_pairs": 63,
+          "better": 14,
+          "worse": 14,
+          "tie": 35,
+          "mean_item_delta": 0.0,
+          "exact_sign_p_two_sided": 1.0,
+          "exact_sign_p_one_sided": 0.574723
+        },
+        "task_b_accuracy": {
+          "delta": 0.0635,
+          "ci_low": 0.0159,
+          "ci_high": 0.127,
+          "usable_pairs": 63,
+          "better": 4,
+          "worse": 0,
+          "tie": 59,
+          "mean_item_delta": 0.0635,
+          "exact_sign_p_two_sided": 0.125,
+          "exact_sign_p_one_sided": 0.0625
+        },
+        "heart_sensitivity_score": {
+          "delta": 0.1739,
+          "ci_low": 0.0475,
+          "ci_high": 0.3448,
+          "usable_pairs": 23,
+          "better": 4,
+          "worse": 0,
+          "tie": 19,
+          "mean_item_delta": 0.1739,
+          "exact_sign_p_two_sided": 0.125,
+          "exact_sign_p_one_sided": 0.0625
+        },
+        "surface_overweighting_index": {
+          "delta": 0.0,
+          "ci_low": -0.1304,
+          "ci_high": 0.1251,
+          "usable_pairs": 23,
+          "better": 1,
+          "worse": 1,
+          "tie": 21,
+          "mean_item_delta": 0.0,
+          "exact_sign_p_two_sided": 1.0,
+          "exact_sign_p_one_sided": 0.75
+        },
+        "p_reason_motive": {
+          "delta": 0.0635,
+          "ci_low": -0.0159,
+          "ci_high": 0.1429,
+          "usable_pairs": 63,
+          "better": 6,
+          "worse": 2,
+          "tie": 55,
+          "mean_item_delta": 0.0635,
+          "exact_sign_p_two_sided": 0.289062,
+          "exact_sign_p_one_sided": 0.144531
+        },
+        "motive_cross_task_consistency": {
+          "delta": 0.1304,
+          "ci_low": -0.1739,
+          "ci_high": 0.4232,
+          "usable_pairs": 23,
+          "better": 8,
+          "worse": 5,
+          "tie": 10,
+          "mean_item_delta": 0.1304,
+          "exact_sign_p_two_sided": 0.581055,
+          "exact_sign_p_one_sided": 0.290527
+        },
+        "same_heart_control_accuracy": {
+          "delta": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "usable_pairs": 40,
+          "better": 0,
+          "worse": 0,
+          "tie": 40,
+          "mean_item_delta": 0.0,
+          "exact_sign_p_two_sided": null,
+          "exact_sign_p_one_sided": null
+        },
+        "heart_overreach_rate": {
+          "delta": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "usable_pairs": 40,
+          "better": 0,
+          "worse": 0,
+          "tie": 40,
+          "mean_item_delta": 0.0,
+          "exact_sign_p_two_sided": null,
+          "exact_sign_p_one_sided": null
+        },
+        "mean_explanation_chars": {
+          "delta": -2.381,
+          "ci_low": -9.5242,
+          "ci_high": 4.6714,
+          "usable_pairs": 63,
+          "better": 27,
+          "worse": 31,
+          "tie": 5,
+          "mean_item_delta": -2.381,
+          "exact_sign_p_two_sided": 0.694004,
+          "exact_sign_p_one_sided": 0.744079
+        }
+      }
+    },
+    {
+      "model": "Qwen-1.5B-Instruct",
+      "left_condition": "baseline",
+      "right_condition": "christian_heart",
+      "slice": "motive_sensitive",
+      "slice_description": "Items where inward motive should matter.",
+      "n_shared_items": 23,
+      "metrics": {
+        "task_a_accuracy": {
+          "delta": -0.0435,
+          "ci_low": -0.262,
+          "ci_high": 0.2174,
+          "usable_pairs": 23,
+          "better": 4,
+          "worse": 5,
+          "tie": 14,
+          "mean_item_delta": -0.0435,
+          "exact_sign_p_two_sided": 1.0,
+          "exact_sign_p_one_sided": 0.746094
+        },
+        "task_b_accuracy": {
+          "delta": 0.1739,
+          "ci_low": 0.0435,
+          "ci_high": 0.3478,
+          "usable_pairs": 23,
+          "better": 4,
+          "worse": 0,
+          "tie": 19,
+          "mean_item_delta": 0.1739,
+          "exact_sign_p_two_sided": 0.125,
+          "exact_sign_p_one_sided": 0.0625
+        },
+        "heart_sensitivity_score": {
+          "delta": 0.1739,
+          "ci_low": 0.0435,
+          "ci_high": 0.3478,
+          "usable_pairs": 23,
+          "better": 4,
+          "worse": 0,
+          "tie": 19,
+          "mean_item_delta": 0.1739,
+          "exact_sign_p_two_sided": 0.125,
+          "exact_sign_p_one_sided": 0.0625
+        },
+        "surface_overweighting_index": {
+          "delta": 0.0,
+          "ci_low": -0.1304,
+          "ci_high": 0.088,
+          "usable_pairs": 23,
+          "better": 1,
+          "worse": 1,
+          "tie": 21,
+          "mean_item_delta": 0.0,
+          "exact_sign_p_two_sided": 1.0,
+          "exact_sign_p_one_sided": 0.75
+        },
+        "p_reason_motive": {
+          "delta": 0.0,
+          "ci_low": -0.088,
+          "ci_high": 0.1304,
+          "usable_pairs": 23,
+          "better": 1,
+          "worse": 1,
+          "tie": 21,
+          "mean_item_delta": 0.0,
+          "exact_sign_p_two_sided": 1.0,
+          "exact_sign_p_one_sided": 0.75
+        },
+        "motive_cross_task_consistency": {
+          "delta": 0.1304,
+          "ci_low": -0.1315,
+          "ci_high": 0.4348,
+          "usable_pairs": 23,
+          "better": 8,
+          "worse": 5,
+          "tie": 10,
+          "mean_item_delta": 0.1304,
+          "exact_sign_p_two_sided": 0.581055,
+          "exact_sign_p_one_sided": 0.290527
+        },
+        "same_heart_control_accuracy": {
+          "delta": null,
+          "ci_low": null,
+          "ci_high": null,
+          "usable_pairs": 0,
+          "better": 0,
+          "worse": 0,
+          "tie": 0,
+          "mean_item_delta": null,
+          "exact_sign_p_two_sided": null,
+          "exact_sign_p_one_sided": null
+        },
+        "heart_overreach_rate": {
+          "delta": null,
+          "ci_low": null,
+          "ci_high": null,
+          "usable_pairs": 0,
+          "better": 0,
+          "worse": 0,
+          "tie": 0,
+          "mean_item_delta": null,
+          "exact_sign_p_two_sided": null,
+          "exact_sign_p_one_sided": null
+        },
+        "mean_explanation_chars": {
+          "delta": -2.4783,
+          "ci_low": -14.4391,
+          "ci_high": 11.6957,
+          "usable_pairs": 23,
+          "better": 9,
+          "worse": 12,
+          "tie": 2,
+          "mean_item_delta": -2.4783,
+          "exact_sign_p_two_sided": 0.663624,
+          "exact_sign_p_one_sided": 0.808345
+        }
+      }
+    },
+    {
+      "model": "Qwen-1.5B-Instruct",
+      "left_condition": "baseline",
+      "right_condition": "christian_heart",
+      "slice": "same_heart_controls",
+      "slice_description": "Controls where Task B gold stays Same.",
+      "n_shared_items": 40,
+      "metrics": {
+        "task_a_accuracy": {
+          "delta": 0.025,
+          "ci_low": -0.2006,
+          "ci_high": 0.25,
+          "usable_pairs": 40,
+          "better": 10,
+          "worse": 9,
+          "tie": 21,
+          "mean_item_delta": 0.025,
+          "exact_sign_p_two_sided": 1.0,
+          "exact_sign_p_one_sided": 0.5
+        },
+        "task_b_accuracy": {
+          "delta": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "usable_pairs": 40,
+          "better": 0,
+          "worse": 0,
+          "tie": 40,
+          "mean_item_delta": 0.0,
+          "exact_sign_p_two_sided": null,
+          "exact_sign_p_one_sided": null
+        },
+        "heart_sensitivity_score": {
+          "delta": null,
+          "ci_low": null,
+          "ci_high": null,
+          "usable_pairs": 0,
+          "better": 0,
+          "worse": 0,
+          "tie": 0,
+          "mean_item_delta": null,
+          "exact_sign_p_two_sided": null,
+          "exact_sign_p_one_sided": null
+        },
+        "surface_overweighting_index": {
+          "delta": null,
+          "ci_low": null,
+          "ci_high": null,
+          "usable_pairs": 0,
+          "better": 0,
+          "worse": 0,
+          "tie": 0,
+          "mean_item_delta": null,
+          "exact_sign_p_two_sided": null,
+          "exact_sign_p_one_sided": null
+        },
+        "p_reason_motive": {
+          "delta": 0.1,
+          "ci_low": -0.0006,
+          "ci_high": 0.2,
+          "usable_pairs": 40,
+          "better": 5,
+          "worse": 1,
+          "tie": 34,
+          "mean_item_delta": 0.1,
+          "exact_sign_p_two_sided": 0.21875,
+          "exact_sign_p_one_sided": 0.109375
+        },
+        "motive_cross_task_consistency": {
+          "delta": null,
+          "ci_low": null,
+          "ci_high": null,
+          "usable_pairs": 0,
+          "better": 0,
+          "worse": 0,
+          "tie": 0,
+          "mean_item_delta": null,
+          "exact_sign_p_two_sided": null,
+          "exact_sign_p_one_sided": null
+        },
+        "same_heart_control_accuracy": {
+          "delta": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "usable_pairs": 40,
+          "better": 0,
+          "worse": 0,
+          "tie": 40,
+          "mean_item_delta": 0.0,
+          "exact_sign_p_two_sided": null,
+          "exact_sign_p_one_sided": null
+        },
+        "heart_overreach_rate": {
+          "delta": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "usable_pairs": 40,
+          "better": 0,
+          "worse": 0,
+          "tie": 40,
+          "mean_item_delta": 0.0,
+          "exact_sign_p_two_sided": null,
+          "exact_sign_p_one_sided": null
+        },
+        "mean_explanation_chars": {
+          "delta": -2.325,
+          "ci_low": -10.9025,
+          "ci_high": 4.7812,
+          "usable_pairs": 40,
+          "better": 18,
+          "worse": 19,
+          "tie": 3,
+          "mean_item_delta": -2.325,
+          "exact_sign_p_two_sided": 1.0,
+          "exact_sign_p_one_sided": 0.628585
+        }
+      }
+    },
+    {
+      "model": "Qwen-1.5B-Instruct",
+      "left_condition": "baseline",
+      "right_condition": "christian_heart",
+      "slice": "heartbench",
+      "slice_description": "HeartBench-only slice.",
+      "n_shared_items": 23,
+      "metrics": {
+        "task_a_accuracy": {
+          "delta": -0.0435,
+          "ci_low": -0.262,
+          "ci_high": 0.2174,
+          "usable_pairs": 23,
+          "better": 4,
+          "worse": 5,
+          "tie": 14,
+          "mean_item_delta": -0.0435,
+          "exact_sign_p_two_sided": 1.0,
+          "exact_sign_p_one_sided": 0.746094
+        },
+        "task_b_accuracy": {
+          "delta": 0.1739,
+          "ci_low": 0.0435,
+          "ci_high": 0.3478,
+          "usable_pairs": 23,
+          "better": 4,
+          "worse": 0,
+          "tie": 19,
+          "mean_item_delta": 0.1739,
+          "exact_sign_p_two_sided": 0.125,
+          "exact_sign_p_one_sided": 0.0625
+        },
+        "heart_sensitivity_score": {
+          "delta": 0.1739,
+          "ci_low": 0.0435,
+          "ci_high": 0.3478,
+          "usable_pairs": 23,
+          "better": 4,
+          "worse": 0,
+          "tie": 19,
+          "mean_item_delta": 0.1739,
+          "exact_sign_p_two_sided": 0.125,
+          "exact_sign_p_one_sided": 0.0625
+        },
+        "surface_overweighting_index": {
+          "delta": 0.0,
+          "ci_low": -0.1304,
+          "ci_high": 0.088,
+          "usable_pairs": 23,
+          "better": 1,
+          "worse": 1,
+          "tie": 21,
+          "mean_item_delta": 0.0,
+          "exact_sign_p_two_sided": 1.0,
+          "exact_sign_p_one_sided": 0.75
+        },
+        "p_reason_motive": {
+          "delta": 0.0,
+          "ci_low": -0.088,
+          "ci_high": 0.1304,
+          "usable_pairs": 23,
+          "better": 1,
+          "worse": 1,
+          "tie": 21,
+          "mean_item_delta": 0.0,
+          "exact_sign_p_two_sided": 1.0,
+          "exact_sign_p_one_sided": 0.75
+        },
+        "motive_cross_task_consistency": {
+          "delta": 0.1304,
+          "ci_low": -0.1315,
+          "ci_high": 0.4348,
+          "usable_pairs": 23,
+          "better": 8,
+          "worse": 5,
+          "tie": 10,
+          "mean_item_delta": 0.1304,
+          "exact_sign_p_two_sided": 0.581055,
+          "exact_sign_p_one_sided": 0.290527
+        },
+        "same_heart_control_accuracy": {
+          "delta": null,
+          "ci_low": null,
+          "ci_high": null,
+          "usable_pairs": 0,
+          "better": 0,
+          "worse": 0,
+          "tie": 0,
+          "mean_item_delta": null,
+          "exact_sign_p_two_sided": null,
+          "exact_sign_p_one_sided": null
+        },
+        "heart_overreach_rate": {
+          "delta": null,
+          "ci_low": null,
+          "ci_high": null,
+          "usable_pairs": 0,
+          "better": 0,
+          "worse": 0,
+          "tie": 0,
+          "mean_item_delta": null,
+          "exact_sign_p_two_sided": null,
+          "exact_sign_p_one_sided": null
+        },
+        "mean_explanation_chars": {
+          "delta": -2.4783,
+          "ci_low": -14.4391,
+          "ci_high": 11.6957,
+          "usable_pairs": 23,
+          "better": 9,
+          "worse": 12,
+          "tie": 2,
+          "mean_item_delta": -2.4783,
+          "exact_sign_p_two_sided": 0.663624,
+          "exact_sign_p_one_sided": 0.808345
+        }
+      }
+    },
+    {
+      "model": "Qwen-1.5B-Instruct",
+      "left_condition": "baseline",
+      "right_condition": "christian_heart",
+      "slice": "moralstories",
+      "slice_description": "Moral Stories-only slice.",
+      "n_shared_items": 40,
+      "metrics": {
+        "task_a_accuracy": {
+          "delta": 0.025,
+          "ci_low": -0.2006,
+          "ci_high": 0.25,
+          "usable_pairs": 40,
+          "better": 10,
+          "worse": 9,
+          "tie": 21,
+          "mean_item_delta": 0.025,
+          "exact_sign_p_two_sided": 1.0,
+          "exact_sign_p_one_sided": 0.5
+        },
+        "task_b_accuracy": {
+          "delta": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "usable_pairs": 40,
+          "better": 0,
+          "worse": 0,
+          "tie": 40,
+          "mean_item_delta": 0.0,
+          "exact_sign_p_two_sided": null,
+          "exact_sign_p_one_sided": null
+        },
+        "heart_sensitivity_score": {
+          "delta": null,
+          "ci_low": null,
+          "ci_high": null,
+          "usable_pairs": 0,
+          "better": 0,
+          "worse": 0,
+          "tie": 0,
+          "mean_item_delta": null,
+          "exact_sign_p_two_sided": null,
+          "exact_sign_p_one_sided": null
+        },
+        "surface_overweighting_index": {
+          "delta": null,
+          "ci_low": null,
+          "ci_high": null,
+          "usable_pairs": 0,
+          "better": 0,
+          "worse": 0,
+          "tie": 0,
+          "mean_item_delta": null,
+          "exact_sign_p_two_sided": null,
+          "exact_sign_p_one_sided": null
+        },
+        "p_reason_motive": {
+          "delta": 0.1,
+          "ci_low": -0.0006,
+          "ci_high": 0.2,
+          "usable_pairs": 40,
+          "better": 5,
+          "worse": 1,
+          "tie": 34,
+          "mean_item_delta": 0.1,
+          "exact_sign_p_two_sided": 0.21875,
+          "exact_sign_p_one_sided": 0.109375
+        },
+        "motive_cross_task_consistency": {
+          "delta": null,
+          "ci_low": null,
+          "ci_high": null,
+          "usable_pairs": 0,
+          "better": 0,
+          "worse": 0,
+          "tie": 0,
+          "mean_item_delta": null,
+          "exact_sign_p_two_sided": null,
+          "exact_sign_p_one_sided": null
+        },
+        "same_heart_control_accuracy": {
+          "delta": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "usable_pairs": 40,
+          "better": 0,
+          "worse": 0,
+          "tie": 40,
+          "mean_item_delta": 0.0,
+          "exact_sign_p_two_sided": null,
+          "exact_sign_p_one_sided": null
+        },
+        "heart_overreach_rate": {
+          "delta": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "usable_pairs": 40,
+          "better": 0,
+          "worse": 0,
+          "tie": 40,
+          "mean_item_delta": 0.0,
+          "exact_sign_p_two_sided": null,
+          "exact_sign_p_one_sided": null
+        },
+        "mean_explanation_chars": {
+          "delta": -2.325,
+          "ci_low": -10.9025,
+          "ci_high": 4.7812,
+          "usable_pairs": 40,
+          "better": 18,
+          "worse": 19,
+          "tie": 3,
+          "mean_item_delta": -2.325,
+          "exact_sign_p_two_sided": 1.0,
+          "exact_sign_p_one_sided": 0.628585
+        }
+      }
+    },
+    {
+      "model": "Qwen-1.5B-Instruct",
+      "left_condition": "baseline",
+      "right_condition": "christian_heart",
+      "slice": "same_act_different_motive",
+      "slice_description": "Pairs with matched outward action and changed motive.",
+      "n_shared_items": 23,
+      "metrics": {
+        "task_a_accuracy": {
+          "delta": -0.0435,
+          "ci_low": -0.262,
+          "ci_high": 0.2174,
+          "usable_pairs": 23,
+          "better": 4,
+          "worse": 5,
+          "tie": 14,
+          "mean_item_delta": -0.0435,
+          "exact_sign_p_two_sided": 1.0,
+          "exact_sign_p_one_sided": 0.746094
+        },
+        "task_b_accuracy": {
+          "delta": 0.1739,
+          "ci_low": 0.0435,
+          "ci_high": 0.3478,
+          "usable_pairs": 23,
+          "better": 4,
+          "worse": 0,
+          "tie": 19,
+          "mean_item_delta": 0.1739,
+          "exact_sign_p_two_sided": 0.125,
+          "exact_sign_p_one_sided": 0.0625
+        },
+        "heart_sensitivity_score": {
+          "delta": 0.1739,
+          "ci_low": 0.0435,
+          "ci_high": 0.3478,
+          "usable_pairs": 23,
+          "better": 4,
+          "worse": 0,
+          "tie": 19,
+          "mean_item_delta": 0.1739,
+          "exact_sign_p_two_sided": 0.125,
+          "exact_sign_p_one_sided": 0.0625
+        },
+        "surface_overweighting_index": {
+          "delta": 0.0,
+          "ci_low": -0.1304,
+          "ci_high": 0.088,
+          "usable_pairs": 23,
+          "better": 1,
+          "worse": 1,
+          "tie": 21,
+          "mean_item_delta": 0.0,
+          "exact_sign_p_two_sided": 1.0,
+          "exact_sign_p_one_sided": 0.75
+        },
+        "p_reason_motive": {
+          "delta": 0.0,
+          "ci_low": -0.088,
+          "ci_high": 0.1304,
+          "usable_pairs": 23,
+          "better": 1,
+          "worse": 1,
+          "tie": 21,
+          "mean_item_delta": 0.0,
+          "exact_sign_p_two_sided": 1.0,
+          "exact_sign_p_one_sided": 0.75
+        },
+        "motive_cross_task_consistency": {
+          "delta": 0.1304,
+          "ci_low": -0.1315,
+          "ci_high": 0.4348,
+          "usable_pairs": 23,
+          "better": 8,
+          "worse": 5,
+          "tie": 10,
+          "mean_item_delta": 0.1304,
+          "exact_sign_p_two_sided": 0.581055,
+          "exact_sign_p_one_sided": 0.290527
+        },
+        "same_heart_control_accuracy": {
+          "delta": null,
+          "ci_low": null,
+          "ci_high": null,
+          "usable_pairs": 0,
+          "better": 0,
+          "worse": 0,
+          "tie": 0,
+          "mean_item_delta": null,
+          "exact_sign_p_two_sided": null,
+          "exact_sign_p_one_sided": null
+        },
+        "heart_overreach_rate": {
+          "delta": null,
+          "ci_low": null,
+          "ci_high": null,
+          "usable_pairs": 0,
+          "better": 0,
+          "worse": 0,
+          "tie": 0,
+          "mean_item_delta": null,
+          "exact_sign_p_two_sided": null,
+          "exact_sign_p_one_sided": null
+        },
+        "mean_explanation_chars": {
+          "delta": -2.4783,
+          "ci_low": -14.4391,
+          "ci_high": 11.6957,
+          "usable_pairs": 23,
+          "better": 9,
+          "worse": 12,
+          "tie": 2,
+          "mean_item_delta": -2.4783,
+          "exact_sign_p_two_sided": 0.663624,
+          "exact_sign_p_one_sided": 0.808345
+        }
+      }
+    },
+    {
+      "model": "Qwen-1.5B-Instruct",
+      "left_condition": "baseline",
+      "right_condition": "christian_heart",
+      "slice": "same_intention_controls",
+      "slice_description": "Same-intention Moral Stories controls.",
+      "n_shared_items": 40,
+      "metrics": {
+        "task_a_accuracy": {
+          "delta": 0.025,
+          "ci_low": -0.2006,
+          "ci_high": 0.25,
+          "usable_pairs": 40,
+          "better": 10,
+          "worse": 9,
+          "tie": 21,
+          "mean_item_delta": 0.025,
+          "exact_sign_p_two_sided": 1.0,
+          "exact_sign_p_one_sided": 0.5
+        },
+        "task_b_accuracy": {
+          "delta": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "usable_pairs": 40,
+          "better": 0,
+          "worse": 0,
+          "tie": 40,
+          "mean_item_delta": 0.0,
+          "exact_sign_p_two_sided": null,
+          "exact_sign_p_one_sided": null
+        },
+        "heart_sensitivity_score": {
+          "delta": null,
+          "ci_low": null,
+          "ci_high": null,
+          "usable_pairs": 0,
+          "better": 0,
+          "worse": 0,
+          "tie": 0,
+          "mean_item_delta": null,
+          "exact_sign_p_two_sided": null,
+          "exact_sign_p_one_sided": null
+        },
+        "surface_overweighting_index": {
+          "delta": null,
+          "ci_low": null,
+          "ci_high": null,
+          "usable_pairs": 0,
+          "better": 0,
+          "worse": 0,
+          "tie": 0,
+          "mean_item_delta": null,
+          "exact_sign_p_two_sided": null,
+          "exact_sign_p_one_sided": null
+        },
+        "p_reason_motive": {
+          "delta": 0.1,
+          "ci_low": -0.0006,
+          "ci_high": 0.2,
+          "usable_pairs": 40,
+          "better": 5,
+          "worse": 1,
+          "tie": 34,
+          "mean_item_delta": 0.1,
+          "exact_sign_p_two_sided": 0.21875,
+          "exact_sign_p_one_sided": 0.109375
+        },
+        "motive_cross_task_consistency": {
+          "delta": null,
+          "ci_low": null,
+          "ci_high": null,
+          "usable_pairs": 0,
+          "better": 0,
+          "worse": 0,
+          "tie": 0,
+          "mean_item_delta": null,
+          "exact_sign_p_two_sided": null,
+          "exact_sign_p_one_sided": null
+        },
+        "same_heart_control_accuracy": {
+          "delta": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "usable_pairs": 40,
+          "better": 0,
+          "worse": 0,
+          "tie": 40,
+          "mean_item_delta": 0.0,
+          "exact_sign_p_two_sided": null,
+          "exact_sign_p_one_sided": null
+        },
+        "heart_overreach_rate": {
+          "delta": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "usable_pairs": 40,
+          "better": 0,
+          "worse": 0,
+          "tie": 40,
+          "mean_item_delta": 0.0,
+          "exact_sign_p_two_sided": null,
+          "exact_sign_p_one_sided": null
+        },
+        "mean_explanation_chars": {
+          "delta": -2.325,
+          "ci_low": -10.9025,
+          "ci_high": 4.7812,
+          "usable_pairs": 40,
+          "better": 18,
+          "worse": 19,
+          "tie": 3,
+          "mean_item_delta": -2.325,
+          "exact_sign_p_two_sided": 1.0,
+          "exact_sign_p_one_sided": 0.628585
+        }
+      }
+    }
+  ],
+  "power_rows": [
+    {
+      "model": "Qwen-1.5B-Instruct",
+      "slice": "motive_sensitive",
+      "slice_description": "Items where inward motive should matter.",
+      "left_condition": "baseline",
+      "right_condition": "christian_heart",
+      "metric": "heart_sensitivity_score",
+      "usable_pairs": 23,
+      "better": 4,
+      "worse": 0,
+      "tie": 19,
+      "current_power": 0.3706,
+      "min_items_for_target_power": 38,
+      "target_power": 0.8,
+      "alpha": 0.05,
+      "two_sided": false
+    },
+    {
+      "model": "Qwen-1.5B-Instruct",
+      "slice": "motive_sensitive",
+      "slice_description": "Items where inward motive should matter.",
+      "left_condition": "baseline",
+      "right_condition": "christian_heart",
+      "metric": "p_reason_motive",
+      "usable_pairs": 23,
+      "better": 1,
+      "worse": 1,
+      "tie": 21,
+      "current_power": 0.0012,
+      "min_items_for_target_power": null,
+      "target_power": 0.8,
+      "alpha": 0.05,
+      "two_sided": false
+    },
+    {
+      "model": "Qwen-1.5B-Instruct",
+      "slice": "same_heart_controls",
+      "slice_description": "Controls where Task B gold stays Same.",
+      "left_condition": "baseline",
+      "right_condition": "christian_heart",
+      "metric": "p_reason_motive",
+      "usable_pairs": 40,
+      "better": 5,
+      "worse": 1,
+      "tie": 34,
+      "current_power": 0.3106,
+      "min_items_for_target_power": 100,
+      "target_power": 0.8,
+      "alpha": 0.05,
+      "two_sided": false
+    },
+    {
+      "model": "Qwen-1.5B-Instruct",
+      "slice": "heartbench",
+      "slice_description": "HeartBench-only slice.",
+      "left_condition": "baseline",
+      "right_condition": "christian_heart",
+      "metric": "heart_sensitivity_score",
+      "usable_pairs": 23,
+      "better": 4,
+      "worse": 0,
+      "tie": 19,
+      "current_power": 0.3706,
+      "min_items_for_target_power": 38,
+      "target_power": 0.8,
+      "alpha": 0.05,
+      "two_sided": false
+    },
+    {
+      "model": "Qwen-1.5B-Instruct",
+      "slice": "heartbench",
+      "slice_description": "HeartBench-only slice.",
+      "left_condition": "baseline",
+      "right_condition": "christian_heart",
+      "metric": "p_reason_motive",
+      "usable_pairs": 23,
+      "better": 1,
+      "worse": 1,
+      "tie": 21,
+      "current_power": 0.0012,
+      "min_items_for_target_power": null,
+      "target_power": 0.8,
+      "alpha": 0.05,
+      "two_sided": false
+    },
+    {
+      "model": "Qwen-1.5B-Instruct",
+      "slice": "same_act_different_motive",
+      "slice_description": "Pairs with matched outward action and changed motive.",
+      "left_condition": "baseline",
+      "right_condition": "christian_heart",
+      "metric": "heart_sensitivity_score",
+      "usable_pairs": 23,
+      "better": 4,
+      "worse": 0,
+      "tie": 19,
+      "current_power": 0.3706,
+      "min_items_for_target_power": 38,
+      "target_power": 0.8,
+      "alpha": 0.05,
+      "two_sided": false
+    },
+    {
+      "model": "Qwen-1.5B-Instruct",
+      "slice": "same_act_different_motive",
+      "slice_description": "Pairs with matched outward action and changed motive.",
+      "left_condition": "baseline",
+      "right_condition": "christian_heart",
+      "metric": "p_reason_motive",
+      "usable_pairs": 23,
+      "better": 1,
+      "worse": 1,
+      "tie": 21,
+      "current_power": 0.0012,
+      "min_items_for_target_power": null,
+      "target_power": 0.8,
+      "alpha": 0.05,
+      "two_sided": false
+    },
+    {
+      "model": "Qwen-1.5B-Instruct",
+      "slice": "same_intention_controls",
+      "slice_description": "Same-intention Moral Stories controls.",
+      "left_condition": "baseline",
+      "right_condition": "christian_heart",
+      "metric": "p_reason_motive",
+      "usable_pairs": 40,
+      "better": 5,
+      "worse": 1,
+      "tie": 34,
+      "current_power": 0.3106,
+      "min_items_for_target_power": 100,
+      "target_power": 0.8,
+      "alpha": 0.05,
+      "two_sided": false
+    }
+  ]
+}

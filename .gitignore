@@ -13,11 +13,14 @@ annotation/
 
 results/*
 !results/pilot_live_v11_fullpilot/
+!results/main_same_act_confirmation_v12_mps/
 !results/pilot_revision_scoreboard.json
 !results/pilot_revision_scoreboard.md
 !results/pilot_v11_fullpilot_freeze_manifest.json
 !results/pilot_v11_fullpilot_job_balance.json
 !results/pilot_v11_fullpilot_jobs.jsonl
+!results/main_same_act_confirmation_v12_mps/*.json
+!results/main_same_act_confirmation_v12_mps/*.md
 
 results/**/*.jsonl
 results/**/*_qualitative_examples.json
