@@ -13,7 +13,7 @@ This repository asks a more mechanistic question than "Does religious prompting 
 
 **When an LLM reads a moral case, does Christian heart-focused framing change what it treats as morally diagnostic, especially whether it privileges inward motive over outward behavioral surface?**
 
-![Same-act confirmation overview](assets/same-act-confirmation-overview.svg)
+![Same-act confirmation overview](assets/same-act-confirmation-overview.png)
 
 ## Current Strongest Result
 

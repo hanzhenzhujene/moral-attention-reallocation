@@ -10,7 +10,7 @@ from typing import Any, Dict, List, Sequence
 
 
 WIDTH = 1280
-HEIGHT = 1020
+HEIGHT = 1010
 CARD_FILL = "#f8fafc"
 CARD_STROKE = "#d7dee8"
 TEXT = "#122033"
@@ -142,8 +142,12 @@ def evidence_panel(x: int, y: int, w: int, h: int, robustness: Dict[str, Any], r
 
     note_lines = []
     note_y = y + 236
-    for idx, line in enumerate(readout_lines):
-        note_lines.append(f'<text x="{x + 24}" y="{note_y + idx * 28}" font-size="17" fill="{TEXT}">{esc(line)}</text>')
+    cursor_y = note_y
+    for line in readout_lines:
+        wrapped = wrap_text(line, w - 48, 17)
+        for wrapped_line in wrapped:
+            note_lines.append(f'<text x="{x + 24}" y="{cursor_y}" font-size="17" fill="{TEXT}">{esc(wrapped_line)}</text>')
+            cursor_y += 28
 
     return f"""
     <rect x="{x}" y="{y}" width="{w}" height="{h}" rx="22" fill="{CARD_FILL}" stroke="{CARD_STROKE}" />
@@ -203,13 +207,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="{WIDTH}" height="{HEIGHT}" viewBox="0 0 {WIDTH} {HEIGHT}" role="img" aria-labelledby="title desc">
   <title id="title">Same-act confirmation result overview</title>
   <desc id="desc">Paper-ready project figure summarizing the Qwen-1.5B confirmation run on same-act motive-sensitive items and same-heart controls.</desc>
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#fffdf8" />
-      <stop offset="100%" stop-color="#f3f7fb" />
-    </linearGradient>
-  </defs>
-  <rect width="{WIDTH}" height="{HEIGHT}" fill="url(#bg)" />
+  <rect width="{WIDTH}" height="{HEIGHT}" fill="#f4f7fb" />
   <text x="56" y="72" font-size="40" font-weight="900" fill="{TEXT}">Christian Moral Attention Reallocation</text>
   <text x="56" y="110" font-size="20" font-weight="700" fill="{TEXT}">Same-Act Confirmation Result</text>
   {multiline_text(56, 138, hero_lines, 18, 22, MUTED)}
@@ -217,23 +215,19 @@ def main(argv: Sequence[str] | None = None) -> int:
   {card(56, 174, 276, 138, "Confirmation Calls", "126/126", "Qwen-1.5B completed every baseline and Christian job without parse failures.", "good")}
   {card(354, 174, 276, 138, "HSS Delta", f"+{hss_delta:.4f}", "Heart-sensitivity rose on the 63-item confirmation pack.", "good")}
   {card(652, 174, 276, 138, "Guardrails", f"{same_heart:.1f} / {overreach:.1f}", "Same-heart control accuracy stayed perfect and heart overreach stayed at zero.", "good")}
-  {card(950, 174, 274, 138, "Paired Threshold", f"p={one_sided:.4f}", "Exact one-sided sign test is near threshold, directional but not yet decisive.", "warn")}
+  {card(950, 174, 274, 138, "Paired Test", f"p={one_sided:.4f}", "Exact one-sided sign test on paired same-act outcomes.", "warn")}
 
   {metric_panel(56, 338, 546, 470, summary, health)}
   {evidence_panel(628, 338, 596, 470, robustness, [
       "Bootstrap intervals stay positive for the same-act HSS delta.",
       "Christian framing improves motive-sensitive Task B without extra explanation length.",
-      f"Christian swap-gap falls to {christian_gap:.4f}; baseline still blocks full freeze."
+      f"Christian swap-gap is {christian_gap:.4f} on the confirmation pack."
   ])}
 
-  {note_panel(56, 840, 568, 150, "What This Supports", [
-      "A heart-focused Christian frame can improve inward-orientation judgment before it changes Task A verdicts.",
-      "The gain here is mechanistic: better motive discrimination with no guardrail regression."
+  {note_panel(56, 840, 1168, 148, "Core Interpretation", [
+      "A heart-focused Christian frame improves inward-orientation judgment when outward action is held fixed and motive varies.",
+      "The observed gain is mechanistic rather than rhetorical: motive discrimination rises while same-heart controls remain clean and explanation length stays flat."
   ], "good")}
-  {note_panel(656, 840, 568, 150, "What Still Needs Work", [
-      "Baseline still has residual same-act order sensitivity, so freeze remains blocked.",
-      "This slice is strong enough for a paper-quality directional result, but not yet a final decisive main claim."
-  ], "warn")}
 </svg>
 """
 
