@@ -1,4 +1,4 @@
-name: christian-moral-attention
+name: moral-attention-reallocation
 channels:
   - conda-forge
 dependencies:

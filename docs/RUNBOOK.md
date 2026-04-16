@@ -549,5 +549,5 @@ Use these pilot branches intentionally rather than mixing them:
 - `v10`: true multi-pass Task B diagnostic; solved overreach on `Qwen-1.5B-Instruct` but `Qwen-0.5B-Instruct` failed mainly in the copy pass
 - `v11`: benchmark-summary-assisted multi-pass; passed the held-out 20-item pilot on parse and overreach, but still shows residual Task B swap-gap concentrated in `same_act_different_motive`
 
-See [docs/TASK_B_REVISION_LOG.md](/Users/hanzhenzhu/Desktop/moral-attention-reallocation/docs/TASK_B_REVISION_LOG.md) before starting another pre-freeze Task B revision.
-The current multi-pass status is documented in [docs/TASK_B_MULTIPASS_DIAGNOSTIC.md](/Users/hanzhenzhu/Desktop/moral-attention-reallocation/docs/TASK_B_MULTIPASS_DIAGNOSTIC.md).
+See [docs/TASK_B_REVISION_LOG.md](TASK_B_REVISION_LOG.md) before starting another pre-freeze Task B revision.
+The current multi-pass status is documented in [docs/TASK_B_MULTIPASS_DIAGNOSTIC.md](TASK_B_MULTIPASS_DIAGNOSTIC.md).

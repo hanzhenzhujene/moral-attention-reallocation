@@ -113,7 +113,7 @@ Same-heart controls are the guardrail. They hold inward orientation fixed while 
 
 - A public `Qwen-1.5B-Instruct` confirmation artifact on a 63-item same-act-plus-control slice.
 - The canonical result files in `results/main_same_act_confirmation_v12_mps/`.
-- The current project-page figure and a minimal reproduction path for this slice.
+- The current README overview diagram and a minimal reproduction path for this slice.
 
 **What is not frozen yet**
 
@@ -124,7 +124,7 @@ Same-heart controls are the guardrail. They hold inward orientation fixed while 
 
 ## Reproduce The Current Confirmation Slice
 
-This public repo guarantees reproduction of the current `Qwen-1.5B-Instruct` confirmation slice, not the full benchmark-construction workflow. Third-party raw benchmark mirrors are intentionally not vendored here.
+This public repo guarantees reproduction of the current `Qwen-1.5B-Instruct` confirmation slice, not the full benchmark-construction workflow. Third-party raw benchmark mirrors are intentionally not vendored here. The reproduction script auto-selects `cuda`, `mps`, or `cpu`, so it is no longer tied to the original Apple Silicon run environment.
 
 ```bash
 python3 -m venv .venv && source .venv/bin/activate
