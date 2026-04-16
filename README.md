@@ -12,45 +12,61 @@
 This repository studies a narrow mechanistic question about moral cognition in language models: whether framing changes what the model treats as morally diagnostic. The current public confirmation slice uses a Christian heart-focused condition as the main probe against a baseline prompt. The benchmark logic centers on pairwise moral cases with three tasks: overall moral verdict (Task A), inward-orientation judgment (Task B), and reason focus (Task C). The key design uses same-act-different-motive pairs together with same-heart controls, so motive sensitivity can be separated from false projection of outwardly worse action into inwardly worse heart. On a 63-item Qwen-1.5B-Instruct confirmation slice, the Christian heart-focused condition improved Task B accuracy from `0.8889` to `0.9524` and heart-sensitivity score from `0.6957` to `0.8696`, while same-heart control accuracy remained `1.0` and heart-overreach remained `0.0`. Under conservative paired testing this is a directional confirmation result, not yet a final decisive main-benchmark claim. The broader project design includes matched secular controls, but the current public artifact is intentionally narrower: a pre-freeze confirmation slice with honest reproducibility boundaries.
 
 ```mermaid
-graph TD
-    %% 样式定义
-    classDef input fill:#eef2ff,stroke:#4f46e5,stroke-width:2px,color:#000
-    classDef frame fill:#fff7ed,stroke:#ea580c,stroke-width:2px,color:#000
-    classDef task fill:#f0fdf4,stroke:#16a34a,stroke-width:2px,color:#000
-    classDef result fill:#fdf4ff,stroke:#c026d3,stroke-width:2px,color:#000
+%%{init: {
+  'theme': 'base',
+  'flowchart': { 'htmlLabels': true, 'curve': 'linear' },
+  'themeVariables': {
+    'fontSize': '11px',
+    'fontFamily': 'ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif',
+    'lineColor': '#64748b',
+    'primaryTextColor': '#111827'
+  }
+}}%%
+flowchart LR
+    classDef input fill:#eef2ff,stroke:#4f46e5,stroke-width:1.5px,color:#111827
+    classDef frame fill:#fff7ed,stroke:#ea580c,stroke-width:1.5px,color:#111827
+    classDef task fill:#f0fdf4,stroke:#16a34a,stroke-width:1.5px,color:#111827
+    classDef result fill:#fdf4ff,stroke:#c026d3,stroke-width:1.5px,color:#111827
+    classDef guard fill:#ecfeff,stroke:#0891b2,stroke-width:1.5px,color:#111827
+    classDef neutral fill:#f8fafc,stroke:#64748b,stroke-width:1.5px,color:#111827
 
-    %% 方法论部分
-    subgraph Methodology ["1. Experimental Design (Pairwise Cases)"]
-        direction LR
-        A["Same-Act Motive Pairs<br/><small>Varying inward orientation</small>"]:::input
-        B["Same-Heart Controls<br/><small>Fixed inward orientation (Guardrail)</small>"]:::input
+    subgraph Design ["1. Design"]
+        direction TB
+        A["Same act<br/>different motive"]:::input
+        B["Same-heart<br/>control"]:::guard
     end
 
-    subgraph Framing ["2. Framing Conditions"]
-        C["Baseline Prompt"]:::frame
-        D["Christian Heart-focused<br/>Condition"]:::frame
+    subgraph Framing ["2. Conditions"]
+        direction TB
+        C["Baseline"]:::frame
+        D["Christian<br/>heart-focused"]:::frame
     end
 
-    subgraph Evaluation ["3. Evaluated Tasks"]
-        T1["Task A: Overall Verdict<br/><small>Morally problematic?</small>"]:::task
-        T2["Task B: Inward Orientation<br/><small>Worse heart posture?</small>"]:::task
-        T3["Task C: Reason Focus<br/><small>Diagnostic driver?</small>"]:::task
+    subgraph Tasks ["3. Tasks"]
+        direction TB
+        T1["Task A<br/>overall verdict"]:::task
+        T2["Task B<br/>inward orientation"]:::task
+        T3["Task C<br/>reason focus"]:::task
     end
 
-    A --> Framing
-    B --> Framing
-    Framing --> Evaluation
-
-    %% 结果部分
-    subgraph Results ["4. Confirmation Results (Qwen-1.5B-Instruct)"]
-        direction LR
-        R1["Task B Accuracy<br/><b>0.8889 ➔ 0.9524</b>"]:::result
-        R2["Heart-Sensitivity Score<br/><b>0.6957 ➔ 0.8696</b>"]:::result
-        R3["Same-Heart Control<br/><b>1.0 ➔ 1.0</b> (No degradation)"]:::result
-        R4["Overreach<br/><b>0.0 ➔ 0.0</b> (No false projection)"]:::result
+    subgraph Results ["4. Public Result (Qwen-1.5B)"]
+        direction TB
+        R1["Task A: flat<br/>0.5079 -> 0.5079"]:::neutral
+        R2["Task B: up<br/>0.8889 -> 0.9524"]:::result
+        R3["HSS: up<br/>0.6957 -> 0.8696"]:::result
+        R4["Task C: more motive<br/>0.4127 -> 0.4762"]:::result
+        R5["Guardrail: held<br/>control 1.0<br/>overreach 0.0"]:::guard
     end
 
-    Evaluation --> Results
+    Design --> Framing
+    Framing --> T1
+    Framing --> T2
+    Framing --> T3
+    T1 --> R1
+    T2 --> R2
+    T2 --> R3
+    T3 --> R4
+    B --> R5
 ```
 
 ## Main Result At A Glance
