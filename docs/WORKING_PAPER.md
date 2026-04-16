@@ -1,5 +1,10 @@
 # Working Paper Draft
 
+Formal LaTeX paper:
+
+- PDF: [paper/main.pdf](../paper/main.pdf)
+- Source: [paper/main.tex](../paper/main.tex)
+
 ## Title
 
 Moral Attention Reallocation in Language Models
@@ -115,6 +120,7 @@ Not yet frozen:
 
 ## Figures And Readouts
 
+- Main comparison figure: [`assets/confirmation-comparison-bars.svg`](../assets/confirmation-comparison-bars.svg)
 - Overview figure: [`assets/same-act-confirmation-overview.svg`](../assets/same-act-confirmation-overview.svg)
 - Metric scoreboard: [`assets/confirmation-metric-scoreboard.svg`](../assets/confirmation-metric-scoreboard.svg)
 - Readout: [`results/main_same_act_confirmation_v12_mps/confirmation_readout.md`](../results/main_same_act_confirmation_v12_mps/confirmation_readout.md)
@@ -129,4 +135,3 @@ bash scripts/reproduce_confirmation_slice.sh results/reproduction_confirmation
 ```
 
 This script now creates a portable local config and auto-selects `cuda`, `mps`, or `cpu`, so it is not tied to the original development machine.
-

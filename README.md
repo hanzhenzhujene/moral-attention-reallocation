@@ -4,15 +4,16 @@
 ![Status](https://img.shields.io/badge/status-pre--freeze%20confirmation%20artifact-0f766e?style=flat-square)
 ![Public Scope](https://img.shields.io/badge/public%20scope-Qwen--1.5B%20confirmation%20slice-12805c?style=flat-square)
 ![License](https://img.shields.io/badge/license-Apache--2.0-2563eb?style=flat-square)
-[![Working Paper](https://img.shields.io/badge/paper-working%20draft-b45309?style=flat-square)](docs/WORKING_PAPER.md)
+[![Paper PDF](https://img.shields.io/badge/paper-LaTeX%20PDF-b45309?style=flat-square)](paper/main.pdf)
 
 > This repo does not show that any single framing condition makes LLMs more moral overall. It shows that, on a clean same-act confirmation slice, a Christian heart-focused condition directionally improves inward-motive judgment without increasing same-heart overreach.
 
 ## Paper And Figures
 
-- Working paper draft: [docs/WORKING_PAPER.md](docs/WORKING_PAPER.md)
-- Main overview figure: [assets/same-act-confirmation-overview.svg](assets/same-act-confirmation-overview.svg)
-- Metric scoreboard: [assets/confirmation-metric-scoreboard.svg](assets/confirmation-metric-scoreboard.svg)
+- Paper PDF: [paper/main.pdf](paper/main.pdf)
+- LaTeX source: [paper/main.tex](paper/main.tex)
+- Main comparison figure: [assets/confirmation-comparison-bars.svg](assets/confirmation-comparison-bars.svg)
+- Method markdown draft: [docs/WORKING_PAPER.md](docs/WORKING_PAPER.md)
 - Canonical readout: [results/main_same_act_confirmation_v12_mps/confirmation_readout.md](results/main_same_act_confirmation_v12_mps/confirmation_readout.md)
 - Release artifact: [v0.1-confirmation](https://github.com/hanzhenzhujene/moral-attention-reallocation/releases/tag/v0.1-confirmation)
 
@@ -20,13 +21,9 @@
 
 This repository studies a narrow mechanistic question about moral cognition in language models: whether framing changes what the model treats as morally diagnostic. The current public confirmation slice uses a Christian heart-focused condition as the main probe against a baseline prompt. The benchmark logic centers on pairwise moral cases with three tasks: overall moral verdict (Task A), inward-orientation judgment (Task B), and reason focus (Task C). The key design uses same-act-different-motive pairs together with same-heart controls, so motive sensitivity can be separated from false projection of outwardly worse action into inwardly worse heart. On a 63-item Qwen-1.5B-Instruct confirmation slice, the Christian heart-focused condition improved Task B accuracy from `0.8889` to `0.9524` and heart-sensitivity score from `0.6957` to `0.8696`, while same-heart control accuracy remained `1.0` and heart-overreach remained `0.0`. Under conservative paired testing this is a directional confirmation result, not yet a final decisive main-benchmark claim. The broader project design includes matched secular controls, but the current public artifact is intentionally narrower: a pre-freeze confirmation slice with honest reproducibility boundaries.
 
-![Publication-style overview of benchmark logic and confirmation result](assets/same-act-confirmation-overview.svg)
+![Paper-style comparison chart for the public confirmation slice](assets/confirmation-comparison-bars.svg)
 
-The main overview figure above shows the benchmark logic and the strongest public claim: same-act motive sensitivity increases while same-heart guardrails stay intact.
-
-![Publication-style metric scoreboard for the public confirmation slice](assets/confirmation-metric-scoreboard.svg)
-
-The scoreboard above shows the public confirmation slice in publication-style form: `Task A` stays flat, `Task B` and `HSS` move in the expected direction, `Task C` shifts toward motive, and guardrails stay stable.
+The main figure above is the repo's paper-style result figure: `Task A` stays flat, `Task B` and `HSS` move upward, `Task C` shifts modestly toward motive, and the same-heart guardrails stay intact.
 
 ## Main Result At A Glance
 
@@ -63,6 +60,32 @@ The three tasks then separate different kinds of judgment:
 
 Same-heart controls are the guardrail. They hold inward orientation fixed while outward surface changes, so a method cannot "win" by simply over-imputing bad hearts everywhere.
 
+## Method Sketch
+
+The mermaid diagram below stays in the repo on purpose: it is the fastest way to see the experimental logic without reading the whole paper.
+
+```mermaid
+%%{init: {'theme':'base','themeVariables': {'fontSize':'12px','primaryTextColor':'#16253d','primaryColor':'#eef2ff','primaryBorderColor':'#4f46e5','secondaryColor':'#ecfeff','tertiaryColor':'#f0fdf4','lineColor':'#94a3b8'}}}%%
+flowchart TD
+    A["Same-act pairs<br/>same act, different motive"]
+    B["Same-heart controls<br/>different act, same motive"]
+    C["Task A<br/>overall verdict"]
+    D["Task B<br/>worse heart?"]
+    E["Task C<br/>reason focus"]
+    F["Compare prompts<br/>baseline vs heart-focused"]
+    G["Claim shift only if<br/>Task B or motive-focus rises<br/>and controls stay stable"]
+
+    A --> C
+    A --> D
+    A --> E
+    B --> D
+    B --> E
+    C --> F
+    D --> F
+    E --> F
+    F --> G
+```
+
 ## What We Can Claim
 
 - On the current public confirmation slice, the Christian heart-focused condition directionally improves inward-motive judgment.
@@ -81,8 +104,8 @@ Same-heart controls are the guardrail. They hold inward orientation fixed while 
 
 - A public `Qwen-1.5B-Instruct` confirmation artifact on a 63-item same-act-plus-control slice.
 - The canonical result files in `results/main_same_act_confirmation_v12_mps/`.
-- The current README overview diagram and a minimal reproduction path for this slice.
-- A linked working paper draft in `docs/WORKING_PAPER.md`.
+- The current README comparison figure, the mermaid method sketch, and a minimal reproduction path for this slice.
+- A formal LaTeX paper in `paper/main.tex` with compiled PDF at `paper/main.pdf`.
 
 **What is not frozen yet**
 
@@ -117,6 +140,7 @@ Expected outputs:
 ## Repository Map
 
 - `assets/`: figures used on the project page
+- `paper/`: LaTeX manuscript and compiled paper PDF
 - `docs/WORKING_PAPER.md`: paper-style summary of the public artifact
 - `configs/`: execution configs for the public confirmation artifact and internal study configs
 - `results/main_same_act_confirmation_v12_mps/`: canonical public result files for the current strongest slice
@@ -143,6 +167,8 @@ Expected outputs:
 Use the GitHub release artifact for citation when referencing this repository:
 
 - Working paper draft: [docs/WORKING_PAPER.md](docs/WORKING_PAPER.md)
+- Paper PDF: [paper/main.pdf](paper/main.pdf)
+- Paper source: [paper/main.tex](paper/main.tex)
 - Release: [v0.1-confirmation](https://github.com/hanzhenzhujene/moral-attention-reallocation/releases/tag/v0.1-confirmation)
 - Citation metadata: [CITATION.cff](CITATION.cff)
 - Preprint: no public preprint is linked yet

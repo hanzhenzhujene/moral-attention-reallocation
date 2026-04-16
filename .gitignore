@@ -25,3 +25,10 @@ results/*
 results/**/*.jsonl
 results/**/*_qualitative_examples.json
 results/mock_*
+
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.toc
+paper/*.fls
+paper/*.fdb_latexmk
