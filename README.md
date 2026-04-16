@@ -23,7 +23,7 @@ This repository studies a narrow mechanistic question about moral cognition in l
 
 ![Paper-style comparison chart for the public confirmation slice](assets/confirmation-comparison-bars.svg)
 
-The main figure above is the repo's paper-style result figure: `Task A` stays flat, `Task B` and `HSS` move upward, `Task C` shifts modestly toward motive, and the same-heart guardrails stay intact.
+The main figure above is the repo's paper-style result figure: `Task A` stays flat, `Task B` and `HSS` move upward, `Task C` shifts modestly toward motive, and the guardrail metrics are summarized in the lower note box.
 
 ## Main Result At A Glance
 
