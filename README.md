@@ -4,76 +4,44 @@
 ![Status](https://img.shields.io/badge/status-pre--freeze%20confirmation%20artifact-0f766e?style=flat-square)
 ![Public Scope](https://img.shields.io/badge/public%20scope-Qwen--1.5B%20confirmation%20slice-12805c?style=flat-square)
 ![License](https://img.shields.io/badge/license-Apache--2.0-2563eb?style=flat-square)
+[![Working Paper](https://img.shields.io/badge/paper-working%20draft-b45309?style=flat-square)](docs/WORKING_PAPER.md)
 
 > This repo does not show that any single framing condition makes LLMs more moral overall. It shows that, on a clean same-act confirmation slice, a Christian heart-focused condition directionally improves inward-motive judgment without increasing same-heart overreach.
+
+## Paper And Figures
+
+- Working paper draft: [docs/WORKING_PAPER.md](docs/WORKING_PAPER.md)
+- Main overview figure: [assets/same-act-confirmation-overview.svg](assets/same-act-confirmation-overview.svg)
+- Metric scoreboard: [assets/confirmation-metric-scoreboard.svg](assets/confirmation-metric-scoreboard.svg)
+- Canonical readout: [results/main_same_act_confirmation_v12_mps/confirmation_readout.md](results/main_same_act_confirmation_v12_mps/confirmation_readout.md)
+- Release artifact: [v0.1-confirmation](https://github.com/hanzhenzhujene/moral-attention-reallocation/releases/tag/v0.1-confirmation)
 
 ## Abstract
 
 This repository studies a narrow mechanistic question about moral cognition in language models: whether framing changes what the model treats as morally diagnostic. The current public confirmation slice uses a Christian heart-focused condition as the main probe against a baseline prompt. The benchmark logic centers on pairwise moral cases with three tasks: overall moral verdict (Task A), inward-orientation judgment (Task B), and reason focus (Task C). The key design uses same-act-different-motive pairs together with same-heart controls, so motive sensitivity can be separated from false projection of outwardly worse action into inwardly worse heart. On a 63-item Qwen-1.5B-Instruct confirmation slice, the Christian heart-focused condition improved Task B accuracy from `0.8889` to `0.9524` and heart-sensitivity score from `0.6957` to `0.8696`, while same-heart control accuracy remained `1.0` and heart-overreach remained `0.0`. Under conservative paired testing this is a directional confirmation result, not yet a final decisive main-benchmark claim. The broader project design includes matched secular controls, but the current public artifact is intentionally narrower: a pre-freeze confirmation slice with honest reproducibility boundaries.
 
-```mermaid
-%%{init: {
-  'theme': 'base',
-  'flowchart': { 'htmlLabels': true, 'curve': 'linear' },
-  'themeVariables': {
-    'fontSize': '11px',
-    'fontFamily': 'ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif',
-    'lineColor': '#64748b',
-    'primaryTextColor': '#111827'
-  }
-}}%%
-flowchart LR
-    classDef input fill:#eef2ff,stroke:#4f46e5,stroke-width:1.5px,color:#111827
-    classDef frame fill:#fff7ed,stroke:#ea580c,stroke-width:1.5px,color:#111827
-    classDef task fill:#f0fdf4,stroke:#16a34a,stroke-width:1.5px,color:#111827
-    classDef result fill:#fdf4ff,stroke:#c026d3,stroke-width:1.5px,color:#111827
-    classDef guard fill:#ecfeff,stroke:#0891b2,stroke-width:1.5px,color:#111827
-    classDef neutral fill:#f8fafc,stroke:#64748b,stroke-width:1.5px,color:#111827
+![Publication-style overview of benchmark logic and confirmation result](assets/same-act-confirmation-overview.svg)
 
-    subgraph Design ["1. Design"]
-        direction TB
-        A["Same act<br/>different motive"]:::input
-        B["Same-heart<br/>control"]:::guard
-    end
+The main overview figure above shows the benchmark logic and the strongest public claim: same-act motive sensitivity increases while same-heart guardrails stay intact.
 
-    subgraph Framing ["2. Conditions"]
-        direction TB
-        C["Baseline"]:::frame
-        D["Christian<br/>heart-focused"]:::frame
-    end
+![Publication-style metric scoreboard for the public confirmation slice](assets/confirmation-metric-scoreboard.svg)
 
-    subgraph Tasks ["3. Tasks"]
-        direction TB
-        T1["Task A<br/>overall verdict"]:::task
-        T2["Task B<br/>inward orientation"]:::task
-        T3["Task C<br/>reason focus"]:::task
-    end
-
-    subgraph Results ["4. Public Result (Qwen-1.5B)"]
-        direction TB
-        R1["Task A: flat<br/>0.5079 -> 0.5079"]:::neutral
-        R2["Task B: up<br/>0.8889 -> 0.9524"]:::result
-        R3["HSS: up<br/>0.6957 -> 0.8696"]:::result
-        R4["Task C: more motive<br/>0.4127 -> 0.4762"]:::result
-        R5["Guardrail: held<br/>control 1.0<br/>overreach 0.0"]:::guard
-    end
-
-    Design --> Framing
-    Framing --> T1
-    Framing --> T2
-    Framing --> T3
-    T1 --> R1
-    T2 --> R2
-    T2 --> R3
-    T3 --> R4
-    B --> R5
-```
+The scoreboard above shows the public confirmation slice in publication-style form: `Task A` stays flat, `Task B` and `HSS` move in the expected direction, `Task C` shifts toward motive, and guardrails stay stable.
 
 ## Main Result At A Glance
 
-| Model | Slice | Task B | HSS | Same-Heart Control | Overreach | Significance note |
-| --- | --- | ---: | ---: | ---: | ---: | --- |
-| Qwen-1.5B-Instruct | `23` same-act motive pairs + `40` same-heart controls | `0.8889 -> 0.9524` | `0.6957 -> 0.8696` | `1.0 -> 1.0` | `0.0 -> 0.0` | exact paired sign test: one-sided `p = 0.0625`, two-sided `p = 0.125` |
+| Metric | Baseline | Christian heart-focused | Delta | Read |
+| --- | ---: | ---: | ---: | --- |
+| Task A accuracy | `0.5079` | `0.5079` | `+0.0000` | Top-line verdict stays flat |
+| Task B accuracy | `0.8889` | `0.9524` | `+0.0635` | Inward-orientation judgment improves |
+| Heart-sensitivity score | `0.6957` | `0.8696` | `+0.1739` | Stronger motive sensitivity on the target slice |
+| `P(reason = motive)` | `0.4127` | `0.4762` | `+0.0635` | Reason focus shifts toward motive |
+| Same-heart control accuracy | `1.0` | `1.0` | `+0.0` | Guardrail remains perfect |
+| Heart overreach rate | `0.0` | `0.0` | `+0.0` | No false projection increase |
+| Mean explanation chars | `111.54` | `109.16` | `-2.38` | No verbosity inflation |
+
+Significance note:
+The public result is directional rather than definitive. On the `23` same-act motive pairs, the exact sign test gives one-sided `p = 0.0625` and two-sided `p = 0.125`.
 
 ## What This Benchmark Measures
 
@@ -114,6 +82,7 @@ Same-heart controls are the guardrail. They hold inward orientation fixed while 
 - A public `Qwen-1.5B-Instruct` confirmation artifact on a 63-item same-act-plus-control slice.
 - The canonical result files in `results/main_same_act_confirmation_v12_mps/`.
 - The current README overview diagram and a minimal reproduction path for this slice.
+- A linked working paper draft in `docs/WORKING_PAPER.md`.
 
 **What is not frozen yet**
 
@@ -148,6 +117,7 @@ Expected outputs:
 ## Repository Map
 
 - `assets/`: figures used on the project page
+- `docs/WORKING_PAPER.md`: paper-style summary of the public artifact
 - `configs/`: execution configs for the public confirmation artifact and internal study configs
 - `results/main_same_act_confirmation_v12_mps/`: canonical public result files for the current strongest slice
 - `scripts/reproduce_confirmation_slice.sh`: minimal reproduction entry point
@@ -172,6 +142,7 @@ Expected outputs:
 
 Use the GitHub release artifact for citation when referencing this repository:
 
+- Working paper draft: [docs/WORKING_PAPER.md](docs/WORKING_PAPER.md)
 - Release: [v0.1-confirmation](https://github.com/hanzhenzhujene/moral-attention-reallocation/releases/tag/v0.1-confirmation)
 - Citation metadata: [CITATION.cff](CITATION.cff)
 - Preprint: no public preprint is linked yet
