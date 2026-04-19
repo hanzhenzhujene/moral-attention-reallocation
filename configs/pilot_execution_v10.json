@@ -6,7 +6,7 @@
   "prompt_dir": "/Users/hanzhenzhu/Desktop/moral-attention-reallocation/prompts/pilot_v10",
   "conditions": [
     "baseline",
-    "christian_heart",
+    "heart_focused",
     "secular_matched"
   ],
   "models": [

@@ -1,12 +1,12 @@
-# Christian Framing as Moral Attention Reallocation
+# Heart-focused framing as Moral Attention Reallocation
 
 ## 1. Working Thesis
 
-This project does **not** ask whether Christian framing makes an LLM "more moral" in a general sense.
+This project does **not** ask whether heart-focused framing makes an LLM "more moral" in a general sense.
 
 It asks a narrower and more mechanism-oriented question:
 
-**Does Christian heart-focused framing change what the model treats as morally diagnostic when reading a moral case?**
+**Does heart-focused framing change what the model treats as morally diagnostic when reading a moral case?**
 
 More concretely, when an LLM evaluates a moral scenario, does it attend more to:
 
@@ -17,7 +17,7 @@ More concretely, when an LLM evaluates a moral scenario, does it attend more to:
 
 Core claim:
 
-> Christian framing may not improve moral judgment uniformly, but it may reallocate moral attention from outward behavioral surface toward inward motive and disposition.
+> heart-focused framing may not improve moral judgment uniformly, but it may reallocate moral attention from outward behavioral surface toward inward motive and disposition.
 
 This is a strong framing for a paper because it is:
 
@@ -29,7 +29,7 @@ This is a strong framing for a paper because it is:
 
 The project sits at a useful intersection:
 
-- Christian ethics
+- religious ethics
 - virtue / character-sensitive evaluation
 - moral salience diagnosis
 
@@ -42,46 +42,46 @@ The novelty is not primarily "religion helps." The novelty is:
 
 This gives the paper a clear contribution:
 
-**Christian framing is studied here as a probe on moral cognition, not as a blanket intervention for moral improvement.**
+**heart-focused framing is studied here as a probe on moral cognition, not as a blanket intervention for moral improvement.**
 
 ## 3. Main Research Questions
 
 ### RQ1
 
-Does Christian heart-focused framing increase sensitivity to inward motive on morally diagnostic cases where outward behavior is held constant?
+Does heart-focused framing increase sensitivity to inward motive on morally diagnostic cases where outward behavior is held constant?
 
 ### RQ2
 
-Does Christian framing shift explanation focus away from outward act and toward motive/disposition?
+Does heart-focused framing shift explanation focus away from outward act and toward motive/disposition?
 
 ### RQ3
 
-Is any observed effect specifically Christian/doctrinal, or can it be explained by a secular paraphrase that also highlights inner motive and character?
+Is any observed effect specifically doctrinal, or can it be explained by a secular paraphrase that also highlights inner motive and character?
 
 ### RQ4
 
-Does Christian framing increase cross-task consistency between moral evaluation and heart-level attribution?
+Does heart-focused framing increase cross-task consistency between moral evaluation and heart-level attribution?
 
 ## 4. Main Hypotheses
 
 ### H1: Heart-Sensitivity Hypothesis
 
-On same-act-different-motive items, Christian heart-focused framing will increase the probability that the model identifies the inwardly worse case as more morally problematic.
+On same-act-different-motive items, heart-focused framing will increase the probability that the model identifies the inwardly worse case as more morally problematic.
 
 ### H2: Reason-Focus Shift Hypothesis
 
-Christian framing will increase `reason_focus = motive` and decrease `reason_focus = outward_act`, relative to baseline.
+heart-focused framing will increase `reason_focus = motive` and decrease `reason_focus = outward_act`, relative to baseline.
 
 ### H3: Consistency Hypothesis
 
-Christian framing will increase agreement between:
+heart-focused framing will increase agreement between:
 
 - which case is judged more morally problematic
 - which case is judged to reveal worse inward orientation
 
 ### H4: Semantic-Reorientation Alternative
 
-If Christian framing and a secular motive-focused paraphrase perform similarly, then the main mechanism is likely **semantic reorientation toward inward motive**, not uniquely sacred authority.
+If heart-focused framing and a secular motive-focused paraphrase perform similarly, then the main mechanism is likely **semantic reorientation toward inward motive**, not uniquely sacred authority.
 
 ## 5. Benchmark Strategy
 
@@ -127,13 +127,13 @@ Keep a balanced mix of:
 - rule-diagnostic items
 - mixed-signal items
 
-This lets the paper show whether Christian framing shifts attention selectively, rather than just making the model globally "motive-biased."
+This lets the paper show whether heart-focused framing shifts attention selectively, rather than just making the model globally "motive-biased."
 
 ## 5.2 Secondary Benchmark: HeartBench Mini-Benchmark
 
 HeartBench should be a custom mini-benchmark, not the main legitimacy anchor.
 
-Its role is to cover Christian moral-psychology cases that existing benchmarks likely underrepresent:
+Its role is to cover heart-focused moral-psychology cases that existing benchmarks likely underrepresent:
 
 - outwardly good but inwardly vain
 - outwardly compliant but resentful
@@ -179,7 +179,7 @@ Five conditions are enough for the main paper:
 
 1. `Baseline`
 2. `Neutral intention-sensitive instruction`
-3. `Christian heart-focused framing`
+3. `heart-focused framing`
 4. `Doctrinal framing`
 5. `Secular matched paraphrase`
 
@@ -204,9 +204,9 @@ Explicitly tells the model to consider motives, intentions, and inner orientatio
 
 Purpose:
 
-- separate generic task clarification from specifically Christian framing
+- separate generic task clarification from specifically heart-focused framing
 
-### Christian Heart-Focused Framing
+### Heart-Focused Framing
 
 Frames moral evaluation in terms of the heart, inward disposition, love, pride, hypocrisy, resentment, and purity/corruption of motive.
 
@@ -216,7 +216,7 @@ Purpose:
 
 ### Doctrinal Framing
 
-Explicitly uses Christian doctrinal language about sin, virtue, repentance, love of neighbor, pride, hypocrisy, and inner transformation.
+Explicitly uses heart-focused doctrinal language about sin, virtue, repentance, love of neighbor, pride, hypocrisy, and inner transformation.
 
 Purpose:
 
@@ -228,7 +228,7 @@ Uses nonreligious language that is semantically matched to character, motive, si
 
 Purpose:
 
-- isolate whether the effect depends on Christian authority or on semantic redirection toward motive
+- isolate whether the effect depends on religious authority or on semantic redirection toward motive
 
 ### Scripture Citation Only
 
@@ -311,7 +311,7 @@ This structure makes the paper much cleaner because it lets us test:
 
 - what changes when outward behavior is fixed
 - whether models overweight visible action
-- whether Christian framing changes internal attribution rather than only final verdict
+- whether heart-focused framing changes internal attribution rather than only final verdict
 
 ## 9. Main Metrics
 
@@ -338,7 +338,7 @@ On same-act-different-motive items, measure how often the model ignores motive b
 Interpretation:
 
 - higher means the model is more dominated by outward surface
-- Christian framing should reduce this index if the thesis is right
+- heart-focused framing should reduce this index if the thesis is right
 
 ## 9.3 Reason-Focus Shift (RFS)
 
@@ -348,11 +348,11 @@ The change in probability of `reason_focus = motive` from baseline to each frami
 
 Main contrast:
 
-- `Christian heart-focused` minus `Baseline`
+- `heart-focused` minus `Baseline`
 
 Important comparison:
 
-- `Christian heart-focused` minus `Secular matched paraphrase`
+- `heart-focused` minus `Secular matched paraphrase`
 
 ## 9.4 Cross-Task Consistency (CTC)
 
@@ -363,7 +363,7 @@ Agreement between Task A and Task B on which case is morally worse / inwardly wo
 Interpretation:
 
 - if the model says B is morally worse but A has the worse heart, that suggests unstable moral reading
-- Christian framing should improve coherence if it creates a more integrated heart-level interpretation
+- heart-focused framing should improve coherence if it creates a more integrated heart-level interpretation
 
 ## 9.5 Optional Secondary Metrics
 
@@ -397,10 +397,10 @@ Use forced-choice labels for the main analysis, and treat free-text explanations
 Within each model, compare conditions using paired item-level analysis:
 
 - Baseline vs Neutral intention-sensitive
-- Baseline vs Christian heart-focused
+- Baseline vs heart-focused
 - Baseline vs Doctrinal
-- Christian heart-focused vs Secular matched
-- Doctrinal vs Christian heart-focused
+- heart-focused vs Secular matched
+- Doctrinal vs heart-focused
 
 ## 11.2 Statistical Strategy
 
@@ -436,7 +436,7 @@ Useful fixed effects:
 
 Risk:
 
-Christian framing may only make the model sound more serious, pious, or verbose.
+heart-focused framing may only make the model sound more serious, pious, or verbose.
 
 Control:
 
@@ -454,7 +454,7 @@ Any prompt that says "consider intention" may produce the effect.
 Control:
 
 - include Neutral intention-sensitive condition
-- compare Christian framing directly against both neutral and secular matched conditions
+- compare heart-focused framing directly against both neutral and secular matched conditions
 
 ## 12.3 Sacred Authority Confound
 
@@ -483,7 +483,7 @@ Control:
 
 ## 13.1 Best-Case Result
 
-Christian framing does not dramatically raise overall moral accuracy, but it clearly improves:
+heart-focused framing does not dramatically raise overall moral accuracy, but it clearly improves:
 
 - motive-sensitive item performance
 - `reason_focus = motive`
@@ -491,21 +491,21 @@ Christian framing does not dramatically raise overall moral accuracy, but it cle
 
 This supports the strongest paper claim:
 
-**Christian framing changes moral attention before it improves moral performance.**
+**heart-focused framing changes moral attention before it improves moral performance.**
 
 ## 13.2 Also Valuable Result
 
-Christian framing and secular matched paraphrase perform similarly.
+heart-focused framing and secular matched paraphrase perform similarly.
 
 Then the paper can argue:
 
-**The main mechanism is semantic reorientation toward inward motive, rather than uniquely Christian authority.**
+**The main mechanism is semantic reorientation toward inward motive, rather than uniquely religious authority.**
 
 This is still a clean and publishable finding.
 
 ## 13.3 Null or Mixed Result
 
-No major change in HSS or RFS, but Christian framing increases verbosity or condemnation language.
+No major change in HSS or RFS, but heart-focused framing increases verbosity or condemnation language.
 
 This would still be useful because it shows:
 
@@ -518,7 +518,7 @@ If the goal is a fast MVP:
 
 - Moral Stories subset: 120 items
 - HeartBench: 40 items
-- Conditions: Baseline / Christian / Secular matched
+- Conditions: Baseline / heart-focused / Secular matched
 - Models: Qwen 0.5B and Qwen 1.5B
 - Tasks: Task A + Task B + Task C
 
@@ -540,7 +540,7 @@ A clean storyline for the paper is:
 
 1. existing work often studies religion in LLMs through QA, value alignment, or broad morality claims
 2. this paper studies a more specific mechanism: moral attention allocation
-3. Christian moral language is especially relevant because it often foregrounds the heart, motive, and inward disposition
+3. heart-focused moral language is especially relevant because it often foregrounds the heart, motive, and inward disposition
 4. experiments show whether this framing shifts what the model treats as morally diagnostic
 5. the result is a contribution to both AI moral evaluation and religion-and-LLM research
 
@@ -550,13 +550,13 @@ A clean storyline for the paper is:
 
 - problem: "more moral" is too coarse
 - proposal: study reallocation of moral attention
-- Christian heart-language as test case
+- heart-focused heart-language as test case
 - contributions
 
 ### Background
 
 - LLM moral reasoning benchmarks
-- religion and Christian ethics in LLM evaluation
+- religion and religious ethics in LLM evaluation
 - virtue ethics, character, motive, and moral salience
 
 ### Benchmark Design
@@ -583,7 +583,7 @@ A clean storyline for the paper is:
 ### Discussion
 
 - moral attention vs moral accuracy
-- Christian effect vs secular semantic effect
+- heart-focused effect vs secular semantic effect
 - implications for prompt-based moral steering
 - limits and future work
 
@@ -619,4 +619,4 @@ A clean storyline for the paper is:
 
 If you need the shortest paper pitch:
 
-**We test whether Christian heart-focused prompting changes not how moral LLMs are in general, but what they attend to as morally diagnostic, shifting evaluation from outward act toward inward motive and disposition.**
+**We test whether heart-focused prompting changes not how moral LLMs are in general, but what they attend to as morally diagnostic, shifting evaluation from outward act toward inward motive and disposition.**

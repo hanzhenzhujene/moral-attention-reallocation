@@ -129,7 +129,6 @@ def main(argv: Sequence[str]) -> int:
     model_contrasts: List[Dict[str, Any]] = []
     for model, condition_map in sorted(by_model.items()):
         baseline = condition_map.get("baseline")
-        christian = condition_map.get("christian_heart")
         if baseline:
             baseline_mean = baseline["metrics"]["mean_explanation_chars"]["point"]
             for condition_name, group_report in condition_map.items():
@@ -171,41 +170,35 @@ def main(argv: Sequence[str]) -> int:
                     failures.append(
                         f"{model}/{condition_name}: heart_overreach_rate {overreach:.4f} exceeds threshold {thresholds['max_heart_overreach_rate']:.4f}"
                     )
-        if baseline and christian:
-            overreach_delta = None
-            hss_delta = None
-            if (
-                christian["metrics"]["heart_overreach_rate"]["point"] is not None
-                and baseline["metrics"]["heart_overreach_rate"]["point"] is not None
-            ):
-                overreach_delta = round(
-                    christian["metrics"]["heart_overreach_rate"]["point"]
-                    - baseline["metrics"]["heart_overreach_rate"]["point"],
-                    4,
-                )
-            if (
-                christian["metrics"]["heart_sensitivity_score"]["point"] is not None
-                and baseline["metrics"]["heart_sensitivity_score"]["point"] is not None
-            ):
-                hss_delta = round(
-                    christian["metrics"]["heart_sensitivity_score"]["point"]
-                    - baseline["metrics"]["heart_sensitivity_score"]["point"],
-                    4,
-                )
-            contrast = {
-                "model": model,
-                "baseline_to_christian_overreach_delta": overreach_delta,
-                "baseline_to_christian_hss_delta": hss_delta,
-            }
-            model_contrasts.append(contrast)
-            if (
-                overreach_delta is not None
-                and overreach_delta > thresholds["max_overreach_delta_without_hss_gain"]
-                and (hss_delta is None or hss_delta <= 0)
-            ):
-                failures.append(
-                    f"{model}: christian overreach delta {overreach_delta:.4f} is too high without positive HSS gain"
-                )
+        if baseline:
+            baseline_overreach = baseline["metrics"]["heart_overreach_rate"]["point"]
+            baseline_hss = baseline["metrics"]["heart_sensitivity_score"]["point"]
+            for condition_name, comparison in sorted(condition_map.items()):
+                if condition_name == "baseline":
+                    continue
+                overreach_delta = None
+                hss_delta = None
+                comparison_overreach = comparison["metrics"]["heart_overreach_rate"]["point"]
+                comparison_hss = comparison["metrics"]["heart_sensitivity_score"]["point"]
+                if comparison_overreach is not None and baseline_overreach is not None:
+                    overreach_delta = round(comparison_overreach - baseline_overreach, 4)
+                if comparison_hss is not None and baseline_hss is not None:
+                    hss_delta = round(comparison_hss - baseline_hss, 4)
+                contrast = {
+                    "model": model,
+                    "comparison_condition": condition_name,
+                    f"baseline_to_{condition_name}_overreach_delta": overreach_delta,
+                    f"baseline_to_{condition_name}_hss_delta": hss_delta,
+                }
+                model_contrasts.append(contrast)
+                if (
+                    overreach_delta is not None
+                    and overreach_delta > thresholds["max_overreach_delta_without_hss_gain"]
+                    and (hss_delta is None or hss_delta <= 0)
+                ):
+                    failures.append(
+                        f"{model}/{condition_name}: overreach delta {overreach_delta:.4f} is too high without positive HSS gain"
+                    )
 
     report = {
         "expected_models": expected_models,

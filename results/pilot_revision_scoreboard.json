@@ -17,7 +17,7 @@
   {
     "branch": "v4",
     "model": "Qwen-0.5B-Instruct",
-    "condition": "christian_heart",
+    "condition": "heart_focused",
     "n_items": 2,
     "parse_failure_rate": 0.0,
     "task_a_accuracy": 0.0,
@@ -62,7 +62,7 @@
   {
     "branch": "v4",
     "model": "Qwen-1.5B-Instruct",
-    "condition": "christian_heart",
+    "condition": "heart_focused",
     "n_items": 2,
     "parse_failure_rate": 0.0,
     "task_a_accuracy": 0.5,
@@ -152,7 +152,7 @@
   {
     "branch": "v6",
     "model": "Qwen-0.5B-Instruct",
-    "condition": "christian_heart",
+    "condition": "heart_focused",
     "n_items": 2,
     "parse_failure_rate": 0.0,
     "task_a_accuracy": 0.5,
@@ -197,7 +197,7 @@
   {
     "branch": "v6",
     "model": "Qwen-1.5B-Instruct",
-    "condition": "christian_heart",
+    "condition": "heart_focused",
     "n_items": 2,
     "parse_failure_rate": 0.0,
     "task_a_accuracy": 0.5,
@@ -242,7 +242,7 @@
   {
     "branch": "v7",
     "model": "Qwen-0.5B-Instruct",
-    "condition": "christian_heart",
+    "condition": "heart_focused",
     "n_items": 4,
     "parse_failure_rate": 0.0,
     "task_a_accuracy": 0.0,
@@ -287,7 +287,7 @@
   {
     "branch": "v7",
     "model": "Qwen-1.5B-Instruct",
-    "condition": "christian_heart",
+    "condition": "heart_focused",
     "n_items": 4,
     "parse_failure_rate": 0.0,
     "task_a_accuracy": 0.5,
@@ -332,7 +332,7 @@
   {
     "branch": "v8",
     "model": "Qwen-0.5B-Instruct",
-    "condition": "christian_heart",
+    "condition": "heart_focused",
     "n_items": 4,
     "parse_failure_rate": 0.0,
     "task_a_accuracy": 0.5,
@@ -377,7 +377,7 @@
   {
     "branch": "v8",
     "model": "Qwen-1.5B-Instruct",
-    "condition": "christian_heart",
+    "condition": "heart_focused",
     "n_items": 4,
     "parse_failure_rate": 0.0,
     "task_a_accuracy": 0.5,
@@ -422,7 +422,7 @@
   {
     "branch": "v9",
     "model": "Qwen-0.5B-Instruct",
-    "condition": "christian_heart",
+    "condition": "heart_focused",
     "n_items": 4,
     "parse_failure_rate": 0.0,
     "task_a_accuracy": 0.5,
@@ -467,7 +467,7 @@
   {
     "branch": "v9",
     "model": "Qwen-1.5B-Instruct",
-    "condition": "christian_heart",
+    "condition": "heart_focused",
     "n_items": 4,
     "parse_failure_rate": 0.0,
     "task_a_accuracy": 0.5,
@@ -512,7 +512,7 @@
   {
     "branch": "v10",
     "model": "Qwen-0.5B-Instruct",
-    "condition": "christian_heart",
+    "condition": "heart_focused",
     "n_items": 3,
     "parse_failure_rate": 0.125,
     "task_a_accuracy": 0.3333,
@@ -557,7 +557,7 @@
   {
     "branch": "v10",
     "model": "Qwen-1.5B-Instruct",
-    "condition": "christian_heart",
+    "condition": "heart_focused",
     "n_items": 4,
     "parse_failure_rate": 0.125,
     "task_a_accuracy": 0.5,
@@ -602,7 +602,7 @@
   {
     "branch": "v11",
     "model": "Qwen-0.5B-Instruct",
-    "condition": "christian_heart",
+    "condition": "heart_focused",
     "n_items": 4,
     "parse_failure_rate": 0.0,
     "task_a_accuracy": 0.25,
@@ -647,7 +647,7 @@
   {
     "branch": "v11",
     "model": "Qwen-1.5B-Instruct",
-    "condition": "christian_heart",
+    "condition": "heart_focused",
     "n_items": 4,
     "parse_failure_rate": 0.0,
     "task_a_accuracy": 0.5,

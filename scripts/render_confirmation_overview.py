@@ -233,7 +233,7 @@ def compare_card(
     h: int,
     title: str,
     baseline_value: str,
-    christian_value: str,
+    focused_value: str,
     delta: str,
     footer: str,
 ) -> str:
@@ -243,7 +243,7 @@ def compare_card(
         f'<text x="{x + 18}" y="{y + 82}" font-size="12" font-weight="800" fill="{MUTED}">Baseline</text>'
         f'<text x="{x + 18}" y="{y + 126}" font-size="34" font-weight="900" fill="{TEXT}">{esc(baseline_value)}</text>'
         f'<text x="{x + w - 18}" y="{y + 82}" font-size="12" font-weight="800" fill="{MUTED}" text-anchor="end">{CONDITION_LABEL}</text>'
-        f'<text x="{x + w - 18}" y="{y + 126}" font-size="34" font-weight="900" fill="{TEAL}" text-anchor="end">{esc(christian_value)}</text>'
+        f'<text x="{x + w - 18}" y="{y + 126}" font-size="34" font-weight="900" fill="{TEAL}" text-anchor="end">{esc(focused_value)}</text>'
         f'<line x1="{x + 98}" y1="{y + 112}" x2="{x + w - 98}" y2="{y + 112}" stroke="{LINE}" stroke-width="3" />'
         f'<polygon points="{x + w / 2 + 16},{y + 112} {x + w / 2 - 4},{y + 100} {x + w / 2 - 4},{y + 124}" fill="{LINE}" />'
         f'{pill(x + 18, y + 142, 86, 30, "Delta", SLATE_FILL, SLATE_STROKE, TEXT)}'
@@ -252,14 +252,14 @@ def compare_card(
     )
 
 
-def trust_card(x: int, y: int, w: int, h: int, title: str, baseline_value: str, christian_value: str, footer: str) -> str:
+def trust_card(x: int, y: int, w: int, h: int, title: str, baseline_value: str, focused_value: str, footer: str) -> str:
     return (
         f'{rounded_rect(x, y, w, h, 18, PANEL, PANEL_STROKE)}'
         f'{multiline_text(x + 16, y + 26, wrap_text(title, w - 24, 15), 15, 16, TEXT, 800)}'
         f'<text x="{x + 16}" y="{y + 66}" font-size="12" font-weight="800" fill="{MUTED}">Baseline</text>'
         f'<text x="{x + 16}" y="{y + 102}" font-size="30" font-weight="900" fill="{TEXT}">{esc(baseline_value)}</text>'
         f'<text x="{x + w - 16}" y="{y + 66}" font-size="12" font-weight="800" fill="{MUTED}" text-anchor="end">{CONDITION_LABEL}</text>'
-        f'<text x="{x + w - 16}" y="{y + 102}" font-size="30" font-weight="900" fill="{TEAL}" text-anchor="end">{esc(christian_value)}</text>'
+        f'<text x="{x + w - 16}" y="{y + 102}" font-size="30" font-weight="900" fill="{TEAL}" text-anchor="end">{esc(focused_value)}</text>'
         f'{pill(x + 16, y + 114, w - 32, 28, footer, TEAL_FILL, TEAL_STROKE, TEAL, 13, 800)}'
     )
 
@@ -292,12 +292,12 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     by_condition = {row["condition"]: row for row in summary["summaries"]}
     baseline = by_condition["baseline"]["metrics"]
-    christian = by_condition["christian_heart"]["metrics"]
+    focused = by_condition["heart_focused"]["metrics"]
     contrast = summary["contrasts"][0]["metrics"]
     same_act = next(row for row in robustness["contrasts"] if row["slice"] == "same_act_different_motive")["metrics"]
 
     subtitle_lines = wrap_text(
-        "Current confirmation slice: a Christian heart-focused condition may reallocate moral attention toward inward motive without increasing same-heart overreach.",
+        "Current confirmation slice: a heart-focused condition may reallocate moral attention toward inward motive without increasing same-heart overreach.",
         WIDTH - 112,
         22,
     )
@@ -319,13 +319,13 @@ def main(argv: Sequence[str] | None = None) -> int:
   {panel_shell(736, 186, 648, 842, "Result Summary", "Qwen-1.5B-Instruct · 63-item same-act confirmation slice.")}
   <text x="764" y="286" font-size="20" font-weight="800" fill="{TEXT}">What improved</text>
   {pill(1010, 268, 142, 28, "Task A flat", SLATE_FILL, PANEL_STROKE, MUTED, 12)}
-  {compare_card(764, 306, 286, 224, "Task B: motive judgment", fmt_point(baseline["task_b_accuracy"]["point"]), fmt_point(christian["task_b_accuracy"]["point"]), f"+{contrast['task_b_accuracy']['delta']:.4f}", "63-item confirmation pack")}
-  {compare_card(1070, 306, 286, 224, "Heart-sensitivity score", fmt_point(baseline["heart_sensitivity_score"]["point"]), fmt_point(christian["heart_sensitivity_score"]["point"]), f"+{contrast['heart_sensitivity_score']['delta']:.4f}", "23 same-act motive pairs")}
+  {compare_card(764, 306, 286, 224, "Task B: motive judgment", fmt_point(baseline["task_b_accuracy"]["point"]), fmt_point(focused["task_b_accuracy"]["point"]), f"+{contrast['task_b_accuracy']['delta']:.4f}", "63-item confirmation pack")}
+  {compare_card(1070, 306, 286, 224, "Heart-sensitivity score", fmt_point(baseline["heart_sensitivity_score"]["point"]), fmt_point(focused["heart_sensitivity_score"]["point"]), f"+{contrast['heart_sensitivity_score']['delta']:.4f}", "23 same-act motive pairs")}
 
   <text x="764" y="596" font-size="20" font-weight="800" fill="{TEXT}">Why trust it</text>
-  {trust_card(764, 616, 188, 156, "Same-heart control", fmt_point(baseline["same_heart_control_accuracy"]["point"]), fmt_point(christian["same_heart_control_accuracy"]["point"]), "accuracy stayed perfect")}
-  {trust_card(976, 616, 168, 156, "Heart overreach", fmt_point(baseline["heart_overreach_rate"]["point"]), fmt_point(christian["heart_overreach_rate"]["point"]), "no increase")}
-  {trust_card(1168, 616, 188, 156, "Explanation length", fmt_point(baseline["mean_explanation_chars"]["point"]), fmt_point(christian["mean_explanation_chars"]["point"]), "no verbosity jump")}
+  {trust_card(764, 616, 188, 156, "Same-heart control", fmt_point(baseline["same_heart_control_accuracy"]["point"]), fmt_point(focused["same_heart_control_accuracy"]["point"]), "accuracy stayed perfect")}
+  {trust_card(976, 616, 168, 156, "Heart overreach", fmt_point(baseline["heart_overreach_rate"]["point"]), fmt_point(focused["heart_overreach_rate"]["point"]), "no increase")}
+  {trust_card(1168, 616, 188, 156, "Explanation length", fmt_point(baseline["mean_explanation_chars"]["point"]), fmt_point(focused["mean_explanation_chars"]["point"]), "no verbosity jump")}
 
   <text x="764" y="814" font-size="20" font-weight="800" fill="{TEXT}">Honest claim</text>
   {claim_box(764, 834, 592, 188, same_act['heart_sensitivity_score']['better'], same_act['heart_sensitivity_score']['worse'], same_act['heart_sensitivity_score']['tie'], same_act['heart_sensitivity_score']['exact_sign_p_one_sided'], same_act['heart_sensitivity_score']['exact_sign_p_two_sided'])}

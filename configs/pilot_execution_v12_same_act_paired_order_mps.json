@@ -8,7 +8,7 @@
   "task_b_order_mode": "canonical_source",
   "conditions": [
     "baseline",
-    "christian_heart",
+    "heart_focused",
     "secular_matched"
   ],
   "models": [

@@ -5,8 +5,8 @@
 - Freeze prompt text for each condition and store the exact file paths used.
 - Freeze the benchmark version and record a dataset hash or dated snapshot.
 - Define the primary contrasts before running the full matrix:
-  - `Christian heart-focused` minus `Baseline`
-  - `Christian heart-focused` minus `Secular matched`
+  - `heart-focused` minus `Baseline`
+  - `heart-focused` minus `Secular matched`
 - Define the primary metrics before running:
   - Heart-Sensitivity Score
   - Surface-Overweighting Index
@@ -54,10 +54,11 @@
 - Report same-intention control results separately from motive-sensitive results.
 - Separate pilot findings from final findings.
 - Run `scripts/evaluate_pilot_health.py` on the held-out pilot before freezing the main run configuration.
+- If a split-based swap-gap fails, run a paired-order diagnostic on the same items before revising prompts, so composition artifacts are not mistaken for true order instability.
 
 ## Interpretation
 
-- Do not claim “Christian framing makes models more moral” unless overall evidence really supports that stronger claim.
+- Do not claim “heart-focused framing makes models more moral” unless overall evidence really supports that stronger claim.
 - Prefer mechanism language:
   - attention reallocation
   - motive salience

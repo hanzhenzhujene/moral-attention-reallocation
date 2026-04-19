@@ -11,7 +11,7 @@ Bucket mode: `pair_type`
 | same_intention_moral_vs_immoral_action | 5 | 1.0 | 1.0 | 0.0 |
 | same_norm_different_heart | 2 | 1.0 | 1.0 | 0.0 |
 
-## Qwen-0.5B-Instruct / christian_heart
+## Qwen-0.5B-Instruct / heart_focused
 
 | Bucket | n | swap_false acc | swap_true acc | abs gap |
 | --- | ---: | ---: | ---: | ---: |
@@ -38,7 +38,7 @@ Bucket mode: `pair_type`
 | same_intention_moral_vs_immoral_action | 5 | 1.0 | 1.0 | 0.0 |
 | same_norm_different_heart | 2 | 1.0 | 1.0 | 0.0 |
 
-## Qwen-1.5B-Instruct / christian_heart
+## Qwen-1.5B-Instruct / heart_focused
 
 | Bucket | n | swap_false acc | swap_true acc | abs gap |
 | --- | ---: | ---: | ---: | ---: |

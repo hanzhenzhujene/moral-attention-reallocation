@@ -5,7 +5,7 @@
   "jobs_path": "/Users/hanzhenzhu/Desktop/moral-attention-reallocation/results/pilot_v9_smoke_jobs.jsonl",
   "conditions": [
     "baseline",
-    "christian_heart",
+    "heart_focused",
     "secular_matched"
   ],
   "models": [

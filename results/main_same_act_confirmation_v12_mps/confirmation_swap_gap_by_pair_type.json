@@ -40,7 +40,7 @@
   },
   {
     "model": "Qwen-1.5B-Instruct",
-    "condition": "christian_heart",
+    "condition": "heart_focused",
     "bucket_mode": "pair_type",
     "buckets": [
       {

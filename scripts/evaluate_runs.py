@@ -321,7 +321,7 @@ def main(argv: Sequence[str]) -> int:
     parser.add_argument(
         "--contrasts",
         nargs="+",
-        default=["baseline:christian_heart", "baseline:secular_matched", "christian_heart:secular_matched"],
+        default=["baseline:heart_focused", "baseline:secular_matched", "heart_focused:secular_matched"],
         help="Condition contrasts to estimate as left:right, reported as right-minus-left",
     )
     args = parser.parse_args(argv)

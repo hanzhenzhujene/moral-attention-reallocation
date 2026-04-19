@@ -166,14 +166,14 @@ def main(argv: Sequence[str] | None = None) -> int:
     by_condition = {row["condition"]: row["metrics"] for row in summary["summaries"]}
     contrast = summary["contrasts"][0]["metrics"]
     baseline = by_condition["baseline"]
-    focused = by_condition["christian_heart"]
+    focused = by_condition["heart_focused"]
 
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="{WIDTH}" height="{HEIGHT}" viewBox="0 0 {WIDTH} {HEIGHT}" role="img" aria-labelledby="title desc">
   <title id="title">Confirmation metric scoreboard</title>
-  <desc id="desc">Publication-style metric scoreboard comparing baseline and Christian heart-focused framing on the Qwen-1.5B confirmation slice.</desc>
+  <desc id="desc">Publication-style metric scoreboard comparing baseline and heart-focused framing on the Qwen-1.5B confirmation slice.</desc>
   <rect width="{WIDTH}" height="{HEIGHT}" fill="{BG}" />
   <text x="54" y="70" font-size="46" font-weight="900" fill="{TEXT}">Confirmation Metrics At A Glance</text>
-  <text x="54" y="108" font-size="22" fill="{MUTED}" font-weight="600">Qwen-1.5B-Instruct · 63-item same-act confirmation slice · baseline vs Christian heart-focused</text>
+  <text x="54" y="108" font-size="22" fill="{MUTED}" font-weight="600">Qwen-1.5B-Instruct · 63-item same-act confirmation slice · baseline vs heart-focused</text>
   {pill(1048, 78, 278, 30, "Public artifact: directional, not definitive", AMBER_FILL, AMBER_STROKE, AMBER, 13, 900)}
 
   {metric_card(54, 160, 412, 238, "Task A accuracy", fmt(baseline["task_a_accuracy"]["point"]), fmt(focused["task_a_accuracy"]["point"]), f"{contrast['task_a_accuracy']['delta']:+.4f}", "Top-line verdict stayed flat.", "flat")}

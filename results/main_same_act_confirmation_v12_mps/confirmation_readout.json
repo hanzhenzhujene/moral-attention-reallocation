@@ -1,0 +1,82 @@
+{
+  "benchmark_name": "paper_first_main_same_act_confirmation_v0",
+  "slice_composition": "23 same_act_different_motive + 40 same-heart controls",
+  "conditions": "baseline, heart_focused",
+  "model": "Qwen-1.5B-Instruct",
+  "valid_records": 126,
+  "parse_failure_rate": 0.0,
+  "same_heart_control": 1.0,
+  "heart_overreach": 0.0,
+  "max_explanation_ratio_vs_baseline": 1.0,
+  "condition_rows": [
+    {
+      "condition": "Baseline",
+      "task_a_accuracy": 0.5079,
+      "task_b_accuracy": 0.8889,
+      "heart_sensitivity_score": 0.6957,
+      "p_reason_motive": 0.4127,
+      "same_heart_control_accuracy": 1.0,
+      "heart_overreach_rate": 0.0,
+      "mean_explanation_chars": 111.5397
+    },
+    {
+      "condition": "Heart-focused",
+      "task_a_accuracy": 0.5079,
+      "task_b_accuracy": 0.9524,
+      "heart_sensitivity_score": 0.8696,
+      "p_reason_motive": 0.4762,
+      "same_heart_control_accuracy": 1.0,
+      "heart_overreach_rate": 0.0,
+      "mean_explanation_chars": 109.1587
+    }
+  ],
+  "all_items_delta": {
+    "task_a": 0.0,
+    "task_b": 0.0635,
+    "hss": 0.1739,
+    "p_reason_motive": 0.0635
+  },
+  "same_act_hss": {
+    "delta": 0.1739,
+    "better": 4,
+    "worse": 0,
+    "tie": 19,
+    "one_sided_p": 0.0625,
+    "two_sided_p": 0.125
+  },
+  "same_act_power": {
+    "current_power": 0.3706,
+    "min_items_for_target_power": 38
+  },
+  "summary_path": "results/main_same_act_confirmation_v12_mps/confirmation_summary.json",
+  "robustness_path": "results/main_same_act_confirmation_v12_mps/confirmation_robustness.json",
+  "health_path": "results/main_same_act_confirmation_v12_mps/confirmation_health.json",
+  "paired_order_followup": {
+    "model": "Qwen-1.5B-Instruct",
+    "slice_description": "23 same_act_different_motive items in both A/B orders",
+    "conditions": "baseline, heart_focused",
+    "paired_order_records": 92,
+    "max_flip_rate": 0.0,
+    "max_gap": 0.0,
+    "rows": [
+      {
+        "condition": "Baseline",
+        "task_b_accuracy": 0.6957,
+        "flip_rate": 0.0,
+        "gap": 0.0,
+        "correct_both": 16,
+        "wrong_both": 7
+      },
+      {
+        "condition": "Heart-focused",
+        "task_b_accuracy": 0.913,
+        "flip_rate": 0.0,
+        "gap": 0.0,
+        "correct_both": 21,
+        "wrong_both": 2
+      }
+    ],
+    "source_path": "results/main_same_act_text_anchor_v1_qwen15b_paired_order_mps/paired_order_stability.json"
+  },
+  "paired_order_path": "results/main_same_act_confirmation_v12_mps/confirmation_paired_order_followup.json"
+}

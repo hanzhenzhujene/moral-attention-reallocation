@@ -2,15 +2,15 @@
 
 ## Primary Estimand
 
-The central estimand is the change in motive sensitivity under Christian heart-focused framing relative to baseline.
+The central estimand is the change in motive sensitivity under heart-focused framing relative to baseline.
 
 Primary contrast:
 
-- `Christian heart-focused` minus `Baseline`
+- `heart-focused` minus `Baseline`
 
 Secondary mechanism contrast:
 
-- `Christian heart-focused` minus `Secular matched paraphrase`
+- `heart-focused` minus `Secular matched paraphrase`
 
 ## Primary Metrics
 
@@ -68,9 +68,9 @@ Definition:
 
 ## Default Contrasts
 
-- `baseline -> christian_heart`
+- `baseline -> heart_focused`
 - `baseline -> secular_matched`
-- `christian_heart -> secular_matched`
+- `heart_focused -> secular_matched`
 
 Interpret deltas as:
 
@@ -90,6 +90,6 @@ For each model:
 ## Interpretation Guardrails
 
 - If HSS does not improve but response length increases, treat the result as rhetorical shift, not cognitive improvement.
-- If Christian and secular matched conditions converge, interpret the effect as semantic reorientation rather than uniquely sacred authority.
+- If heart-focused and secular matched conditions converge, interpret the effect as semantic reorientation rather than uniquely sacred authority.
 - If effects appear only on easy items, avoid claiming broad heart-sensitive reasoning.
-- If Christian framing raises HSS but also raises Heart-Overreach Rate on same-intention controls, interpret the change as a noisier tendency to impute inward corruption rather than cleaner moral attention.
+- If heart-focused framing raises HSS but also raises Heart-Overreach Rate on same-intention controls, interpret the change as a noisier tendency to impute inward corruption rather than cleaner moral attention.

@@ -24,7 +24,7 @@
 \captionsetup{font=small, labelfont=bf}
 \graphicspath{{../assets/}}
 
-\title{Moral Attention Reallocation in Language Models\\\large Christian heart-focused framing as a probe of motive sensitivity}
+\title{Moral Attention Reallocation in Language Models\\\large heart-focused framing as a probe of motive sensitivity}
 \author{Hanzhen Zhu\\\texttt{hanzhen@umich.edu}}
 \date{April 2026}
 
@@ -33,14 +33,14 @@
 \maketitle
 
 \begin{abstract}
-This paper studies a mechanistic question about moral cognition in language models: not whether a religious framing makes a model more moral overall, but whether framing changes what the model treats as morally diagnostic. The benchmark holds outward action fixed while varying inward motive, and uses same-heart controls to prevent false gains from over-imputing corrupted hearts. On a public confirmation slice with Qwen-1.5B-Instruct, a Christian heart-focused condition leaves Task A top-line verdict accuracy flat at 0.5079, but improves Task B inward-orientation judgment from 0.8889 to 0.9524 and raises heart-sensitivity score from 0.6957 to 0.8696. Same-heart control accuracy remains 1.0, heart overreach remains 0.0, and explanation length does not inflate. Under conservative paired testing, the result is directional rather than decisive: the exact sign test on the 23 same-act motive pairs gives $p=0.0625$ one-sided and $p=0.125$ two-sided. The current artifact therefore supports a narrow claim about moral attention reallocation on a clean confirmation slice, rather than a broad claim of moral improvement.
+This paper studies a mechanistic question about moral cognition in language models: not whether a religious framing makes a model more moral overall, but whether framing changes what the model treats as morally diagnostic. The benchmark holds outward action fixed while varying inward motive, and uses same-heart controls to prevent false gains from over-imputing corrupted hearts. On a public confirmation slice with Qwen-1.5B-Instruct, a heart-focused condition leaves Task A top-line verdict accuracy flat at 0.5079, but improves Task B inward-orientation judgment from 0.8889 to 0.9524 and raises heart-sensitivity score from 0.6957 to 0.8696. Same-heart control accuracy remains 1.0, heart overreach remains 0.0, and explanation length does not inflate. Under conservative paired testing, the result is directional rather than decisive: the exact sign test on the 23 same-act motive pairs gives $p=0.0625$ one-sided and $p=0.125$ two-sided. A later paired-order follow-up on the same 23 same-act items found 0.0 item-level Task B order flips for both baseline and heart-focused, suggesting that the main remaining limitation on this slice is power rather than same-item order instability. The repository also includes a broader exploratory six-condition extension on the same slice; in that extension, the heart-focused prompt and a Proverbs 4:23 anchor tie for the strongest motive-sensitive gain while all six conditions preserve same-heart controls and show clean paired-order stability. The current artifact therefore supports a narrow claim about moral attention reallocation on a clean confirmation slice, rather than a broad claim of moral improvement.
 \end{abstract}
 
 \section{Introduction}
 
 Prompt framing effects in large language models are often discussed at the level of top-line outputs: whether a model becomes more helpful, more cautious, or more moral under a particular instruction. For moral evaluation, that framing can be too coarse. A stronger mechanistic question is whether framing changes \emph{what the model attends to morally}. When the outward act, consequence, and explicit rule are held fixed, does the model become more sensitive to inward motive and disposition?
 
-This repository studies that narrower question through a benchmark design centered on \emph{moral attention reallocation}. The specific probe used in the public artifact is a Christian heart-focused condition. The claim is intentionally modest: the current evidence does \emph{not} show that Christian prompting makes language models more moral overall. It shows that, on a clean confirmation slice, Christian heart-focused framing directionally improves inward-motive judgment without increasing same-heart overreach.
+This repository studies that narrower question through a benchmark design centered on \emph{moral attention reallocation}. The specific probe used in the public artifact is a heart-focused condition. The claim is intentionally modest: the current evidence does \emph{not} show that heart-focused prompting makes language models more moral overall. It shows that, on a clean confirmation slice, heart-focused framing directionally improves inward-motive judgment without increasing same-heart overreach.
 
 Two benchmark design choices are central. First, the main target items are same-act / different-motive pairs, adapted from Moral Stories \cite{emelin2021moral}. These items hold outward behavior fixed while varying written motive. Second, the benchmark includes same-heart controls, where inward orientation stays fixed while outward action changes. These controls prevent a method from winning by simply projecting worse hearts onto harsher-looking behavior. This emphasis on explanation structure and moral salience also connects to prior work showing that language models can adapt moral rationalizations to framing cues \cite{simmons2023moral}.
 
@@ -86,7 +86,7 @@ The public artifact in this repository is intentionally narrow and pre-freeze:
 
 \begin{itemize}
   \item \textbf{Model:} Qwen-1.5B-Instruct
-  \item \textbf{Conditions:} baseline vs.\ Christian heart-focused
+  \item \textbf{Conditions:} baseline vs.\ heart-focused
   \item \textbf{Slice size:} 63 items
   \item \textbf{Composition:} 23 same-act motive pairs + 40 same-heart controls
   \item \textbf{Decoding:} temperature $= 0$, top-$p = 1.0$, max\_new\_tokens $= 120$
@@ -102,7 +102,7 @@ Figure~\ref{fig:comparison} shows the central public result. Task A stays flat. 
   \centering
   \includegraphics[width=\textwidth]{confirmation-comparison-bars.pdf}
   \caption{
-    Public confirmation slice, comparing baseline and Christian heart-focused framing.
+    Public confirmation slice, comparing baseline and heart-focused framing.
     The chart shows the primary public outcomes on the confirmation slice.
     Task A remains flat, while Task B and heart-sensitivity move upward, and Task C shifts modestly toward motive.
   }
@@ -135,14 +135,14 @@ The paired test on the 23 same-act motive pairs remains conservative:
   \item Exact sign test: $p = 0.0625$ one-sided, $p = 0.125$ two-sided
 \end{itemize}
 
-So the current public result is best described as \emph{directional confirmation}. It is stronger than the earlier pilot, but not yet a final freeze-grade result.
+So the current public result is best described as \emph{directional confirmation}. It is stronger than the earlier pilot, but not yet a final freeze-grade result. A later paired-order follow-up on the same 23 same-act items found 0.0 item-level Task B order flips and 0.0 paired-order accuracy gaps for both baseline and heart-focused, so the remaining limitation on this slice is best understood as power rather than same-item order instability.
 
 \section{Interpretation}
 
 The public artifact supports the following claim:
 
 \begin{quote}
-Christian heart-focused framing may reallocate moral attention toward inward motive on a clean confirmation slice, without increasing same-heart overreach.
+heart-focused framing may reallocate moral attention toward inward motive on a clean confirmation slice, without increasing same-heart overreach.
 \end{quote}
 
 This wording matters for two reasons.
@@ -157,12 +157,34 @@ The current public artifact has several explicit boundaries.
 
 \begin{itemize}
   \item It is a pre-freeze confirmation slice, not the full main benchmark.
-  \item The canonical public comparison is baseline vs.\ Christian heart-focused framing only; it does not yet include the matched secular comparison as part of the frozen public claim.
+  \item The canonical public comparison is baseline vs.\ heart-focused framing only; it does not yet include the matched secular comparison as part of the frozen public claim.
   \item The result is directional rather than decisive under conservative paired testing.
   \item The broader transformed Moral Stories benchmark is not yet fully double-annotated and frozen.
 \end{itemize}
 
 These limitations are part of the intended honesty of the artifact. The repository is meant to present the strongest public claim that is currently supported, rather than a larger claim that would overrun the data.
+
+\section{Exploratory Text-Anchor Extension}
+
+The repository now also contains a broader exploratory extension that keeps the same benchmark logic but expands the prompt family to six conditions:
+\emph{baseline}, \emph{heart-focused}, \emph{Proverbs 4:23}, \emph{Dhammapada 34}, \emph{Bhagavad Gita 15.15}, and \emph{Qur'an 26:88--89}. This extension is not part of the frozen public claim. Its role is supplementary: to test whether the motive-sensitive pattern remains visible when the framing scaffold is paired with several fixed text anchors rather than a single intuitive wording choice.
+
+The strongest exploratory confirmation was run on the same 63-item slice with Qwen-1.5B-Instruct. The resulting pattern is heterogeneous but informative. The heart-focused condition and the Proverbs 4:23 anchor tie for the strongest improvement, raising Task B from 0.8889 to 0.9683 and heart-sensitivity from 0.6957 to 0.9130. Bhagavad Gita 15.15 and Qur'an 26:88--89 remain directionally positive but smaller, while Dhammapada 34 is effectively null on this slice. All six conditions preserve same-heart control accuracy at 1.0 and keep heart overreach at 0.0.
+
+The paired-order follow-up matters as much as the point estimates. A confirmation paired-order pack on the 23 same-act items shows 0.0 item-level Task B order flips and 0.0 paired-order Task B gaps across all six conditions. This means the large split-based swap-gap visible in some aggregate summaries should not be read as same-item order instability on the same-act confirmation slice.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{text-anchor-confirmation-qwen15.pdf}
+  \caption{
+    Exploratory six-condition confirmation on Qwen-1.5B-Instruct.
+    The strongest gains on the confirmation slice come from the heart-focused prompt and the Proverbs 4:23 anchor, which tie on Task B and heart-sensitivity score.
+    All six conditions preserve same-heart controls, heart overreach stays at zero, and the confirmation paired-order diagnostic shows no item-level Task B order flips.
+  }
+  \label{fig:text-anchor-extension}
+\end{figure}
+
+This extension does not justify a new freeze-grade cross-model claim. The earlier pilot remained heterogeneous across models, and the extension should still be interpreted as exploratory supplementary evidence. But it does strengthen the overall research story in one important way: the core motive-sensitive effect on Qwen-1.5B-Instruct is no longer dependent on only one prompt wording. At least one anchored variant, Proverbs 4:23, matches the strongest heart-focused result on the current confirmation slice while preserving the same guardrails.
 
 \section{Artifact Availability}
 

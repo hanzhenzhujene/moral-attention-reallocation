@@ -1,4 +1,5 @@
 # Minimal public runtime for reproducing the Qwen-1.5B confirmation slice.
+numpy>=1.26
 torch>=2.2
 transformers>=4.52
 safetensors>=0.4

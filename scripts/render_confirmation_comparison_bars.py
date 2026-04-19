@@ -77,7 +77,7 @@ def main() -> int:
     summary = load_json(Path(args.summary))
     by_condition = {row["condition"]: row["metrics"] for row in summary["summaries"]}
     baseline = by_condition["baseline"]
-    focused = by_condition["christian_heart"]
+    focused = by_condition["heart_focused"]
 
     all_contrast = summary["contrasts"][0]["metrics"]
 
@@ -146,7 +146,7 @@ def main() -> int:
         [point for point, _, _ in focused_main],
         width,
         color=FOCUSED,
-        label="Christian heart-focused",
+        label="heart-focused",
         yerr=make_err(focused_main),
         capsize=3,
         ecolor="#0a5d57",

@@ -5,7 +5,7 @@
   "jobs_path": "/Users/hanzhenzhu/Desktop/moral-attention-reallocation/results/paper_first_pilot_jobs_v4.jsonl",
   "conditions": [
     "baseline",
-    "christian_heart",
+    "heart_focused",
     "secular_matched"
   ],
   "models": [

@@ -109,7 +109,7 @@ def bar_row(x: int, y: int, label: str, value: float, color: str) -> str:
 def model_panel(x: int, y: int, model: str, metrics: Dict[str, Dict[str, float]], swap_gaps: Dict[str, float]) -> str:
     labels = [
         ("baseline", "Baseline", BASELINE),
-        ("christian_heart", "Heart-focused", CHRISTIAN),
+        ("heart_focused", "Heart-focused", CHRISTIAN),
         ("secular_matched", "Secular", SECULAR),
     ]
     hss_rows = []

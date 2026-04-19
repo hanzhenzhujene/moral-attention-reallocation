@@ -43,7 +43,7 @@ config = {
     "prompt_dir": str(root_dir / "prompts/pilot_v12"),
     "task_b_copy_mode": "benchmark_summary",
     "task_b_order_mode": "canonical_source",
-    "conditions": ["baseline", "christian_heart"],
+    "conditions": ["baseline", "heart_focused"],
     "models": [
         {
             "alias": "Qwen-1.5B-Instruct",
@@ -83,7 +83,7 @@ python3 "${ROOT_DIR}/scripts/run_diagnostics.py" \
 python3 "${ROOT_DIR}/scripts/evaluate_runs.py" \
   --input "${OUTPUT_DIR}/qwen_1_5b_confirmation_runs.jsonl" \
   --bootstrap-samples 1000 \
-  --contrasts baseline:christian_heart \
+  --contrasts baseline:heart_focused \
   --output "${OUTPUT_DIR}/confirmation_summary.json"
 
 if ! python3 "${ROOT_DIR}/scripts/evaluate_pilot_health.py" \
@@ -97,7 +97,7 @@ fi
 
 python3 "${ROOT_DIR}/scripts/evaluate_robustness_report.py" \
   --bootstrap-samples 400 \
-  --contrasts baseline:christian_heart \
+  --contrasts baseline:heart_focused \
   --input "${OUTPUT_DIR}/qwen_1_5b_confirmation_runs.jsonl" \
   --output-json "${OUTPUT_DIR}/confirmation_robustness.json" \
   --output-md "${OUTPUT_DIR}/confirmation_robustness.md"
@@ -113,6 +113,24 @@ python3 "${ROOT_DIR}/scripts/render_confirmation_overview.py" \
   --health "${OUTPUT_DIR}/confirmation_health.json" \
   --robustness "${OUTPUT_DIR}/confirmation_robustness.json" \
   --output "${OUTPUT_DIR}/confirmation_overview.svg"
+
+python3 "${ROOT_DIR}/scripts/render_confirmation_comparison_bars.py" \
+  --summary "${OUTPUT_DIR}/confirmation_summary.json" \
+  --robustness "${OUTPUT_DIR}/confirmation_robustness.json" \
+  --output "${OUTPUT_DIR}/confirmation_comparison_bars.svg"
+
+python3 "${ROOT_DIR}/scripts/render_public_confirmation_report.py" \
+  --summary "${OUTPUT_DIR}/confirmation_summary.json" \
+  --robustness "${OUTPUT_DIR}/confirmation_robustness.json" \
+  --health "${OUTPUT_DIR}/confirmation_health.json" \
+  --model "Qwen-1.5B-Instruct" \
+  --benchmark-name "paper_first_main_same_act_confirmation_v0" \
+  --slice-composition "23 same_act_different_motive + 40 same-heart controls" \
+  --summary-path "${OUTPUT_DIR}/confirmation_summary.json" \
+  --robustness-path "${OUTPUT_DIR}/confirmation_robustness.json" \
+  --health-path "${OUTPUT_DIR}/confirmation_health.json" \
+  --output-json "${OUTPUT_DIR}/confirmation_readout.json" \
+  --output-md "${OUTPUT_DIR}/confirmation_readout.md"
 
 echo "Detected device: ${DEVICE}"
 echo "Wrote confirmation artifact to ${OUTPUT_DIR}"

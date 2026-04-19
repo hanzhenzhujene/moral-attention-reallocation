@@ -27,22 +27,22 @@ This means the old failure mode, projecting outwardly worse action into inwardly
 
 - `Qwen-0.5B-Instruct`
   - baseline: `0.8`
-  - christian_heart: `0.4`
+  - heart_focused: `0.4`
   - secular_matched: `0.8667`
 - `Qwen-1.5B-Instruct`
   - baseline: `0.8`
-  - christian_heart: `0.8667`
+  - heart_focused: `0.8667`
   - secular_matched: `0.6667`
 
-The Christian effect is not uniform. It hurts HSS on the smaller model, helps slightly on the larger model, and does not dominate the secular matched condition.
+The heart-focused effect is not uniform. It hurts HSS on the smaller model, helps slightly on the larger model, and does not dominate the secular matched condition.
 
 ## Residual Failure
 
 The held-out pilot still fails the study health gate on `task_b swap accuracy gap`:
 
-- `Qwen-0.5B-Instruct / christian_heart`: `0.4066`
+- `Qwen-0.5B-Instruct / heart_focused`: `0.4066`
 - `Qwen-1.5B-Instruct / baseline`: `0.2727`
-- `Qwen-1.5B-Instruct / christian_heart`: `0.1538`
+- `Qwen-1.5B-Instruct / heart_focused`: `0.1538`
 - `Qwen-1.5B-Instruct / secular_matched`: `0.2525`
 
 The pair-type breakdown shows that this residual asymmetry is concentrated in `same_act_different_motive`, not in same-heart controls.

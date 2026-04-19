@@ -2,7 +2,7 @@
   "name": "paper_first_v1",
   "conditions": [
     "baseline",
-    "christian_heart",
+    "heart_focused",
     "secular_matched"
   ],
   "models": [

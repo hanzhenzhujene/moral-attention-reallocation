@@ -50,7 +50,7 @@
       "sha256": "1a324743d393dec3efe59301151c0a17d304481d5f5df38a614f6844f21ba2c6"
     },
     {
-      "path": "/Users/hanzhenzhu/Desktop/moral-attention-reallocation/prompts/pilot_v10/christian_heart_prompt.txt",
+      "path": "/Users/hanzhenzhu/Desktop/moral-attention-reallocation/prompts/pilot_v10/heart_focused_prompt.txt",
       "sha256": "1a324743d393dec3efe59301151c0a17d304481d5f5df38a614f6844f21ba2c6"
     },
     {
@@ -70,7 +70,7 @@
       "sha256": "be9a4ca2761897796a9550b2fb23da1df22c19b1f50d6d3af411d9b405ac830c"
     },
     {
-      "path": "/Users/hanzhenzhu/Desktop/moral-attention-reallocation/prompts/pilot_v10/task_ac_christian_heart_prompt.txt",
+      "path": "/Users/hanzhenzhu/Desktop/moral-attention-reallocation/prompts/pilot_v10/task_ac_heart_focused_prompt.txt",
       "sha256": "f6262f1770495bd98d6cf6df49e1ef7dedc67309f32fab82f78c580e07624c4d"
     },
     {
@@ -82,7 +82,7 @@
       "sha256": "07072eff3c09b561abd833b10527cc55dfb8bf9dc31bb2e08b5d19a6c3091157"
     },
     {
-      "path": "/Users/hanzhenzhu/Desktop/moral-attention-reallocation/prompts/pilot_v10/task_b_christian_heart_prompt.txt",
+      "path": "/Users/hanzhenzhu/Desktop/moral-attention-reallocation/prompts/pilot_v10/task_b_heart_focused_prompt.txt",
       "sha256": "ebd88c73be1e2c440edc7aa118b614c4b5b95fa186dbe83178d280cd5e37a523"
     },
     {

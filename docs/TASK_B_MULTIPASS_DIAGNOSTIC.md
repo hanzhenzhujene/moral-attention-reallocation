@@ -93,7 +93,7 @@ Models:
 Conditions:
 
 - `baseline`
-- `christian_heart`
+- `heart_focused`
 - `secular_matched`
 
 ## Success Criteria

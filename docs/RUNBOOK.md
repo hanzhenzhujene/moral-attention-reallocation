@@ -168,7 +168,7 @@ Create the frozen pilot jobs for the 3 paper conditions:
 ```bash
 python3 scripts/build_prompt_jobs.py \
   --items data/study/paper_first_pilot_v1.json \
-  --conditions baseline christian_heart secular_matched \
+  --conditions baseline heart_focused secular_matched \
   --output results/paper_first_pilot_jobs_v3.jsonl
 ```
 
@@ -252,10 +252,10 @@ Each model run record looks like:
 
 ```json
 {
-  "job_id": "HB001__christian_heart",
+  "job_id": "HB001__heart_focused",
   "item_id": "HB001",
   "model": "Qwen-1.5B",
-  "condition": "christian_heart",
+  "condition": "heart_focused",
   "benchmark_source": "HeartBench",
   "pair_type": "same_act_different_motive",
   "primary_diagnostic_dimension": "motive",
@@ -331,7 +331,7 @@ It reports:
 - swap-related accuracy gaps
 - Same-Heart Control Accuracy
 - Heart-Overreach Rate
-- a warning when Christian overreach rises without a positive HSS gain
+- a warning when heart-focused overreach rises without a positive HSS gain
 
 ## 6.7 Prepare Qualitative Review Cases
 
@@ -429,7 +429,7 @@ Build the frozen held-out jobs:
 ```bash
 python3 scripts/build_prompt_jobs.py \
   --items data/study/paper_first_pilot_v1.json \
-  --conditions baseline christian_heart secular_matched \
+  --conditions baseline heart_focused secular_matched \
   --prompt-dir prompts/pilot_v10 \
   --output results/pilot_v11_fullpilot_jobs.jsonl
 ```
@@ -511,7 +511,42 @@ python3 scripts/analyze_task_b_swap_gap.py \
   --output-md results/pilot_live_v11_fullpilot/pilot_v11_fullpilot_swap_gap_by_pair_type.md
 ```
 
-## 7. Freeze The Dataset State
+## 7. Exploratory 6-Condition Extension
+
+The repo now also includes dedicated runners for the 6-condition text-anchor extension.
+
+Run the 20-item pilot:
+
+```bash
+bash scripts/run_text_anchor_pilot.sh
+```
+
+Run the held-out same-act paired-order diagnostic for the pilot:
+
+```bash
+bash scripts/run_text_anchor_paired_order_same_act.sh
+```
+
+Run the targeted 63-item `Qwen-1.5B-Instruct` exploratory confirmation:
+
+```bash
+bash scripts/run_text_anchor_confirmation_qwen15b.sh
+```
+
+Run the confirmation paired-order diagnostic on the 23 same-act items:
+
+```bash
+bash scripts/run_text_anchor_confirmation_paired_order_qwen15b.sh
+```
+
+Key outputs from this extension:
+
+- `results/pilot_live_text_anchor_v1_mps/text_anchor_stage_report.md`
+- `results/main_same_act_text_anchor_v1_qwen15b_mps/confirmation_readout.md`
+- `results/main_same_act_text_anchor_v1_qwen15b_paired_order_mps/paired_order_stability.md`
+- `assets/text-anchor-confirmation-qwen15.svg`
+
+## 8. Freeze The Dataset State
 
 ```bash
 python3 scripts/write_dataset_manifest.py \
@@ -526,7 +561,7 @@ python3 scripts/write_dataset_manifest.py \
   --output results/paper_first_dataset_manifest_v1.json
 ```
 
-## 8. Recommended Immediate Workflow
+## 9. Recommended Immediate Workflow
 
 1. Do not full-run `v4` through `v10` as the frozen paper method.
 2. For any new Task B revision, run the smallest smoke first and always write the full postprocess bundle.
@@ -535,7 +570,7 @@ python3 scripts/write_dataset_manifest.py \
 5. Continue solo Pass A / Pass B for transformed candidates in parallel, since benchmark curation can proceed while Task B elicitation is still unsettled.
 6. Keep `check_release_gates.py` as the hard stop before any full main run.
 
-## 9. Revision Branches
+## 10. Revision Branches
 
 Use these pilot branches intentionally rather than mixing them:
 

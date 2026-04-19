@@ -4,7 +4,7 @@
 
 Build the smallest version of the project that can still test the central claim:
 
-**Christian heart-focused framing may shift moral attention toward inward motive and disposition, even when it does not uniformly improve overall moral judgment.**
+**heart-focused framing may shift moral attention toward inward motive and disposition, even when it does not uniformly improve overall moral judgment.**
 
 ## Frozen MVP Scope
 
@@ -21,7 +21,7 @@ Build the smallest version of the project that can still test the central claim:
 ### Conditions
 
 - `Baseline`
-- `Christian heart-focused`
+- `heart-focused`
 - `Secular matched paraphrase`
 
 ### Tasks
@@ -34,7 +34,7 @@ Build the smallest version of the project that can still test the central claim:
 
 The MVP is designed to answer one question well:
 
-**When outward behavior is controlled, does Christian framing make the model treat inward motive as more morally diagnostic?**
+**When outward behavior is controlled, does heart-focused framing make the model treat inward motive as more morally diagnostic?**
 
 That means the MVP should prioritize:
 
@@ -128,11 +128,11 @@ Evaluate on same-act-different-motive items:
 
 Main contrast:
 
-- `P(reason = motive | Christian)` minus `P(reason = motive | Baseline)`
+- `P(reason = motive | Heart-focused)` minus `P(reason = motive | Baseline)`
 
 Secondary contrast:
 
-- `P(reason = motive | Christian)` minus `P(reason = motive | Secular)`
+- `P(reason = motive | Heart-focused)` minus `P(reason = motive | Secular)`
 
 ### 4. Cross-Task Consistency
 
@@ -172,7 +172,7 @@ This is small enough for an MVP and large enough to produce clear condition cont
 At minimum, produce one summary table with rows:
 
 - Baseline
-- Christian heart-focused
+- heart-focused
 - Secular matched paraphrase
 
 Columns:
@@ -189,9 +189,9 @@ Columns:
 
 Expand from MVP to full study if at least one of the following appears:
 
-- Christian framing improves HSS by a clear margin over baseline
-- Christian framing meaningfully increases `reason = motive`
-- Christian and secular matched converge, suggesting a clean semantic-reorientation result
+- heart-focused framing improves HSS by a clear margin over baseline
+- heart-focused framing meaningfully increases `reason = motive`
+- heart-focused and secular matched converge, suggesting a clean semantic-reorientation result
 
 Do not expand yet if the only observed change is:
 

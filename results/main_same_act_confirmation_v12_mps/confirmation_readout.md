@@ -1,70 +1,63 @@
-# Same-Act Confirmation Readout
+# Public Confirmation Readout
 
 ## Setup
 
 - Benchmark: `paper_first_main_same_act_confirmation_v0`
-- Slice composition: `23` `same_act_different_motive` items + `40` same-heart controls
-- Conditions: `baseline`, `christian_heart`
+- Slice composition: `23 same_act_different_motive + 40 same-heart controls`
+- Conditions: `baseline, heart_focused`
 - Model: `Qwen-1.5B-Instruct`
-- Inference: `temperature=0`, `top_p=1.0`, `max_new_tokens=120`, `mps`
+- Valid records: `126`
+- Parse failure rate: `0.0`
 
 ## What Held
 
-- `126/126` valid records
-- `parse_failure_rate = 0.0`
-- `same_heart_control_accuracy = 1.0` for both conditions
-- `heart_overreach_rate = 0.0` for both conditions
-- mean explanation length stayed stable:
-  - baseline: `111.54`
-  - christian_heart: `109.16`
+- same-heart control accuracy stayed `1.0` in both conditions
+- heart overreach stayed `0.0` in both conditions
+- maximum explanation ratio vs baseline: `1.0`
+
+| Condition | Task A | Task B | HSS | P(reason=motive) | Same-heart | Overreach | Mean chars |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Baseline | 0.5079 | 0.8889 | 0.6957 | 0.4127 | 1.0 | 0.0 | 111.5397 |
+| Heart-focused | 0.5079 | 0.9524 | 0.8696 | 0.4762 | 1.0 | 0.0 | 109.1587 |
 
 ## Main Directional Result
 
-On the full 63-item confirmation pack:
+- `Task A` delta: `0.0`
+- `Task B` delta: `0.0635`
+- `heart_sensitivity_score` delta: `0.1739`
+- `P(reason = motive)` delta: `0.0635`
 
-- `heart_sensitivity_score`: `0.6957 -> 0.8696` (`+0.1739`)
-- `task_b_accuracy`: `0.8889 -> 0.9524` (`+0.0635`)
-- `p(reason = motive)`: `0.4127 -> 0.4762` (`+0.0635`)
+## Same-Act Slice Evidence
 
-On the 23-item `same_act_different_motive` slice:
+- HSS delta on `same_act_different_motive`: `0.1739`
+- paired sign counts: `4` better / `0` worse / `19` ties
+- exact sign test: one-sided `0.0625`, two-sided `0.125`
+- current directional sign-test power: `0.3706`
+- minimum motive-sensitive items for target power: `38`
 
-- `heart_sensitivity_score`: `0.6957 -> 0.8696` (`+0.1739`)
-- paired bootstrap CI: `[0.0435, 0.3478]`
-- paired sign counts: `4` better, `0` worse, `19` ties
-- exact sign test:
-  - two-sided `p = 0.125`
-  - one-sided `p = 0.0625`
+## Later Paired-Order Follow-Up
 
-Interpretation:
+- paired-order records: `92`
+- maximum item-level Task B order-flip rate: `0.0`
+- maximum paired-order Task B gap: `0.0`
 
-- Christian heart-focused framing improved motive sensitivity directionally on the cleanest mechanistic slice.
-- The gain was not accompanied by extra verbosity or same-heart overreach.
-- The result is stronger than the 20-item pilot, but it is still not a full freeze-grade significance result under conservative paired testing.
+| Condition | Paired-order Task B | Order flips | Paired gap |
+| --- | ---: | ---: | ---: |
+| Baseline | 0.6957 | 0.0 | 0.0 |
+| Heart-focused | 0.913 | 0.0 | 0.0 |
 
-## What Still Blocks Freeze
+- On this follow-up, the public baseline and heart-focused conditions show no same-item Task B order instability.
+- The remaining limitation on the public slice is power, not guardrail failure.
 
-- Baseline still fails the swap-gap health threshold:
-  - overall Task B swap gap: `0.1842`
-- Christian passes the overall swap-gap threshold on this pack:
-  - overall Task B swap gap: `0.0789`
-- Same-act order sensitivity remains concentrated in the baseline condition:
-  - baseline same-act swap gap: `0.4375`
-  - christian_heart same-act swap gap: `0.1765`
+## Interpretation
 
-So the confirmation pack strengthens the substantive direction of the effect, but it does not fully solve the order-robustness bar.
+- The public artifact supports a narrow mechanistic claim: heart-focused framing directionally improves inward-motive judgment on a clean confirmation slice.
+- The strongest movement is in Task B and heart-sensitivity, not in the top-line Task A verdict.
+- The gain does not come with worse same-heart controls, higher heart overreach, or longer explanations.
 
-## Actionable Next Step
+## Primary Files
 
-The power estimate from this pack says:
-
-- for `same_act_different_motive` HSS under the observed effect pattern, the current `23` motive items only give:
-  - directional sign-test power around `0.37`
-  - two-sided sign-test power around `0.20`
-- reaching roughly `0.80` power would require about:
-  - `38` motive items under a directional sign test
-  - `44` motive items under a two-sided sign test
-
-Practical implication:
-
-- add about `15` more clean `same_act_different_motive` items before treating this as a decisive confirmation slice
-- keep the same-heart controls unchanged, because they are already doing their guardrail job well
+- Summary: `results/main_same_act_confirmation_v12_mps/confirmation_summary.json`
+- Robustness: `results/main_same_act_confirmation_v12_mps/confirmation_robustness.json`
+- Health: `results/main_same_act_confirmation_v12_mps/confirmation_health.json`
+- Paired-order follow-up: `results/main_same_act_confirmation_v12_mps/confirmation_paired_order_followup.json`

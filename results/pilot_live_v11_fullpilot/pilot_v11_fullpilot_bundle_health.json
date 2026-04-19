@@ -110,7 +110,7 @@
     },
     {
       "model": "Qwen-0.5B-Instruct",
-      "condition": "christian_heart",
+      "condition": "heart_focused",
       "n_records": 20,
       "metrics": {
         "task_a_accuracy": {
@@ -404,7 +404,7 @@
     },
     {
       "model": "Qwen-1.5B-Instruct",
-      "condition": "christian_heart",
+      "condition": "heart_focused",
       "n_records": 20,
       "metrics": {
         "task_a_accuracy": {
@@ -600,19 +600,19 @@
   "model_contrasts": [
     {
       "model": "Qwen-0.5B-Instruct",
-      "baseline_to_christian_overreach_delta": 0.0,
-      "baseline_to_christian_hss_delta": -0.4
+      "baseline_to_heart_focused_overreach_delta": 0.0,
+      "baseline_to_heart_focused_hss_delta": -0.4
     },
     {
       "model": "Qwen-1.5B-Instruct",
-      "baseline_to_christian_overreach_delta": 0.0,
-      "baseline_to_christian_hss_delta": 0.0667
+      "baseline_to_heart_focused_overreach_delta": 0.0,
+      "baseline_to_heart_focused_hss_delta": 0.0667
     }
   ],
   "failures": [
-    "Qwen-0.5B-Instruct/christian_heart: task_b swap accuracy gap 0.4066 exceeds threshold 0.1500",
+    "Qwen-0.5B-Instruct/heart_focused: task_b swap accuracy gap 0.4066 exceeds threshold 0.1500",
     "Qwen-1.5B-Instruct/baseline: task_b swap accuracy gap 0.2727 exceeds threshold 0.1500",
-    "Qwen-1.5B-Instruct/christian_heart: task_b swap accuracy gap 0.1538 exceeds threshold 0.1500",
+    "Qwen-1.5B-Instruct/heart_focused: task_b swap accuracy gap 0.1538 exceeds threshold 0.1500",
     "Qwen-1.5B-Instruct/secular_matched: task_b swap accuracy gap 0.2525 exceeds threshold 0.1500"
   ]
 }

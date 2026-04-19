@@ -7,7 +7,7 @@
   "task_b_copy_mode": "benchmark_summary",
   "conditions": [
     "baseline",
-    "christian_heart",
+    "heart_focused",
     "secular_matched"
   ],
   "models": [

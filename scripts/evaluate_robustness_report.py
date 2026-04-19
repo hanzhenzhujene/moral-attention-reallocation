@@ -310,7 +310,7 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--contrasts",
         nargs="+",
-        default=["baseline:christian_heart", "baseline:secular_matched", "christian_heart:secular_matched"],
+        default=["baseline:heart_focused", "baseline:secular_matched", "heart_focused:secular_matched"],
         help="Condition contrasts, reported as right-minus-left",
     )
     parser.add_argument(
@@ -333,7 +333,7 @@ def build_arg_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--power-contrast",
-        default="baseline:christian_heart",
+        default="baseline:heart_focused",
         help="Only estimate power for this contrast. Use '*' to estimate power for every contrast.",
     )
     parser.add_argument(

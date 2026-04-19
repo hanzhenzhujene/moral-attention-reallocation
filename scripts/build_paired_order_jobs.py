@@ -77,6 +77,7 @@ def build_jobs(
                             presented_case_a,
                             presented_case_b,
                             scripture_block,
+                            build_prompt_jobs.condition_registry.text_anchor_block(condition),
                         ),
                     }
                 )
@@ -95,7 +96,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--conditions",
         nargs="+",
-        default=["baseline", "christian_heart", "secular_matched"],
+        default=["baseline", "heart_focused", "secular_matched"],
         help="Prompt conditions to render",
     )
     parser.add_argument(

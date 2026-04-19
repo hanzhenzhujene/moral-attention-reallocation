@@ -17,7 +17,7 @@
     "task_a_presented_a_b_gap": 0.0
   },
   {
-    "condition": "christian_heart",
+    "condition": "heart_focused",
     "n_jobs": 20,
     "swapped_false": 7,
     "swapped_true": 13,

@@ -13,20 +13,10 @@ from typing import Any, Dict, Iterable, List, Sequence, Tuple
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
+import condition_registry
 import evaluate_runs
 import run_transformers_jobs as single_pass
 
-
-TASK_AC_FILENAMES = {
-    "baseline": "task_ac_baseline_prompt.txt",
-    "christian_heart": "task_ac_christian_heart_prompt.txt",
-    "secular_matched": "task_ac_secular_matched_prompt.txt",
-}
-TASK_B_FILENAMES = {
-    "baseline": "task_b_baseline_prompt.txt",
-    "christian_heart": "task_b_christian_heart_prompt.txt",
-    "secular_matched": "task_b_secular_matched_prompt.txt",
-}
 COPY_FILENAME = "copy_intentions_prompt.txt"
 RELATION_FILENAME = "relation_prompt.txt"
 AB_ONLY = {"A", "B"}
@@ -238,7 +228,12 @@ def presented_cases(job: Dict[str, Any], item: Dict[str, Any]) -> Tuple[Dict[str
     return item[source_a], item[source_b]
 
 
-def prompt_replacements(case_a: Dict[str, Any], case_b: Dict[str, Any]) -> Dict[str, str]:
+def prompt_replacements(
+    case_a: Dict[str, Any],
+    case_b: Dict[str, Any],
+    *,
+    text_anchor_block: str = "",
+) -> Dict[str, str]:
     return {
         "{{case_a}}": case_a["text"],
         "{{case_b}}": case_b["text"],
@@ -254,7 +249,28 @@ def prompt_replacements(case_a: Dict[str, Any], case_b: Dict[str, Any]) -> Dict[
         "{{case_b_written_intention_copy}}": "",
         "{{comparison_first_written_intention_copy}}": "",
         "{{comparison_second_written_intention_copy}}": "",
+        "{{text_anchor_block}}": text_anchor_block,
     }
+
+
+def load_condition_templates(
+    prompt_dir: Path,
+    conditions: Sequence[str],
+    prompt_kind: str,
+) -> Dict[str, str]:
+    templates: Dict[str, str] = {}
+    for condition in conditions:
+        if prompt_kind == "task_ac":
+            filename = condition_registry.task_ac_prompt_filename(condition)
+        elif prompt_kind == "task_b":
+            filename = condition_registry.task_b_prompt_filename(condition)
+        else:
+            raise ValueError(f"Unsupported prompt kind '{prompt_kind}'")
+        path = prompt_dir / filename
+        if not path.exists():
+            raise FileNotFoundError(f"Missing {prompt_kind} template for '{condition}': {path}")
+        templates[condition] = load_prompt(path)
+    return templates
 
 
 def source_to_presented_label(job: Dict[str, Any], source: str) -> str:
@@ -406,6 +422,18 @@ def config_name_suffix(config: Dict[str, Any]) -> str:
     return normalized or "multipass"
 
 
+PASSTHROUGH_JOB_FIELDS = (
+    "paired_order_group_id",
+    "order_variant",
+    "presented_case_a_source",
+    "presented_case_b_source",
+)
+
+
+def passthrough_job_metadata(job: Dict[str, Any]) -> Dict[str, Any]:
+    return {field: job[field] for field in PASSTHROUGH_JOB_FIELDS if field in job}
+
+
 def cleanup_failure_file(output_path: Path, failure_path: Path) -> None:
     if not output_path.exists() or not failure_path.exists():
         return
@@ -486,8 +514,9 @@ def main(argv: Sequence[str]) -> int:
     if tokenizer.pad_token_id is None:
         tokenizer.pad_token_id = tokenizer.eos_token_id
 
-    task_ac_templates = {condition: load_prompt(prompt_dir / filename) for condition, filename in TASK_AC_FILENAMES.items()}
-    task_b_templates = {condition: load_prompt(prompt_dir / filename) for condition, filename in TASK_B_FILENAMES.items()}
+    configured_conditions = list(config["conditions"])
+    task_ac_templates = load_condition_templates(prompt_dir, configured_conditions, "task_ac")
+    task_b_templates = load_condition_templates(prompt_dir, configured_conditions, "task_b")
     copy_template = load_prompt(prompt_dir / COPY_FILENAME)
     relation_template = load_prompt(prompt_dir / RELATION_FILENAME)
     copy_mode = config.get("task_b_copy_mode", "model_copy")
@@ -522,7 +551,11 @@ def main(argv: Sequence[str]) -> int:
         print(f"[{index}/{len(jobs)}] {job['job_id']}")
         item = benchmark_items[job["item_id"]]
         case_a, case_b = presented_cases(job, item)
-        replacements = prompt_replacements(case_a, case_b)
+        replacements = prompt_replacements(
+            case_a,
+            case_b,
+            text_anchor_block=condition_registry.text_anchor_block(job["condition"]),
+        )
 
         task_ac_prompt = render_template(task_ac_templates[job["condition"]], replacements)
         task_ac_response, task_ac_raw, task_ac_error = generate_and_parse(
@@ -715,6 +748,7 @@ def main(argv: Sequence[str]) -> int:
                 "pair_type": job["pair_type"],
                 "primary_diagnostic_dimension": job["primary_diagnostic_dimension"],
                 "swapped": job["swapped"],
+                **passthrough_job_metadata(job),
                 "gold": job["gold"],
                 "response": response,
             },
@@ -729,6 +763,8 @@ def main(argv: Sequence[str]) -> int:
                 "benchmark_source": job["benchmark_source"],
                 "pair_type": job["pair_type"],
                 "primary_diagnostic_dimension": job["primary_diagnostic_dimension"],
+                "swapped": job["swapped"],
+                **passthrough_job_metadata(job),
                 "gold": job["gold"],
                 "expected_relation": pass_expected_relation(job),
                 "copy_mode": copy_mode,

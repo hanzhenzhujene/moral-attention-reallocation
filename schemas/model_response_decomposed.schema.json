@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.org/christian-moral-attention/model-response-decomposed.schema.json",
-  "title": "Christian Moral Attention Model Response (Decomposed Task B)",
+  "$id": "https://example.org/heart_focused-moral-attention/model-response-decomposed.schema.json",
+  "title": "Moral Attention Model Response (Decomposed Task B)",
   "type": "object",
   "additionalProperties": false,
   "required": [

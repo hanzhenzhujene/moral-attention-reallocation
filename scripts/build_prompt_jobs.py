@@ -12,6 +12,8 @@ from collections import Counter
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Sequence
 
+import condition_registry
+
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_PROMPT_DIR = ROOT / "prompts"
@@ -22,16 +24,6 @@ DEFAULT_SCRIPTURE_BLOCK = "\n".join(
         "- Matthew 23:27-28",
     ]
 )
-CONDITION_TO_PROMPT_FILENAME = {
-    "baseline": "baseline_prompt.txt",
-    "neutral_intention_sensitive": "neutral_intention_sensitive_prompt.txt",
-    "christian_heart": "christian_heart_prompt.txt",
-    "doctrinal": "doctrinal_prompt.txt",
-    "secular_matched": "secular_matched_prompt.txt",
-    "scripture_citation_only": "scripture_citation_only_prompt.txt",
-}
-
-
 def load_items(path: Path) -> List[Dict[str, Any]]:
     data = json.loads(path.read_text(encoding="utf-8"))
     if isinstance(data, list):
@@ -57,11 +49,7 @@ def flip_ab(label: str) -> str:
 
 
 def condition_prompt_path(condition: str, prompt_dir: Path) -> Path:
-    try:
-        filename = CONDITION_TO_PROMPT_FILENAME[condition]
-    except KeyError as exc:
-        allowed = ", ".join(sorted(CONDITION_TO_PROMPT_FILENAME))
-        raise ValueError(f"Unknown condition '{condition}'. Allowed: {allowed}") from exc
+    filename = condition_registry.single_pass_prompt_filename(condition)
     path = prompt_dir / filename
     if not path.exists():
         raise ValueError(f"Missing prompt template for '{condition}': {path}")
@@ -136,6 +124,7 @@ def rendered_prompt(
     presented_case_a: Dict[str, Any],
     presented_case_b: Dict[str, Any],
     scripture_block: str,
+    text_anchor_block: str,
 ) -> str:
     case_a_slots = canonical_case_slots(presented_case_a)
     case_b_slots = canonical_case_slots(presented_case_b)
@@ -157,6 +146,7 @@ def rendered_prompt(
         "{{case_b_structured}}": structured_case_block(presented_case_b),
         "{{case_a_task_ac_block}}": task_ac_case_block(presented_case_a),
         "{{case_b_task_ac_block}}": task_ac_case_block(presented_case_b),
+        "{{text_anchor_block}}": text_anchor_block,
     }
     rendered = template
     for placeholder, value in replacements.items():
@@ -262,7 +252,13 @@ def build_jobs(
                         "task_c_primary_reason": item["gold"]["task_c_primary_reason"],
                         "adjudication_note": item["gold"]["adjudication_note"],
                     },
-                    "prompt": rendered_prompt(template_text, presented_case_a, presented_case_b, scripture_block),
+                    "prompt": rendered_prompt(
+                        template_text,
+                        presented_case_a,
+                        presented_case_b,
+                        scripture_block,
+                        condition_registry.text_anchor_block(condition),
+                    ),
                 }
             )
     return jobs
@@ -285,7 +281,7 @@ def main(argv: Sequence[str]) -> int:
     parser.add_argument(
         "--conditions",
         nargs="+",
-        default=["baseline", "christian_heart", "secular_matched"],
+        default=["baseline", "heart_focused", "secular_matched"],
         help="Prompt conditions to render",
     )
     parser.add_argument("--output", required=True, help="Output JSONL path")

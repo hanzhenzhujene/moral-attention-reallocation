@@ -42,7 +42,7 @@
   },
   {
     "model": "Qwen-1.5B-Instruct",
-    "condition": "christian_heart",
+    "condition": "heart_focused",
     "n_items": 63,
     "task_a_answer_distribution": {
       "B": 1.0

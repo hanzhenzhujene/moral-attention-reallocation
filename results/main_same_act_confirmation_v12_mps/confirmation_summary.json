@@ -61,7 +61,7 @@
     },
     {
       "model": "Qwen-1.5B-Instruct",
-      "condition": "christian_heart",
+      "condition": "heart_focused",
       "n_items": 63,
       "metrics": {
         "task_a_accuracy": {
@@ -121,7 +121,7 @@
     {
       "model": "Qwen-1.5B-Instruct",
       "left_condition": "baseline",
-      "right_condition": "christian_heart",
+      "right_condition": "heart_focused",
       "n_shared_items": 63,
       "metrics": {
         "task_a_accuracy": {

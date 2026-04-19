@@ -6,20 +6,24 @@
 ![License](https://img.shields.io/badge/license-Apache--2.0-2563eb?style=flat-square)
 [![Paper PDF](https://img.shields.io/badge/paper-LaTeX%20PDF-b45309?style=flat-square)](paper/main.pdf)
 
-> This repo does not show that any single framing condition makes LLMs more moral overall. It shows that, on a clean same-act confirmation slice, a Christian heart-focused condition directionally improves inward-motive judgment without increasing same-heart overreach.
+> This repo does not show that any single framing condition makes LLMs more moral overall. It shows that, on a clean same-act confirmation slice, a heart-focused condition directionally improves inward-motive judgment without increasing same-heart overreach.
 
 ## Paper And Figures
 
 - Paper PDF: [paper/main.pdf](paper/main.pdf)
 - LaTeX source: [paper/main.tex](paper/main.tex)
 - Main comparison figure: [assets/confirmation-comparison-bars.svg](assets/confirmation-comparison-bars.svg)
+- Exploratory 6-condition figure: [assets/text-anchor-confirmation-qwen15.svg](assets/text-anchor-confirmation-qwen15.svg)
 - Method markdown draft: [docs/WORKING_PAPER.md](docs/WORKING_PAPER.md)
+- Project status and next steps: [docs/STATUS_AND_NEXT_STEPS.md](docs/STATUS_AND_NEXT_STEPS.md)
 - Canonical readout: [results/main_same_act_confirmation_v12_mps/confirmation_readout.md](results/main_same_act_confirmation_v12_mps/confirmation_readout.md)
+- Canonical paired-order follow-up: [results/main_same_act_confirmation_v12_mps/confirmation_paired_order_followup.md](results/main_same_act_confirmation_v12_mps/confirmation_paired_order_followup.md)
+- Exploratory 6-condition confirmation readout: [results/main_same_act_text_anchor_v1_qwen15b_mps/confirmation_readout.md](results/main_same_act_text_anchor_v1_qwen15b_mps/confirmation_readout.md)
 - Release artifact: [v0.1-confirmation](https://github.com/hanzhenzhujene/moral-attention-reallocation/releases/tag/v0.1-confirmation)
 
 ## Abstract
 
-This repository studies a narrow mechanistic question about moral cognition in language models: whether framing changes what the model treats as morally diagnostic. The current public confirmation slice uses a Christian heart-focused condition as the main probe against a baseline prompt. The benchmark logic centers on pairwise moral cases with three tasks: overall moral verdict (Task A), inward-orientation judgment (Task B), and reason focus (Task C). The key design uses same-act-different-motive pairs together with same-heart controls, so motive sensitivity can be separated from false projection of outwardly worse action into inwardly worse heart. On a 63-item Qwen-1.5B-Instruct confirmation slice, the Christian heart-focused condition improved Task B accuracy from `0.8889` to `0.9524` and heart-sensitivity score from `0.6957` to `0.8696`, while same-heart control accuracy remained `1.0` and heart-overreach remained `0.0`. Under conservative paired testing this is a directional confirmation result, not yet a final decisive main-benchmark claim. The broader project design includes matched secular controls, but the current public artifact is intentionally narrower: a pre-freeze confirmation slice with honest reproducibility boundaries.
+This repository studies a narrow mechanistic question about moral cognition in language models: whether framing changes what the model treats as morally diagnostic. The current public confirmation slice uses a heart-focused condition as the main probe against a baseline prompt. The benchmark logic centers on pairwise moral cases with three tasks: overall moral verdict (Task A), inward-orientation judgment (Task B), and reason focus (Task C). The key design uses same-act-different-motive pairs together with same-heart controls, so motive sensitivity can be separated from false projection of outwardly worse action into inwardly worse heart. On a 63-item Qwen-1.5B-Instruct confirmation slice, the heart-focused condition improved Task B accuracy from `0.8889` to `0.9524` and heart-sensitivity score from `0.6957` to `0.8696`, while same-heart control accuracy remained `1.0` and heart-overreach remained `0.0`. Under conservative paired testing this is a directional confirmation result, not yet a final decisive main-benchmark claim. A later paired-order follow-up on the same 23 same-act items found `0.0` item-level Task B order flips for both `baseline` and `heart_focused`, so the main remaining blocker on this slice is statistical power rather than same-item order instability. The broader project design includes matched secular controls, but the current public artifact is intentionally narrower: a pre-freeze confirmation slice with honest reproducibility boundaries.
 
 ![Paper-style comparison chart for the public confirmation slice](assets/confirmation-comparison-bars.svg)
 
@@ -27,7 +31,7 @@ The main figure above is the repo's paper-style result figure: `Task A` stays fl
 
 ## Main Result At A Glance
 
-| Metric | Baseline | Christian heart-focused | Delta | Read |
+| Metric | Baseline | heart-focused | Delta | Read |
 | --- | ---: | ---: | ---: | --- |
 | Task A accuracy | `0.5079` | `0.5079` | `+0.0000` | Top-line verdict stays flat |
 | Task B accuracy | `0.8889` | `0.9524` | `+0.0635` | Inward-orientation judgment improves |
@@ -39,6 +43,9 @@ The main figure above is the repo's paper-style result figure: `Task A` stays fl
 
 Significance note:
 The public result is directional rather than definitive. On the `23` same-act motive pairs, the exact sign test gives one-sided `p = 0.0625` and two-sided `p = 0.125`.
+
+Order note:
+The later paired-order follow-up on the same `23` same-act items showed `0.0` item-level Task B order flips and `0.0` paired-order Task B accuracy gaps for both `baseline` and `heart_focused`.
 
 ## What This Benchmark Measures
 
@@ -88,7 +95,7 @@ flowchart TD
 
 ## What We Can Claim
 
-- On the current public confirmation slice, the Christian heart-focused condition directionally improves inward-motive judgment.
+- On the current public confirmation slice, the heart-focused condition directionally improves inward-motive judgment.
 - The strongest movement is in Task B and heart-sensitivity, not in first-pass Task A verdicts.
 - That gain does not come with higher same-heart overreach or longer explanations on this slice.
 
@@ -96,7 +103,14 @@ flowchart TD
 
 - We cannot claim that any single religious framing improves moral judgment overall across models or benchmarks.
 - We cannot yet claim a freeze-grade decisive result for the full paper benchmark.
-- We cannot yet claim that the current public confirmation result is uniquely Christian rather than a more general semantic reorientation, because the canonical public slice here is a baseline-vs-Christian comparison.
+- We cannot yet claim that the current public confirmation result is uniquely religious rather than a more general semantic reorientation, because the canonical public slice here is a baseline-vs-heart-focused comparison.
+
+## Artifact Matrix
+
+| Artifact | Status | Scope | Strongest supported claim | Canonical file |
+| --- | --- | --- | --- | --- |
+| Public confirmation slice | Frozen public artifact | `63` items, `Qwen-1.5B-Instruct`, `baseline` vs `heart_focused` | heart-focused framing directionally improves inward-motive judgment without increasing same-heart overreach | `results/main_same_act_confirmation_v12_mps/confirmation_readout.md` |
+| Exploratory 6-condition extension | Exploratory supplement | same `63` items, `Qwen-1.5B-Instruct`, `baseline` + `heart_focused` + 4 text anchors | the strongest motive-sensitive gain is reproduced by both `heart_focused` and `Proverbs 4:23`, while all six conditions preserve same-heart controls and show clean paired-order stability | `results/main_same_act_text_anchor_v1_qwen15b_mps/confirmation_readout.md` |
 
 ## Status
 
@@ -106,6 +120,7 @@ flowchart TD
 - The canonical result files in `results/main_same_act_confirmation_v12_mps/`.
 - The current README comparison figure, the mermaid method sketch, and a minimal reproduction path for this slice.
 - A formal LaTeX paper in `paper/main.tex` with compiled PDF at `paper/main.pdf`.
+- A later paired-order follow-up on the same same-act slice showing `0.0` item-level Task B order flips for `baseline` and `heart_focused`.
 
 **What is not frozen yet**
 
@@ -113,6 +128,32 @@ flowchart TD
 - A fully double-annotated transformed Moral Stories main set.
 - A final order-robust Task B method that clears the freeze bar across all cells.
 - A public preprint and a full paper-ready main matrix.
+- The exploratory 6-condition text-anchor extension, which now has a completed pilot and paired-order diagnostic but is not part of the frozen public claim.
+
+## Exploratory Extension
+
+The repo now also includes a broader **exploratory** 6-condition extension on the same 63-item confirmation slice:
+`baseline`, `heart_focused`, `Proverbs 4:23`, `Dhammapada 34`, `Bhagavad Gita 15.15`, and `Qur'an 26:88-89`.
+
+On `Qwen-1.5B-Instruct`, `heart_focused` and `Proverbs 4:23` tie for the strongest confirmation result:
+
+- `Task B`: `0.8889 -> 0.9683`
+- `HSS`: `0.6957 -> 0.9130`
+- same-act sign test for HSS: one-sided `p = 0.03125`, two-sided `p = 0.0625`
+
+All six conditions preserved same-heart controls at `1.0`, kept heart overreach at `0.0`, and the confirmation paired-order pack showed `0.0` item-level Task B order flips across all six conditions. This is supplementary evidence, not a replacement for the narrower frozen public claim.
+
+![Exploratory 6-condition confirmation figure for Qwen-1.5B-Instruct](assets/text-anchor-confirmation-qwen15.svg)
+
+Reproduce this exploratory artifact:
+
+```bash
+bash scripts/run_text_anchor_confirmation_qwen15b.sh results/main_same_act_text_anchor_v1_qwen15b_mps
+```
+
+```bash
+bash scripts/run_text_anchor_confirmation_paired_order_qwen15b.sh results/main_same_act_text_anchor_v1_qwen15b_paired_order_mps
+```
 
 ## Reproduce The Current Confirmation Slice
 
@@ -135,16 +176,34 @@ Expected outputs:
 - `results/reproduction_confirmation/confirmation_summary.json`
 - `results/reproduction_confirmation/confirmation_health.json`
 - `results/reproduction_confirmation/confirmation_robustness.md`
+- `results/reproduction_confirmation/confirmation_readout.md`
+- `results/reproduction_confirmation/confirmation_comparison_bars.svg`
 - `results/reproduction_confirmation/confirmation_overview.svg`
+
+Optional later paired-order follow-up:
+
+```bash
+bash scripts/reproduce_confirmation_paired_order_followup.sh results/reproduction_confirmation_paired_order
+```
+
+Expected paired-order outputs:
+
+- `results/reproduction_confirmation_paired_order/paired_order_stability.json`
+- `results/reproduction_confirmation_paired_order/confirmation_paired_order_followup.md`
 
 ## Repository Map
 
 - `assets/`: figures used on the project page
 - `paper/`: LaTeX manuscript and compiled paper PDF
 - `docs/WORKING_PAPER.md`: paper-style summary of the public artifact
+- `docs/STATUS_AND_NEXT_STEPS.md`: current state, blockers, and recommended next experiments
 - `configs/`: execution configs for the public confirmation artifact and internal study configs
 - `results/main_same_act_confirmation_v12_mps/`: canonical public result files for the current strongest slice
+- `results/main_same_act_text_anchor_v1_qwen15b_mps/`: exploratory 6-condition confirmation artifact
 - `scripts/reproduce_confirmation_slice.sh`: minimal reproduction entry point
+- `scripts/reproduce_confirmation_paired_order_followup.sh`: optional same-item paired-order reproduction for the later public follow-up
+- `scripts/run_text_anchor_confirmation_qwen15b.sh`: exploratory 6-condition confirmation runner
+- `scripts/run_text_anchor_confirmation_paired_order_qwen15b.sh`: paired-order stability runner for the exploratory confirmation slice
 - `docs/RUNBOOK.md`: internal full-pipeline runbook for benchmark construction and broader experiments
 - `docs/ANNOTATION_PROTOCOL.md`: annotation rules for Task A, Task B, and Task C
 - `docs/archive/`: archived planning and scoping notes from the active workspace phase
@@ -153,12 +212,19 @@ Expected outputs:
 <summary>Method Details And Internal Diagnostics</summary>
 
 - [Same-act confirmation readout](results/main_same_act_confirmation_v12_mps/confirmation_readout.md)
+- [Public paired-order follow-up](results/main_same_act_confirmation_v12_mps/confirmation_paired_order_followup.md)
 - [Robustness report](results/main_same_act_confirmation_v12_mps/confirmation_robustness.md)
 - [Swap-gap breakdown](results/main_same_act_confirmation_v12_mps/confirmation_swap_gap_by_pair_type.md)
+- [Exploratory 6-condition stage report](results/pilot_live_text_anchor_v1_mps/text_anchor_stage_report.md)
+- [Exploratory 6-condition confirmation readout](results/main_same_act_text_anchor_v1_qwen15b_mps/confirmation_readout.md)
+- [Exploratory 6-condition confirmation figure](assets/text-anchor-confirmation-qwen15.svg)
+- [Exploratory paired-order stability report](results/pilot_paired_order_text_anchor_same_act_v1_mps/paired_order_stability.md)
+- [Exploratory confirmation paired-order stability](results/main_same_act_text_anchor_v1_qwen15b_paired_order_mps/paired_order_stability.md)
 - [Annotation protocol](docs/ANNOTATION_PROTOCOL.md)
 - [Internal runbook](docs/RUNBOOK.md)
 - [Task B revision log](docs/TASK_B_REVISION_LOG.md)
 - [Preregistration draft](docs/PREREGISTRATION_DRAFT.md)
+- [Working paper note on the exploratory extension](docs/WORKING_PAPER.md)
 
 </details>
 

@@ -179,7 +179,7 @@ What happened in smoke testing:
 
 - Parse stability was again `0.0`.
 - Motive sensitivity partly returned:
-  - `HSS = 0.6667 / 0.3333 / 0.6667` for baseline / christian / secular on both Qwen models in this smoke pack.
+  - `HSS = 0.6667 / 0.3333 / 0.6667` for baseline / heart-focused / secular on both Qwen models in this smoke pack.
 - Same-heart behavior collapsed again in all six model-condition cells:
   - `same_heart_control_accuracy = 0.0`
   - `heart_overreach_rate = 1.0`
@@ -213,7 +213,7 @@ What happened in smoke testing:
 
 - Parse stability remained `0.0`.
 - The metric profile was effectively the same as `v8`:
-  - `HSS = 0.6667 / 0.3333 / 0.6667` for baseline / christian / secular on both Qwen models in this smoke pack
+  - `HSS = 0.6667 / 0.3333 / 0.6667` for baseline / heart-focused / secular on both Qwen models in this smoke pack
   - `same_heart_control_accuracy = 0.0`
   - `heart_overreach_rate = 1.0`
 - Qualitatively, the models continued to describe the outwardly worse case as showing a more manipulative intention even when the intention strings were identical.
@@ -251,7 +251,7 @@ What happened in smoke testing:
   - `parse_failure_rate = 0.0` for the model-level run
   - `same_heart_control_accuracy = 1.0`
   - `heart_overreach_rate = 0.0`
-  - `HSS = 1.0 / 0.6667 / 1.0` for baseline / christian / secular
+  - `HSS = 1.0 / 0.6667 / 1.0` for baseline / heart-focused / secular
 - `Qwen-0.5B-Instruct` failed mainly in Pass 1 copy:
   - after parser cleanup, branch-level `parse_failure_rate = 0.125`
   - all remaining failures were the same-heart control item failing to copy the second intention text
@@ -338,11 +338,11 @@ Held-out HSS by model / condition:
 
 - `Qwen-0.5B-Instruct`
   - baseline: `0.8`
-  - christian_heart: `0.4`
+  - heart_focused: `0.4`
   - secular_matched: `0.8667`
 - `Qwen-1.5B-Instruct`
   - baseline: `0.8`
-  - christian_heart: `0.8667`
+  - heart_focused: `0.8667`
   - secular_matched: `0.6667`
 
 Held-out interpretation:
@@ -352,10 +352,10 @@ Held-out interpretation:
   - no heart overreach
   - perfect same-heart control performance in this held-out pilot
 - But the substantive framing effect is not stable:
-  - Christian hurts HSS for `Qwen-0.5B-Instruct`
-  - Christian helps HSS slightly for `Qwen-1.5B-Instruct`
+  - heart-focused framing hurts HSS for `Qwen-0.5B-Instruct`
+  - heart-focused framing helps HSS slightly for `Qwen-1.5B-Instruct`
   - secular matched is strongest on `Qwen-0.5B-Instruct`
-- So the main claim at this stage is not "Christian framing wins under `v11`."
+- So the main claim at this stage is not "heart-focused framing wins under `v11`."
 - The main claim is that **benchmark-assisted decomposition can suppress heart overreach without collapsing motive sensitivity.**
 
 Residual problem after the held-out pilot:
@@ -363,9 +363,9 @@ Residual problem after the held-out pilot:
 - Pilot health still fails on `task_b swap accuracy gap` for multiple model-condition cells.
 - The new swap-gap breakdown shows that the residual asymmetry is concentrated in `same_act_different_motive`, not in same-heart controls:
   - `Qwen-1.5B-Instruct / baseline`: `same_act_different_motive` gap `0.5`
-  - `Qwen-1.5B-Instruct / christian_heart`: `0.2857`
+  - `Qwen-1.5B-Instruct / heart_focused`: `0.2857`
   - `Qwen-1.5B-Instruct / secular_matched`: `0.25`
-  - `Qwen-0.5B-Instruct / christian_heart`: `0.3714`
+  - `Qwen-0.5B-Instruct / heart_focused`: `0.3714`
 - That means `v11` solved the overreach problem but not the full order-sensitivity problem.
 
 ## Cross-Branch Pattern
