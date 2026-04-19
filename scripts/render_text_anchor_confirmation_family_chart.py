@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render a compact figure for the Qwen-1.5B text-anchor confirmation run."""
+"""Render a compact multi-panel figure for the Qwen-1.5B text-anchor confirmation run."""
 
 from __future__ import annotations
 
@@ -64,7 +64,8 @@ def main() -> int:
         if row["model"] == args.model
     }
 
-    labels = [condition_registry.display_name(condition) for condition in ORDER]
+    labels = [condition_registry.figure_display_name(condition) for condition in ORDER]
+    task_a = [point(rows[condition], "task_a_accuracy") for condition in ORDER]
     task_b = [point(rows[condition], "task_b_accuracy") for condition in ORDER]
     hss = [point(rows[condition], "heart_sensitivity_score") for condition in ORDER]
     reason = [point(rows[condition], "p_reason_motive") for condition in ORDER]
@@ -80,19 +81,21 @@ def main() -> int:
     paired_flip = [paired_lookup.get(condition, {}).get("task_b_order_flip_rate") for condition in ORDER]
     paired_gap = [paired_lookup.get(condition, {}).get("task_b_accuracy_gap") for condition in ORDER]
 
-    fig = plt.figure(figsize=(11.2, 7.1), dpi=180)
+    fig = plt.figure(figsize=(13.1, 8.8), dpi=180)
     gs = fig.add_gridspec(
         4,
-        1,
-        height_ratios=[0.58, 1.42, 1.42, 0.92],
+        2,
+        height_ratios=[0.56, 1.35, 1.35, 0.86],
+        width_ratios=[1.02, 1.0],
         hspace=0.38,
+        wspace=0.16,
         top=0.94,
         bottom=0.07,
         left=0.17,
         right=0.97,
     )
 
-    title_ax = fig.add_subplot(gs[0, 0])
+    title_ax = fig.add_subplot(gs[0, :])
     title_ax.axis("off")
     title_ax.text(
         0.0,
@@ -116,14 +119,25 @@ def main() -> int:
     title_ax.text(
         0.0,
         0.12,
-        "Heart-focused and Proverbs 4:23 tie for the strongest gain; all six conditions keep controls clean.",
+        "Generic heart-focused framing plus Biblical, Buddhist, Hindu, and Islamic text anchors.",
         fontsize=10.2,
         color="#475569",
         ha="left",
         va="center",
     )
 
-    def draw_metric(ax, values: List[float], title: str, baseline_value: float, xlim: tuple[float, float]) -> None:
+    def draw_metric(
+        ax,
+        values: List[float],
+        title: str,
+        baseline_value: float,
+        xlim: tuple[float, float],
+        *,
+        show_y_labels: bool,
+        highlight: bool = False,
+    ) -> None:
+        if highlight:
+            ax.set_facecolor("#f7fbfa")
         ax.set_title(title, loc="left", fontsize=13.2, fontweight="bold", color="#0f172a", pad=10)
         y_positions = list(range(len(ORDER)))
         ax.barh(
@@ -135,7 +149,10 @@ def main() -> int:
         )
         ax.axvline(baseline_value, color="#94a3b8", linestyle="--", linewidth=1.2)
         ax.set_yticks(y_positions)
-        ax.set_yticklabels(labels, fontsize=10.5, color="#0f172a")
+        if show_y_labels:
+            ax.set_yticklabels(labels, fontsize=9.6, color="#0f172a")
+        else:
+            ax.set_yticklabels([""] * len(labels))
         ax.set_xlim(*xlim)
         ax.invert_yaxis()
         ax.grid(axis="x", color="#e2e8f0", linewidth=0.8)
@@ -155,18 +172,53 @@ def main() -> int:
                 color="#0f172a",
             )
 
-    ax1 = fig.add_subplot(gs[1, 0])
-    draw_metric(ax1, task_b, "Task B: inward-orientation judgment", task_b[0], (0.84, 1.0))
+    ax_a = fig.add_subplot(gs[1, 0])
+    draw_metric(
+        ax_a,
+        task_a,
+        "Task A: overall moral verdict",
+        task_a[0],
+        (0.44, 0.54),
+        show_y_labels=True,
+    )
 
-    ax2 = fig.add_subplot(gs[2, 0])
-    draw_metric(ax2, hss, "Heart-sensitivity score on same-act motive pairs", hss[0], (0.64, 0.96))
+    ax_b = fig.add_subplot(gs[1, 1])
+    draw_metric(
+        ax_b,
+        task_b,
+        "Task B: inward-orientation judgment",
+        task_b[0],
+        (0.84, 1.0),
+        show_y_labels=False,
+        highlight=True,
+    )
 
-    footer_ax = fig.add_subplot(gs[3, 0])
+    ax_c = fig.add_subplot(gs[2, 0])
+    draw_metric(
+        ax_c,
+        reason,
+        "Task C: motive as primary reason",
+        reason[0],
+        (0.39, 0.56),
+        show_y_labels=True,
+    )
+
+    ax_hss = fig.add_subplot(gs[2, 1])
+    draw_metric(
+        ax_hss,
+        hss,
+        "Heart-sensitivity score on same-act pairs",
+        hss[0],
+        (0.64, 0.96),
+        show_y_labels=False,
+        highlight=True,
+    )
+
+    footer_ax = fig.add_subplot(gs[3, :])
     footer_ax.axis("off")
     card_specs = [
-        (0.00, 0.02, 0.31, 0.90, "#f8fafc"),
-        (0.345, 0.02, 0.31, 0.90, "#f0fdf4"),
-        (0.69, 0.02, 0.31, 0.90, "#eff6ff"),
+        (0.00, 0.02, 0.48, 0.90, "#f8fafc"),
+        (0.52, 0.02, 0.48, 0.90, "#f0fdf4"),
     ]
     for x, y, w, h, face in card_specs:
         footer_ax.add_patch(
@@ -186,7 +238,7 @@ def main() -> int:
     footer_ax.text(
         0.03,
         0.72,
-        "Task C: reason focus",
+        "How to read the pattern",
         fontsize=12.0,
         fontweight="bold",
         color="#0f172a",
@@ -195,31 +247,39 @@ def main() -> int:
     footer_ax.text(
         0.03,
         0.46,
-        f"Baseline {reason[0]:.3f} | Heart-focused {reason[1]:.3f}",
+        f"Task A stays flat: baseline {task_a[0]:.3f} | heart-focused {task_a[1]:.3f}",
         fontsize=10.5,
         color="#334155",
         transform=footer_ax.transAxes,
     )
     footer_ax.text(
         0.03,
-        0.20,
-        f"Best anchor: Proverbs 4:23 = {reason[2]:.3f}",
+        0.24,
+        f"Task B rises most: baseline {task_b[0]:.3f} | heart-focused {task_b[1]:.3f}",
+        fontsize=10.5,
+        color="#334155",
+        transform=footer_ax.transAxes,
+    )
+    footer_ax.text(
+        0.03,
+        0.08,
+        f"Task C also shifts toward motive: baseline {reason[0]:.3f} | Proverbs 4:23 {reason[2]:.3f}",
         fontsize=10.5,
         color="#334155",
         transform=footer_ax.transAxes,
     )
 
     footer_ax.text(
-        0.375,
+        0.55,
         0.72,
-        "Guardrails",
+        "Guardrails and stability",
         fontsize=12.0,
         fontweight="bold",
         color="#0f172a",
         transform=footer_ax.transAxes,
     )
     footer_ax.text(
-        0.375,
+        0.55,
         0.46,
         f"Same-heart control = {min(same_heart):.1f} in all 6",
         fontsize=10.5,
@@ -227,8 +287,8 @@ def main() -> int:
         transform=footer_ax.transAxes,
     )
     footer_ax.text(
-        0.375,
-        0.20,
+        0.55,
+        0.24,
         f"Heart overreach = {max(overreach):.1f} in all 6",
         fontsize=10.5,
         color="#334155",
@@ -238,27 +298,14 @@ def main() -> int:
     max_flip = max(paired_flip) if paired_flip and all(value is not None for value in paired_flip) else None
     max_gap = max(paired_gap) if paired_gap and all(value is not None for value in paired_gap) else None
     footer_ax.text(
-        0.72,
-        0.72,
-        "Paired-order check",
-        fontsize=12.0,
-        fontweight="bold",
-        color="#0f172a",
-        transform=footer_ax.transAxes,
-    )
-    footer_ax.text(
-        0.72,
-        0.46,
-        "Same-act Task B flipped on 0 items" if max_flip == 0 else "Order flips pending",
-        fontsize=10.5,
-        color="#334155",
-        transform=footer_ax.transAxes,
-    )
-    footer_ax.text(
-        0.72,
-        0.20,
-        f"Maximum paired-order gap = {max_gap:.1f}" if max_gap is not None else "Paired-order gap unavailable",
-        fontsize=10.5,
+        0.55,
+        0.08,
+        (
+            f"Paired-order: 0 flips | max gap = {max_gap:.1f}"
+            if max_flip == 0 and max_gap is not None
+            else "Paired-order stability pending"
+        ),
+        fontsize=10.2,
         color="#334155",
         transform=footer_ax.transAxes,
     )

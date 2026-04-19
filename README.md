@@ -1,4 +1,4 @@
-# Moral Attention Reallocation in Language Models
+# Religious Text Anchors and Moral Attention Reallocation in Language Models
 
 ![Release](https://img.shields.io/github/v/release/hanzhenzhujene/moral-attention-reallocation?style=flat-square)
 ![Status](https://img.shields.io/badge/status-pre--freeze%20confirmation%20artifact-0f766e?style=flat-square)
@@ -6,7 +6,7 @@
 ![License](https://img.shields.io/badge/license-Apache--2.0-2563eb?style=flat-square)
 [![Paper PDF](https://img.shields.io/badge/paper-LaTeX%20PDF-b45309?style=flat-square)](paper/main.pdf)
 
-> This repo does not show that any single framing condition makes LLMs more moral overall. It shows that, on a clean same-act confirmation slice, a heart-focused condition directionally improves inward-motive judgment without increasing same-heart overreach.
+> This repo studies whether generic heart-focused framing and cross-tradition religious text anchors change what an LLM treats as morally diagnostic. The current strongest public claim is still narrow: on a clean same-act confirmation slice, a heart-focused condition directionally improves inward-motive judgment without increasing same-heart overreach.
 
 ## Paper And Figures
 
@@ -14,6 +14,7 @@
 - LaTeX source: [paper/main.tex](paper/main.tex)
 - Main comparison figure: [assets/confirmation-comparison-bars.svg](assets/confirmation-comparison-bars.svg)
 - Exploratory 6-condition figure: [assets/text-anchor-confirmation-qwen15.svg](assets/text-anchor-confirmation-qwen15.svg)
+- Exploratory 6-condition tables: [docs/tables/text_anchor_confirmation_tables.md](docs/tables/text_anchor_confirmation_tables.md)
 - Method markdown draft: [docs/WORKING_PAPER.md](docs/WORKING_PAPER.md)
 - Project status and next steps: [docs/STATUS_AND_NEXT_STEPS.md](docs/STATUS_AND_NEXT_STEPS.md)
 - Canonical readout: [results/main_same_act_confirmation_v12_mps/confirmation_readout.md](results/main_same_act_confirmation_v12_mps/confirmation_readout.md)
@@ -23,7 +24,7 @@
 
 ## Abstract
 
-This repository studies a narrow mechanistic question about moral cognition in language models: whether framing changes what the model treats as morally diagnostic. The current public confirmation slice uses a heart-focused condition as the main probe against a baseline prompt. The benchmark logic centers on pairwise moral cases with three tasks: overall moral verdict (Task A), inward-orientation judgment (Task B), and reason focus (Task C). The key design uses same-act-different-motive pairs together with same-heart controls, so motive sensitivity can be separated from false projection of outwardly worse action into inwardly worse heart. On a 63-item Qwen-1.5B-Instruct confirmation slice, the heart-focused condition improved Task B accuracy from `0.8889` to `0.9524` and heart-sensitivity score from `0.6957` to `0.8696`, while same-heart control accuracy remained `1.0` and heart-overreach remained `0.0`. Under conservative paired testing this is a directional confirmation result, not yet a final decisive main-benchmark claim. A later paired-order follow-up on the same 23 same-act items found `0.0` item-level Task B order flips for both `baseline` and `heart_focused`, so the main remaining blocker on this slice is statistical power rather than same-item order instability. The broader project design includes matched secular controls, but the current public artifact is intentionally narrower: a pre-freeze confirmation slice with honest reproducibility boundaries.
+This repository studies a narrow mechanistic question about moral cognition in language models: whether framing changes what the model treats as morally diagnostic. The full project includes both a generic `heart_focused` scaffold and a cross-tradition set of religious text anchors: `Proverbs 4:23` from the Biblical Jewish/Christian tradition, `Dhammapada 34` from the Buddhist tradition, `Bhagavad Gita 15.15` from the Hindu tradition, and `Qur'an 26:88-89` from the Islamic tradition. The benchmark logic centers on pairwise moral cases with three tasks: overall moral verdict (Task A), inward-orientation judgment (Task B), and reason focus (Task C). The key design uses same-act-different-motive pairs together with same-heart controls, so motive sensitivity can be separated from false projection of outwardly worse action into inwardly worse heart. On a 63-item Qwen-1.5B-Instruct confirmation slice, the heart-focused condition improved Task B accuracy from `0.8889` to `0.9524` and heart-sensitivity score from `0.6957` to `0.8696`, while same-heart control accuracy remained `1.0` and heart-overreach remained `0.0`. Under conservative paired testing this is a directional confirmation result, not yet a final decisive main-benchmark claim. A later paired-order follow-up on the same 23 same-act items found `0.0` item-level Task B order flips for both `baseline` and `heart_focused`, so the main remaining blocker on this slice is statistical power rather than same-item order instability. The current public artifact is intentionally narrower than the full project: a pre-freeze confirmation slice with honest reproducibility boundaries, plus an exploratory cross-tradition extension.
 
 ![Paper-style comparison chart for the public confirmation slice](assets/confirmation-comparison-bars.svg)
 
@@ -130,10 +131,15 @@ flowchart TD
 - A public preprint and a full paper-ready main matrix.
 - The exploratory 6-condition text-anchor extension, which now has a completed pilot and paired-order diagnostic but is not part of the frozen public claim.
 
-## Exploratory Extension
+## Exploratory Cross-Tradition Extension
 
 The repo now also includes a broader **exploratory** 6-condition extension on the same 63-item confirmation slice:
-`baseline`, `heart_focused`, `Proverbs 4:23`, `Dhammapada 34`, `Bhagavad Gita 15.15`, and `Qur'an 26:88-89`.
+`baseline`, `heart_focused`, and four religion-labeled text anchors:
+
+- `Proverbs 4:23`: Biblical, shared across Jewish and Christian scripture traditions
+- `Dhammapada 34`: Buddhist
+- `Bhagavad Gita 15.15`: Hindu
+- `Qur'an 26:88-89`: Islamic
 
 On `Qwen-1.5B-Instruct`, `heart_focused` and `Proverbs 4:23` tie for the strongest confirmation result:
 
@@ -143,7 +149,44 @@ On `Qwen-1.5B-Instruct`, `heart_focused` and `Proverbs 4:23` tie for the stronge
 
 All six conditions preserved same-heart controls at `1.0`, kept heart overreach at `0.0`, and the confirmation paired-order pack showed `0.0` item-level Task B order flips across all six conditions. This is supplementary evidence, not a replacement for the narrower frozen public claim.
 
+The exploratory figure below is now a four-panel readout: `Task A` overall verdict, `Task B` inward-orientation judgment, `Task C` motive-as-primary-reason, and heart-sensitivity on same-act pairs.
+
 ![Exploratory 6-condition confirmation figure for Qwen-1.5B-Instruct](assets/text-anchor-confirmation-qwen15.svg)
+
+### Complete 6-Condition Tables
+
+Generated table artifact: [docs/tables/text_anchor_confirmation_tables.md](docs/tables/text_anchor_confirmation_tables.md)
+
+CSV exports:
+[docs/tables/condition_metric_matrix.csv](docs/tables/condition_metric_matrix.csv) and [docs/tables/condition_delta_matrix.csv](docs/tables/condition_delta_matrix.csv)
+
+`n = 63` total items. `Task A`, `Task B`, and `Task C` use all `63` items; `HSS` and paired-order Task B use the `23` same-act pairs.
+
+| Metric | Baseline<br><sub>No religious text</sub> | Heart-focused<br><sub>Generic scaffold</sub> | Proverbs 4:23<br><sub>Biblical (Jewish/Christian)</sub> | Dhammapada 34<br><sub>Buddhist</sub> | Bhagavad Gita 15.15<br><sub>Hindu</sub> | Qur'an 26:88-89<br><sub>Islamic</sub> |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Task A overall verdict | 0.5079 | 0.5079 | 0.5079 | 0.5079 | 0.4762 | 0.4921 |
+| Task B inward-orientation judgment | 0.8889 | 0.9683 | 0.9683 | 0.8889 | 0.9206 | 0.9206 |
+| Task C motive as primary reason | 0.4127 | 0.4762 | 0.5397 | 0.4127 | 0.4603 | 0.5238 |
+| Heart-sensitivity score | 0.6957 | 0.9130 | 0.9130 | 0.6957 | 0.7826 | 0.7826 |
+| Same-heart control accuracy | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 1.0000 |
+| Heart overreach rate | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 |
+| Mean explanation chars | 112.9 | 105.7 | 108.0 | 106.6 | 114.7 | 109.0 |
+| Paired-order Task B | 0.6957 | 0.9130 | 0.9130 | 0.6957 | 0.7826 | 0.7826 |
+| Order-flip rate | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 |
+| Paired-order Task B gap | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 |
+
+| Condition | Tradition / frame | Delta Task A | Delta Task B | Delta Task C | Delta HSS | Delta chars | Same-heart | Overreach | Paired-order stable |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| Heart-focused | Generic scaffold | +0.0000 | +0.0794 | +0.0635 | +0.2173 | -7.3 | 1.0000 | 0.0000 | yes |
+| Proverbs 4:23 | Biblical (Jewish/Christian) | +0.0000 | +0.0794 | +0.1270 | +0.2173 | -4.9 | 1.0000 | 0.0000 | yes |
+| Dhammapada 34 | Buddhist | +0.0000 | +0.0000 | +0.0000 | +0.0000 | -6.3 | 1.0000 | 0.0000 | yes |
+| Bhagavad Gita 15.15 | Hindu | -0.0317 | +0.0317 | +0.0476 | +0.0869 | +1.8 | 1.0000 | 0.0000 | yes |
+| Qur'an 26:88-89 | Islamic | -0.0158 | +0.0317 | +0.1111 | +0.0869 | -3.9 | 1.0000 | 0.0000 | yes |
+
+Two quick reading notes:
+
+- identical percentages on this slice reflect identical discrete counts, not a rendering bug
+- `Bhagavad Gita 15.15` and `Qur'an 26:88-89` both score `58/63` on Task B and `18/23` on HSS
 
 Reproduce this exploratory artifact:
 
@@ -242,7 +285,7 @@ Use the GitHub release artifact for citation when referencing this repository:
 ```bibtex
 @software{zhu_2026_moral_attention_reallocation,
   author = {Zhu, Hanzhen},
-  title = {Moral Attention Reallocation in Language Models},
+  title = {Religious Text Anchors and Moral Attention Reallocation in Language Models},
   year = {2026},
   version = {v0.1-confirmation},
   url = {https://github.com/hanzhenzhujene/moral-attention-reallocation},

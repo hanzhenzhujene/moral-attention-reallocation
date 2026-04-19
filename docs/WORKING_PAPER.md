@@ -7,15 +7,15 @@ Formal LaTeX paper:
 
 ## Title
 
-Moral Attention Reallocation in Language Models
+Religious Text Anchors and Moral Attention Reallocation in Language Models
 
 ## Subtitle
 
-heart-focused framing as a probe of motive sensitivity rather than a general claim of moral improvement
+heart-focused and cross-tradition framing as probes of motive sensitivity rather than a general claim of moral improvement
 
 ## Abstract
 
-This project studies a mechanistic question about moral cognition in language models: when an LLM reads a moral case, what does it treat as morally diagnostic? Rather than asking whether a religious prompt makes a model "more moral" overall, the benchmark asks whether framing changes the model's attention across outward act, inward motive, consequence, and rule. The public artifact focuses on a clean confirmation slice built from `same_act_different_motive` items plus `same-heart` guardrail controls. On the current `Qwen-1.5B-Instruct` confirmation slice, a heart-focused condition improves `Task B` inward-orientation judgment from `0.8889` to `0.9524`, raises heart-sensitivity score from `0.6957` to `0.8696`, and increases `P(reason = motive)` from `0.4127` to `0.4762`, while same-heart control accuracy remains `1.0` and heart overreach remains `0.0`. Under conservative paired testing this is a directional confirmation result, not yet a freeze-grade decisive result. A later paired-order follow-up on the same `23` same-act items found `0.0` item-level Task B order flips for both `baseline` and `heart_focused`, so the main remaining limitation on this slice is power rather than same-item order instability.
+This project studies a mechanistic question about moral cognition in language models: when an LLM reads a moral case, what does it treat as morally diagnostic? Rather than asking whether a religious prompt makes a model "more moral" overall, the benchmark asks whether framing changes the model's attention across outward act, inward motive, consequence, and rule. The broader project includes a generic heart-focused scaffold plus four cross-tradition text anchors: `Proverbs 4:23` from the Biblical Jewish/Christian tradition, `Dhammapada 34` from the Buddhist tradition, `Bhagavad Gita 15.15` from the Hindu tradition, and `Qur'an 26:88-89` from the Islamic tradition. The public artifact focuses on a clean confirmation slice built from `same_act_different_motive` items plus `same-heart` guardrail controls. On the current `Qwen-1.5B-Instruct` confirmation slice, a heart-focused condition improves `Task B` inward-orientation judgment from `0.8889` to `0.9524`, raises heart-sensitivity score from `0.6957` to `0.8696`, and increases `P(reason = motive)` from `0.4127` to `0.4762`, while same-heart control accuracy remains `1.0` and heart overreach remains `0.0`. Under conservative paired testing this is a directional confirmation result, not yet a freeze-grade decisive result. A later paired-order follow-up on the same `23` same-act items found `0.0` item-level Task B order flips for both `baseline` and `heart_focused`, so the main remaining limitation on this slice is power rather than same-item order instability.
 
 ## Research Question
 

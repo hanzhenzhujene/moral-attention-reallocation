@@ -211,7 +211,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         summary_row = find_summary(summaries, model, condition)
         condition_rows.append(
             {
-                "condition": condition_registry.display_name(condition),
+                "condition": condition_registry.public_display_name(condition),
                 "task_a_accuracy": metric_point(summary_row, "task_a_accuracy"),
                 "task_b_accuracy": metric_point(summary_row, "task_b_accuracy"),
                 "heart_sensitivity_score": metric_point(summary_row, "heart_sensitivity_score"),
@@ -239,7 +239,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         metric = contrast["metrics"]["heart_sensitivity_score"]
         same_act_rows.append(
             {
-                "label": f"{condition_registry.display_name(condition)} vs baseline",
+                "label": f"{condition_registry.public_display_name(condition)} vs baseline",
                 "hss_delta_vs_baseline": metric["delta"],
                 "better": metric["better"],
                 "worse": metric["worse"],
@@ -252,7 +252,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     paired_groups = [group for group in paired_order["groups"] if group["model"] == model] if paired_order else []
     paired_order_rows = [
         {
-            "condition": condition_registry.display_name(group["condition"]),
+            "condition": condition_registry.public_display_name(group["condition"]),
             "task_b_accuracy": group["task_b_accuracy_ab"],
             "flip_rate": group["task_b_order_flip_rate"],
             "gap": group["task_b_accuracy_gap"],

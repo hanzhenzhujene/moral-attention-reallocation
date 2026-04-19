@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this repository, please cite the software artifact below."
-title: "Moral Attention Reallocation in Language Models"
+title: "Religious Text Anchors and Moral Attention Reallocation in Language Models"
 type: software
 version: "v0.1-confirmation"
 date-released: 2026-04-12
@@ -17,7 +17,7 @@ abstract: >-
   disposition rather than outward behavioral surface. The current public
   confirmation slice uses a heart-focused condition as the main probe, and
   the repository also includes a supplementary exploratory six-condition
-  text-anchor extension on the same confirmation slice.
+  cross-tradition text-anchor extension on the same confirmation slice.
 keywords:
   - llm evaluation
   - moral reasoning

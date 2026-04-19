@@ -10,9 +10,12 @@ CONDITION_SPECS: Dict[str, Dict[str, Any]] = {
     "baseline": {
         "condition_id": "baseline",
         "display_name": "Baseline",
+        "public_display_name": "Baseline (no religious text)",
+        "figure_display_name": "Baseline",
         "family": "baseline_anchor",
         "base_frame": "baseline",
         "citation": None,
+        "tradition_label": None,
         "text_source_label": None,
         "text_block": "",
         "single_pass_prompt_filename": "baseline_prompt.txt",
@@ -22,9 +25,12 @@ CONDITION_SPECS: Dict[str, Dict[str, Any]] = {
     "heart_focused": {
         "condition_id": "heart_focused",
         "display_name": "Heart-focused",
+        "public_display_name": "Heart-focused (generic scaffold)",
+        "figure_display_name": "Heart-focused",
         "family": "generic_heart_focus",
         "base_frame": "heart_focused",
         "citation": None,
+        "tradition_label": None,
         "text_source_label": None,
         "text_block": "",
         "single_pass_prompt_filename": "heart_focused_prompt.txt",
@@ -82,9 +88,12 @@ CONDITION_SPECS: Dict[str, Dict[str, Any]] = {
     "proverbs_4_23": {
         "condition_id": "proverbs_4_23",
         "display_name": "Proverbs 4:23",
+        "public_display_name": "Proverbs 4:23 (Biblical; Jewish/Christian)",
+        "figure_display_name": "Proverbs 4:23\n(Biblical)",
         "family": "text_anchored_heart_focus",
         "base_frame": "heart_focused",
         "citation": "Proverbs 4:23",
+        "tradition_label": "Biblical (Jewish/Christian)",
         "text_source_label": "study paraphrase",
         "text_block": (
             "Text anchor:\n"
@@ -97,9 +106,12 @@ CONDITION_SPECS: Dict[str, Dict[str, Any]] = {
     "dhammapada_34": {
         "condition_id": "dhammapada_34",
         "display_name": "Dhammapada 34",
+        "public_display_name": "Dhammapada 34 (Buddhist)",
+        "figure_display_name": "Dhammapada 34\n(Buddhist)",
         "family": "text_anchored_heart_focus",
         "base_frame": "heart_focused",
         "citation": "Dhammapada 34",
+        "tradition_label": "Buddhist",
         "text_source_label": "study paraphrase",
         "text_block": (
             "Text anchor:\n"
@@ -112,9 +124,12 @@ CONDITION_SPECS: Dict[str, Dict[str, Any]] = {
     "bhagavad_gita_15_15": {
         "condition_id": "bhagavad_gita_15_15",
         "display_name": "Bhagavad Gita 15.15",
+        "public_display_name": "Bhagavad Gita 15.15 (Hindu)",
+        "figure_display_name": "Bhagavad Gita 15.15\n(Hindu)",
         "family": "text_anchored_heart_focus",
         "base_frame": "heart_focused",
         "citation": "Bhagavad Gita 15.15",
+        "tradition_label": "Hindu",
         "text_source_label": "study paraphrase",
         "text_block": (
             "Text anchor:\n"
@@ -127,9 +142,12 @@ CONDITION_SPECS: Dict[str, Dict[str, Any]] = {
     "quran_26_88_89": {
         "condition_id": "quran_26_88_89",
         "display_name": "Qur'an 26:88-89",
+        "public_display_name": "Qur'an 26:88-89 (Islamic)",
+        "figure_display_name": "Qur'an 26:88-89\n(Islamic)",
         "family": "text_anchored_heart_focus",
         "base_frame": "heart_focused",
         "citation": "Qur'an 26:88-89",
+        "tradition_label": "Islamic",
         "text_source_label": "study paraphrase",
         "text_block": (
             "Text anchor:\n"
@@ -185,6 +203,22 @@ def text_anchor_block(condition: str) -> str:
 
 def display_name(condition: str) -> str:
     return str(get_condition_spec(condition)["display_name"])
+
+
+def public_display_name(condition: str) -> str:
+    spec = get_condition_spec(condition)
+    return str(spec.get("public_display_name") or spec["display_name"])
+
+
+def figure_display_name(condition: str) -> str:
+    spec = get_condition_spec(condition)
+    return str(spec.get("figure_display_name") or spec["display_name"])
+
+
+def tradition_label(condition: str) -> str | None:
+    spec = get_condition_spec(condition)
+    value = spec.get("tradition_label")
+    return None if value is None else str(value)
 
 
 def family(condition: str) -> str:
