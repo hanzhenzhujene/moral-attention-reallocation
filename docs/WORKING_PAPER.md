@@ -1,5 +1,8 @@
 # Working Paper Draft
 
+This note expands the public-facing README in a more paper-style format.
+The canonical landing page for first-time readers is [README.md](../README.md); this document is the longer companion note.
+
 Formal LaTeX paper:
 
 - PDF: [paper/main.pdf](../paper/main.pdf)
@@ -17,7 +20,7 @@ heart-focused and cross-tradition framing as probes of motive sensitivity rather
 
 This project studies a mechanistic question about moral cognition in language models: when an LLM reads a moral case, what does it treat as morally diagnostic? Rather than asking whether a religious prompt makes a model "more moral" overall, the benchmark asks whether framing changes the model's attention across outward act, inward motive, consequence, and rule. The broader project includes a generic heart-focused scaffold plus four frozen study-paraphrased cross-tradition text anchors keyed to cited passages: `Proverbs 4:23` from the Biblical Jewish/Christian tradition, `Dhammapada 34` from the Buddhist tradition, `Bhagavad Gita 15.15` from the Hindu tradition, and `Qur'an 26:88-89` from the Islamic tradition. The repo therefore has two linked layers: a project-level six-condition cross-tradition readout, and a narrower frozen release artifact. On the current `Qwen-1.5B-Instruct` confirmation slice, `Heart-focused` and `Proverbs 4:23` tie for the strongest motive-sensitive result, `Bhagavad Gita 15.15` and `Qur'an 26:88-89` are smaller positive shifts, and `Dhammapada 34` is null on this slice; all six conditions preserve same-heart controls and keep heart overreach at `0.0`. The frozen release artifact remains narrower: `Baseline` vs `Heart-focused` improves `Task B` from `0.8889` to `0.9524`, raises heart-sensitivity from `0.6957` to `0.8696`, and leaves same-heart guardrails intact. Under conservative paired testing that release result is directional rather than decisive, and the later paired-order follow-up suggests the remaining limitation is power rather than same-item order instability.
 
-## Research Question
+## Core Question
 
 The project asks:
 
@@ -63,7 +66,7 @@ The frozen release claim centers on `Task B` and heart-sensitivity, with `Task C
 
 ## Frozen Public Release Artifact
 
-The current public artifact is intentionally narrow.
+The current public artifact is intentionally narrow and should be read as the strongest release-grade claim boundary, not as the full project headline.
 
 - Model: `Qwen-1.5B-Instruct`
 - Conditions: `Baseline`, `Heart-focused`

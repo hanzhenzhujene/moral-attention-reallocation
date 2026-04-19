@@ -1,5 +1,8 @@
 # Project Status And Next Steps
 
+This document is the planning/status companion to the public [README](../README.md).
+The README is the canonical claim boundary; this file is where the unfinished parts and recommended next moves are spelled out more explicitly.
+
 ## Current Position
 
 The repo now supports one narrow frozen release claim and one broader project-level cross-tradition readout.
