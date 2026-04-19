@@ -22,9 +22,9 @@ ORDER = [
     "baseline",
     "heart_focused",
     "proverbs_4_23",
+    "dhammapada_34",
     "bhagavad_gita_15_15",
     "quran_26_88_89",
-    "dhammapada_34",
 ]
 
 COLORS = {
@@ -39,6 +39,12 @@ COLORS = {
 
 def load_json(path: str) -> Any:
     return json.loads(Path(path).read_text(encoding="utf-8"))
+
+
+def strip_trailing_whitespace(path: Path) -> None:
+    text = path.read_text(encoding="utf-8")
+    cleaned = "\n".join(line.rstrip() for line in text.splitlines()) + "\n"
+    path.write_text(cleaned, encoding="utf-8")
 
 
 def point(row: Dict[str, Any], metric_name: str) -> float:
@@ -100,7 +106,7 @@ def main() -> int:
     title_ax.text(
         0.0,
         0.82,
-        "Exploratory 6-Condition Confirmation",
+        "Cross-Tradition Moral-Attention Readout",
         fontsize=19.5,
         fontweight="bold",
         color="#0f172a",
@@ -110,7 +116,7 @@ def main() -> int:
     title_ax.text(
         0.0,
         0.44,
-        "Qwen-1.5B-Instruct on the 63-item same-act confirmation slice",
+        "Qwen-1.5B-Instruct on the 63-item confirmation slice",
         fontsize=11.5,
         color="#334155",
         ha="left",
@@ -119,7 +125,7 @@ def main() -> int:
     title_ax.text(
         0.0,
         0.12,
-        "Generic heart-focused framing plus Biblical, Buddhist, Hindu, and Islamic text anchors.",
+        "Baseline + generic heart-focused scaffold + four frozen paraphrased anchors from Biblical, Buddhist, Hindu, and Islamic traditions.",
         fontsize=10.2,
         color="#475569",
         ha="left",
@@ -238,7 +244,7 @@ def main() -> int:
     footer_ax.text(
         0.03,
         0.72,
-        "How to read the pattern",
+        "Pattern summary",
         fontsize=12.0,
         fontweight="bold",
         color="#0f172a",
@@ -247,7 +253,7 @@ def main() -> int:
     footer_ax.text(
         0.03,
         0.46,
-        f"Task A stays flat: baseline {task_a[0]:.3f} | heart-focused {task_a[1]:.3f}",
+        "Task A stays mostly flat across the six conditions.",
         fontsize=10.5,
         color="#334155",
         transform=footer_ax.transAxes,
@@ -255,7 +261,7 @@ def main() -> int:
     footer_ax.text(
         0.03,
         0.24,
-        f"Task B rises most: baseline {task_b[0]:.3f} | heart-focused {task_b[1]:.3f}",
+        f"Task B and HSS peak for Heart-focused and Proverbs 4:23 ({task_b[1]:.3f} / {hss[1]:.3f}).",
         fontsize=10.5,
         color="#334155",
         transform=footer_ax.transAxes,
@@ -263,7 +269,7 @@ def main() -> int:
     footer_ax.text(
         0.03,
         0.08,
-        f"Task C also shifts toward motive: baseline {reason[0]:.3f} | Proverbs 4:23 {reason[2]:.3f}",
+        f"Task C peaks for Proverbs 4:23 ({reason[2]:.3f}); Qur'an 26:88-89 is next ({reason[5]:.3f}).",
         fontsize=10.5,
         color="#334155",
         transform=footer_ax.transAxes,
@@ -313,6 +319,7 @@ def main() -> int:
     output_svg = Path(args.output_svg)
     output_svg.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(output_svg, format="svg", bbox_inches="tight")
+    strip_trailing_whitespace(output_svg)
     if args.output_png:
         output_png = Path(args.output_png)
         output_png.parent.mkdir(parents=True, exist_ok=True)

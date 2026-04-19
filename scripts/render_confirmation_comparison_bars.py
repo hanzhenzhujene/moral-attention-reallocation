@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render a paper-ready comparison chart for the public confirmation slice."""
+"""Render a paper-ready comparison chart for the frozen public release artifact."""
 
 from __future__ import annotations
 
@@ -118,7 +118,7 @@ def main() -> int:
     ax_main.text(
         1.5,
         1.045,
-        "main signal",
+        "narrow supported claim",
         ha="center",
         va="center",
         fontsize=11.5,
@@ -154,7 +154,7 @@ def main() -> int:
     )
     ax_main.set_xticks(x_main)
     ax_main.set_xticklabels([label for label, _ in main_specs], fontsize=13)
-    ax_main.set_title("Primary outcomes", fontsize=18, loc="left", pad=12, color=TEXT)
+    ax_main.set_title("Frozen release outcomes", fontsize=18, loc="left", pad=12, color=TEXT)
     ax_main.set_ylabel("Score", fontsize=12)
 
     label_bars(ax_main, bars_base_main, [point for point, _, _ in baseline_main], TEXT)
@@ -174,7 +174,7 @@ def main() -> int:
         )
 
     fig.suptitle(
-        "Public confirmation slice",
+        "Frozen public release artifact",
         fontsize=22,
         fontweight="bold",
         x=0.055,
@@ -184,7 +184,7 @@ def main() -> int:
     )
     ax_main.legend(
         handles=[bars_base_main, bars_focus_main],
-        labels=["Baseline prompt", "Heart-focused prompt"],
+        labels=["Baseline", "Heart-focused"],
         loc="upper right",
         bbox_to_anchor=(0.99, 0.93),
         ncol=1,

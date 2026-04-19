@@ -1,5 +1,9 @@
 # Task B Revision Log
 
+Internal naming note:
+This revision log uses raw condition ids such as `baseline` and `heart_focused` where exact implementation names matter.
+In the public-facing README and paper, these appear as `Baseline` and `Heart-focused`.
+
 ## Purpose
 
 This log records pre-freeze revisions to Task B elicitation and what each revision did or did not fix.

@@ -1,5 +1,9 @@
 # Task B Multi-Pass Diagnostic
 
+Internal naming note:
+This diagnostic uses raw condition ids such as `baseline` and `heart_focused` where exact implementation names matter.
+In the public-facing README and paper, these appear as `Baseline` and `Heart-focused`.
+
 ## Why This Exists
 
 Single-call prompt revisions `v4` through `v9` now show a stable tradeoff:

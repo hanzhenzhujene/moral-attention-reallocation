@@ -12,12 +12,15 @@ authors:
 repository-code: "https://github.com/hanzhenzhujene/moral-attention-reallocation"
 url: "https://github.com/hanzhenzhujene/moral-attention-reallocation"
 abstract: >-
-  A pre-freeze research artifact for studying whether framing conditions
-  reallocate moral attention in language models toward inward motive and
-  disposition rather than outward behavioral surface. The current public
-  confirmation slice uses a heart-focused condition as the main probe, and
-  the repository also includes a supplementary exploratory six-condition
-  cross-tradition text-anchor extension on the same confirmation slice.
+  A pre-freeze research artifact for studying whether generic heart-focused
+  framing and cross-tradition religious text anchors reallocate moral
+  attention in language models toward inward motive and disposition rather
+  than outward behavioral surface. The cross-tradition anchors are
+  implemented as frozen study paraphrases keyed to cited Biblical,
+  Buddhist, Hindu, and Islamic passages. The repository now exposes two
+  linked artifact layers: a project-level six-condition cross-tradition
+  readout on the confirmation slice, and a narrower frozen release artifact
+  centered on the baseline-versus-heart-focused comparison.
 keywords:
   - llm evaluation
   - moral reasoning

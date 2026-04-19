@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render a compact readout for the exploratory 6-condition confirmation run."""
+"""Render a compact readout for the project-level 6-condition confirmation run."""
 
 from __future__ import annotations
 
@@ -81,10 +81,10 @@ def render_markdown(report: Dict[str, Any]) -> str:
     lines.extend(
         [
             "",
-            "## Main Exploratory Result",
+            "## Main Project-Level Result",
             "",
-            f"- `heart_focused` vs `baseline` Task B: `{report['heart_vs_baseline']['task_b']}`",
-            f"- `heart_focused` vs `baseline` HSS: `{report['heart_vs_baseline']['hss']}`",
+            f"- `Heart-focused` vs `Baseline` Task B: `{report['heart_vs_baseline']['task_b']}`",
+            f"- `Heart-focused` vs `Baseline` HSS: `{report['heart_vs_baseline']['hss']}`",
             f"- supportive text anchors vs baseline: `{report['supportive_anchor_count']}` / `{report['anchor_count']}`",
             f"- mean text-anchor delta vs baseline on Task B: `{report['family_mean_task_b_delta']}`",
             f"- mean text-anchor delta vs baseline on HSS: `{report['family_mean_hss_delta']}`",
@@ -144,8 +144,8 @@ def render_markdown(report: Dict[str, Any]) -> str:
         [
             "## Interpretation",
             "",
-            "- This run is a targeted exploratory confirmation on the model that showed the strongest pilot support, not a new frozen cross-model main claim.",
-            "- The confirmation question is whether multiple text-anchored variants continue to move motive-sensitive metrics in the same direction as `heart_focused` while preserving same-heart controls.",
+            "- This run is a targeted six-condition confirmation on the model that showed the strongest earlier support; it is broader than the frozen release artifact, but it is not a new freeze-grade cross-model main claim.",
+            "- The confirmation question is whether multiple text-anchored variants continue to move motive-sensitive metrics in the same direction as `Heart-focused` while preserving same-heart controls.",
         ]
     )
     if report.get("paired_order_rows"):
@@ -153,7 +153,7 @@ def render_markdown(report: Dict[str, Any]) -> str:
             "- The confirmation paired-order pack matters because it separates genuine same-item order instability from split-based swap-gap artifacts. On this run, the same-item paired-order diagnostic is clean across all six conditions."
         )
         lines.append(
-            "- The current exploratory result is therefore strongest for `heart_focused` and `Proverbs 4:23`: both improve the mechanistic target on the confirmation slice, preserve same-heart guardrails, and stay stable under paired-order diagnosis."
+            "- The current project-level result is therefore strongest for `Heart-focused` and `Proverbs 4:23`: both improve the mechanistic target on the confirmation slice, preserve same-heart guardrails, and stay stable under paired-order diagnosis."
         )
     else:
         lines.append(
@@ -268,7 +268,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     report = {
         "benchmark_name": args.benchmark_name,
         "slice_composition": args.slice_composition,
-        "conditions": ", ".join(["baseline", "heart_focused", "4 text anchors"]),
+        "conditions": ", ".join(["Baseline", "Heart-focused", "4 text anchors"]),
         "model": model,
         "valid_records": health["valid_records"],
         "parse_failure_rate": health["parse_failure_rate"],

@@ -1,5 +1,9 @@
 # Analysis Plan
 
+Internal naming note:
+This document uses raw condition ids such as `baseline` and `heart_focused` where exact implementation names matter.
+In the public-facing README and paper, these appear as `Baseline` and `Heart-focused`.
+
 ## Primary Estimand
 
 The central estimand is the change in motive sensitivity under heart-focused framing relative to baseline.

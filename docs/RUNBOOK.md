@@ -1,5 +1,9 @@
 # Internal Runbook
 
+Internal naming note:
+This runbook uses raw condition ids such as `baseline` and `heart_focused` because it maps directly onto configs, scripts, and result folders.
+In the public-facing README and paper, these appear as `Baseline` and `Heart-focused`.
+
 This document covers the broader internal benchmark-construction and experiment workflow.
 The public README only guarantees reproduction of the current confirmation slice.
 

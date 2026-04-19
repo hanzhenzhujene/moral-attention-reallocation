@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render full exploratory 6-condition comparison tables for README and paper."""
+"""Render full cross-tradition 6-condition comparison tables for README and paper."""
 
 from __future__ import annotations
 
@@ -39,7 +39,7 @@ ABSOLUTE_METRICS: Tuple[Tuple[str, str, int, str], ...] = (
 DELTA_METRICS: Tuple[Tuple[str, str, int], ...] = (
     ("Delta Task A", "task_a_accuracy", 4),
     ("Delta Task B", "task_b_accuracy", 4),
-    ("Delta Task C", "p_reason_motive", 4),
+    ("Delta Task C = motive", "p_reason_motive", 4),
     ("Delta HSS", "heart_sensitivity_score", 4),
     ("Delta explanation chars", "mean_explanation_chars", 1),
 )
@@ -156,7 +156,7 @@ def build_tables(summary: Dict[str, Any], paired_order: Dict[str, Any], model: s
             "Tradition / frame",
             "Delta Task A",
             "Delta Task B",
-            "Delta Task C",
+            "Delta Task C = motive",
             "Delta HSS",
             "Delta chars",
             "Same-heart",
@@ -170,7 +170,7 @@ def build_tables(summary: Dict[str, Any], paired_order: Dict[str, Any], model: s
 
 def write_csv(path: str, headers: Sequence[str], rows: Sequence[Sequence[str]]) -> None:
     with Path(path).open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.writer(handle)
+        writer = csv.writer(handle, lineterminator="\n")
         writer.writerow(headers)
         writer.writerows(rows)
 
@@ -189,7 +189,7 @@ def render_markdown(tables: Dict[str, Any]) -> str:
     lines = [
         "# Complete 6-Condition Comparison Tables",
         "",
-        "Full exploratory matrix for `Qwen-1.5B-Instruct` on the 63-item confirmation slice.",
+        "Full project-level cross-tradition matrix for `Qwen-1.5B-Instruct` on the 63-item confirmation slice.",
         "Task A, Task B, and Task C are evaluated on all 63 items; HSS and paired-order Task B are evaluated on the 23 same-act pairs.",
         "",
         "## Table 1. Metric-by-condition matrix",
@@ -212,8 +212,8 @@ def render_markdown(tables: Dict[str, Any]) -> str:
         "",
         "- Identical percentages here reflect identical discrete counts on a small slice, not a rendering bug.",
         "- Example: `Bhagavad Gita 15.15` and `Qur'an 26:88-89` both score `58/63` on Task B and `18/23` on HSS.",
-        "- `heart_focused` and `Proverbs 4:23` tie at `61/63` on Task B and `21/23` on HSS.",
-        "- `baseline` and `Dhammapada 34` tie at `56/63` on Task B and `16/23` on HSS.",
+        "- `Heart-focused` and `Proverbs 4:23` tie at `61/63` on Task B and `21/23` on HSS.",
+        "- `Baseline` and `Dhammapada 34` tie at `56/63` on Task B and `16/23` on HSS.",
         "",
     ]
     return "\n".join(lines)
@@ -233,7 +233,7 @@ def render_latex(tables: Dict[str, Any]) -> str:
 \begin{{table}}[H]
 \centering
 \small
-\caption{{Exploratory six-condition metric-by-condition matrix on Qwen-1.5B-Instruct. Task A, Task B, and Task C use all 63 confirmation items; HSS and paired-order Task B use the 23 same-act pairs.}}
+\caption{{Project-level six-condition metric-by-condition matrix on Qwen-1.5B-Instruct. Task A, Task B, and Task C use all 63 confirmation items; HSS and paired-order Task B use the 23 same-act pairs.}}
 \label{{tab:text-anchor-matrix}}
 \resizebox{{\textwidth}}{{!}}{{%
 \begin{{tabular}}{{lrrrrrr}}
@@ -249,12 +249,12 @@ def render_latex(tables: Dict[str, Any]) -> str:
 \begin{{table}}[H]
 \centering
 \small
-\caption{{Exploratory six-condition delta matrix relative to baseline on the same Qwen-1.5B confirmation slice.}}
+\caption{{Project-level six-condition delta matrix relative to baseline on the same Qwen-1.5B confirmation slice.}}
 \label{{tab:text-anchor-deltas}}
 \resizebox{{\textwidth}}{{!}}{{%
 \begin{{tabular}}{{llrrrrrrrr}}
 \toprule
-Condition & Tradition / frame & $\Delta$ Task A & $\Delta$ Task B & $\Delta$ Task C & $\Delta$ HSS & $\Delta$ chars & Same-heart & Overreach & Paired-order stable \\
+Condition & Tradition / frame & $\Delta$ Task A & $\Delta$ Task B & $\Delta$ Task C = motive & $\Delta$ HSS & $\Delta$ chars & Same-heart & Overreach & Paired-order stable \\
 \midrule
 {delta_body}
 \bottomrule

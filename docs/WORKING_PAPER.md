@@ -15,7 +15,7 @@ heart-focused and cross-tradition framing as probes of motive sensitivity rather
 
 ## Abstract
 
-This project studies a mechanistic question about moral cognition in language models: when an LLM reads a moral case, what does it treat as morally diagnostic? Rather than asking whether a religious prompt makes a model "more moral" overall, the benchmark asks whether framing changes the model's attention across outward act, inward motive, consequence, and rule. The broader project includes a generic heart-focused scaffold plus four cross-tradition text anchors: `Proverbs 4:23` from the Biblical Jewish/Christian tradition, `Dhammapada 34` from the Buddhist tradition, `Bhagavad Gita 15.15` from the Hindu tradition, and `Qur'an 26:88-89` from the Islamic tradition. The public artifact focuses on a clean confirmation slice built from `same_act_different_motive` items plus `same-heart` guardrail controls. On the current `Qwen-1.5B-Instruct` confirmation slice, a heart-focused condition improves `Task B` inward-orientation judgment from `0.8889` to `0.9524`, raises heart-sensitivity score from `0.6957` to `0.8696`, and increases `P(reason = motive)` from `0.4127` to `0.4762`, while same-heart control accuracy remains `1.0` and heart overreach remains `0.0`. Under conservative paired testing this is a directional confirmation result, not yet a freeze-grade decisive result. A later paired-order follow-up on the same `23` same-act items found `0.0` item-level Task B order flips for both `baseline` and `heart_focused`, so the main remaining limitation on this slice is power rather than same-item order instability.
+This project studies a mechanistic question about moral cognition in language models: when an LLM reads a moral case, what does it treat as morally diagnostic? Rather than asking whether a religious prompt makes a model "more moral" overall, the benchmark asks whether framing changes the model's attention across outward act, inward motive, consequence, and rule. The broader project includes a generic heart-focused scaffold plus four frozen study-paraphrased cross-tradition text anchors keyed to cited passages: `Proverbs 4:23` from the Biblical Jewish/Christian tradition, `Dhammapada 34` from the Buddhist tradition, `Bhagavad Gita 15.15` from the Hindu tradition, and `Qur'an 26:88-89` from the Islamic tradition. The repo therefore has two linked layers: a project-level six-condition cross-tradition readout, and a narrower frozen release artifact. On the current `Qwen-1.5B-Instruct` confirmation slice, `Heart-focused` and `Proverbs 4:23` tie for the strongest motive-sensitive result, `Bhagavad Gita 15.15` and `Qur'an 26:88-89` are smaller positive shifts, and `Dhammapada 34` is null on this slice; all six conditions preserve same-heart controls and keep heart overreach at `0.0`. The frozen release artifact remains narrower: `Baseline` vs `Heart-focused` improves `Task B` from `0.8889` to `0.9524`, raises heart-sensitivity from `0.6957` to `0.8696`, and leaves same-heart guardrails intact. Under conservative paired testing that release result is directional rather than decisive, and the later paired-order follow-up suggests the remaining limitation is power rather than same-item order instability.
 
 ## Research Question
 
@@ -50,21 +50,30 @@ Each item is evaluated with three task layers.
 - `Task B`: inward-orientation judgment
 - `Task C`: reason focus (`outward_act`, `motive`, `consequence`, `rule`)
 
-The public confirmation claim centers on `Task B` and heart-sensitivity, with `Task C` used as support and same-heart controls used as guardrails.
+The frozen release claim centers on `Task B` and heart-sensitivity, with `Task C` used as support and same-heart controls used as guardrails.
 
-## Public Confirmation Slice
+## Implementation Notes
+
+- The released artifacts are prompting-only inference runs; no model training or fine-tuning is performed in this repo.
+- The shared runtime is `scripts/run_transformers_multipass.py` with the `prompts/pilot_v12` prompt package.
+- `Task A` and `Task C` are answered from the two full case texts.
+- In the released configs, `Task B` uses `task_b_copy_mode=benchmark_summary`, so the intention-only comparison is built from the benchmark `motive_summary` strings rather than a model-generated copy pass.
+- A relation gate first checks whether the two intention texts express the same or different inward orientation; only `different` items proceed to the final inward-orientation choice.
+- The four religion-labeled conditions reuse the same generic heart-focused scaffold and append one frozen study-paraphrased anchor block keyed to the cited passage.
+
+## Frozen Public Release Artifact
 
 The current public artifact is intentionally narrow.
 
 - Model: `Qwen-1.5B-Instruct`
-- Conditions: `baseline`, `heart_focused`
+- Conditions: `Baseline`, `Heart-focused`
 - Slice size: `63` items
 - Composition: `23` same-act motive pairs + `40` same-heart controls
 - Decoding: `temperature=0`, `top_p=1.0`, `max_new_tokens=120`
 
-## Main Public Results
+## Frozen Release Results
 
-| Metric | Baseline | heart-focused | Delta | Interpretation |
+| Metric | Baseline | Heart-focused | Delta | Interpretation |
 | --- | ---: | ---: | ---: | --- |
 | Task A accuracy | `0.5079` | `0.5079` | `+0.0000` | Top-line verdict stayed flat |
 | Task B accuracy | `0.8889` | `0.9524` | `+0.0635` | Inward-orientation judgment improved |
@@ -87,8 +96,8 @@ This supports a directional confirmation claim rather than a final decisive pape
 Later follow-up:
 
 - paired-order Task B order flips on the same `23` same-act items: `0.0`
-- paired-order Task B gap for `baseline`: `0.0`
-- paired-order Task B gap for `heart_focused`: `0.0`
+- paired-order Task B gap for `Baseline`: `0.0`
+- paired-order Task B gap for `Heart-focused`: `0.0`
 
 ## Interpretation
 
@@ -117,7 +126,7 @@ Frozen and public now:
 - the `Qwen-1.5B-Instruct` confirmation slice
 - canonical run outputs in `results/main_same_act_confirmation_v12_mps/`
 - the current overview figures and reproduction path
-- a paired-order follow-up on the same same-act slice for `baseline` and `heart_focused`
+- a paired-order follow-up on the same same-act slice for `Baseline` and `Heart-focused`
 
 Not yet frozen:
 
@@ -125,27 +134,28 @@ Not yet frozen:
 - a fully double-annotated transformed Moral Stories main set
 - a final order-robust `Task B` method across all targeted cells
 
-## Exploratory Extension: 6-Condition Text Anchors
+## Project-Level Cross-Tradition Readout
 
-The repo now also contains a broader exploratory extension that is **not** part of the frozen public claim. This extension keeps the same benchmark logic but expands the prompt family to six conditions:
+The repo also contains a broader project-level cross-tradition readout that is **not** part of the frozen release claim. This readout keeps the same benchmark logic but expands the prompt family to six conditions:
 
-- `baseline`
-- `heart_focused`
+- `Baseline`
+- `Heart-focused`
 - `proverbs_4_23`
 - `dhammapada_34`
 - `bhagavad_gita_15_15`
 - `quran_26_88_89`
 
 The goal is not to claim that one anchor "wins." It is to test whether multiple text-anchored variants move motive-sensitive metrics in a common direction while preserving same-heart guardrails.
+Because this six-condition readout is a later rerun rather than the frozen release package, its point estimates differ slightly from the narrower release artifact even on the same 63-item slice.
 
 Current status:
 
 - Full 20-item pilot completed: `240` valid records, `0.0` parse failures.
 - Pilot paired-order diagnostic completed: `288` valid records with `0.0` item-level Task B order flips on the held-out same-act pilot slice.
-- A targeted 63-item `Qwen-1.5B-Instruct` exploratory confirmation has now been completed: `378` valid records, `0.0` parse failures.
+- A targeted 63-item `Qwen-1.5B-Instruct` cross-tradition confirmation has now been completed: `378` valid records, `0.0` parse failures.
 - Same-heart control accuracy stayed `1.0` in all six confirmation conditions.
 - Heart overreach stayed `0.0` in all six confirmation conditions.
-- `heart_focused` and `Proverbs 4:23` tie for the strongest confirmation result:
+- `Heart-focused` and `Proverbs 4:23` tie for the strongest confirmation result:
   - `Task B`: `0.8889 -> 0.9683`
   - `HSS`: `0.6957 -> 0.9130`
   - same-act exact sign test for HSS: one-sided `p = 0.03125`, two-sided `p = 0.0625`
@@ -167,17 +177,15 @@ That confirmation paired-order pack matters because it shows `0.0` item-level Ta
 
 Interpretation:
 
-- the extension is now a substantially stronger exploratory family result on `Qwen-1.5B-Instruct`
-- it is strongest for `heart_focused` and `Proverbs 4:23`
+- the six-condition readout is now a substantially stronger project-level family result on `Qwen-1.5B-Instruct`
+- it is strongest for `Heart-focused` and `Proverbs 4:23`
 - it still is not a freeze-grade cross-model result, because the pilot remained heterogeneous across models
 - it should not replace the narrower public confirmation claim in the README or paper title yet
 
 ## Figures And Readouts
 
-- Main comparison figure: [`assets/confirmation-comparison-bars.svg`](../assets/confirmation-comparison-bars.svg)
-- Overview figure: [`assets/same-act-confirmation-overview.svg`](../assets/same-act-confirmation-overview.svg)
-- Metric scoreboard: [`assets/confirmation-metric-scoreboard.svg`](../assets/confirmation-metric-scoreboard.svg)
-- Exploratory text-anchor confirmation figure: [`assets/text-anchor-confirmation-qwen15.svg`](../assets/text-anchor-confirmation-qwen15.svg)
+- Frozen release figure: [`assets/confirmation-comparison-bars.svg`](../assets/confirmation-comparison-bars.svg)
+- Project overview figure: [`assets/text-anchor-confirmation-qwen15.svg`](../assets/text-anchor-confirmation-qwen15.svg)
 - Readout: [`results/main_same_act_confirmation_v12_mps/confirmation_readout.md`](../results/main_same_act_confirmation_v12_mps/confirmation_readout.md)
 - Public paired-order follow-up: [`results/main_same_act_confirmation_v12_mps/confirmation_paired_order_followup.md`](../results/main_same_act_confirmation_v12_mps/confirmation_paired_order_followup.md)
 - Robustness report: [`results/main_same_act_confirmation_v12_mps/confirmation_robustness.md`](../results/main_same_act_confirmation_v12_mps/confirmation_robustness.md)

@@ -1,6 +1,6 @@
 # Complete 6-Condition Comparison Tables
 
-Full exploratory matrix for `Qwen-1.5B-Instruct` on the 63-item confirmation slice.
+Full project-level cross-tradition matrix for `Qwen-1.5B-Instruct` on the 63-item confirmation slice.
 Task A, Task B, and Task C are evaluated on all 63 items; HSS and paired-order Task B are evaluated on the 23 same-act pairs.
 
 ## Table 1. Metric-by-condition matrix
@@ -20,7 +20,7 @@ Task A, Task B, and Task C are evaluated on all 63 items; HSS and paired-order T
 
 ## Table 2. Condition-by-delta matrix vs baseline
 
-| Condition | Tradition / frame | Delta Task A | Delta Task B | Delta Task C | Delta HSS | Delta chars | Same-heart | Overreach | Paired-order stable |
+| Condition | Tradition / frame | Delta Task A | Delta Task B | Delta Task C = motive | Delta HSS | Delta chars | Same-heart | Overreach | Paired-order stable |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |
 | Heart-focused | Generic scaffold | +0.0000 | +0.0794 | +0.0635 | +0.2173 | -7.3 | 1.0000 | 0.0000 | yes |
 | Proverbs 4:23 | Biblical (Jewish/Christian) | +0.0000 | +0.0794 | +0.1270 | +0.2173 | -4.9 | 1.0000 | 0.0000 | yes |
@@ -32,5 +32,5 @@ Task A, Task B, and Task C are evaluated on all 63 items; HSS and paired-order T
 
 - Identical percentages here reflect identical discrete counts on a small slice, not a rendering bug.
 - Example: `Bhagavad Gita 15.15` and `Qur'an 26:88-89` both score `58/63` on Task B and `18/23` on HSS.
-- `heart_focused` and `Proverbs 4:23` tie at `61/63` on Task B and `21/23` on HSS.
-- `baseline` and `Dhammapada 34` tie at `56/63` on Task B and `16/23` on HSS.
+- `Heart-focused` and `Proverbs 4:23` tie at `61/63` on Task B and `21/23` on HSS.
+- `Baseline` and `Dhammapada 34` tie at `56/63` on Task B and `16/23` on HSS.

@@ -1,5 +1,9 @@
 # Preregistration Draft
 
+Internal naming note:
+This draft uses raw condition ids such as `baseline` and `heart_focused` where exact implementation names matter.
+In the public-facing README and paper, these appear as `Baseline` and `Heart-focused`.
+
 ## Title
 
 Moral Attention Reallocation under Framing Conditions in Language Models
