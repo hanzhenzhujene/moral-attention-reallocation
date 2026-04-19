@@ -1,6 +1,6 @@
-# Minimal public runtime for reproducing the Qwen-1.5B confirmation slice.
-numpy>=1.26
-torch>=2.2
-transformers>=4.52
-safetensors>=0.4
-matplotlib>=3.8
+# Tested public runtime for the README reproduction targets.
+numpy==2.4.4
+torch==2.11.0
+transformers==5.5.4
+safetensors==0.7.0
+matplotlib==3.10.8

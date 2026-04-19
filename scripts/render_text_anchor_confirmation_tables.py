@@ -23,25 +23,16 @@ CONDITION_ORDER: Tuple[str, ...] = (
 
 
 ABSOLUTE_METRICS: Tuple[Tuple[str, str, int, str], ...] = (
-    ("Task A overall verdict", "task_a_accuracy", 4, "summary"),
-    ("Task B inward-orientation judgment", "task_b_accuracy", 4, "summary"),
-    ("Task C motive as primary reason", "p_reason_motive", 4, "summary"),
-    ("Heart-sensitivity score", "heart_sensitivity_score", 4, "summary"),
+    ("Task A accuracy (overall verdict)", "task_a_accuracy", 4, "summary"),
+    ("Task B accuracy (inward orientation)", "task_b_accuracy", 4, "summary"),
+    ("Task C motive-focus rate", "p_reason_motive", 4, "summary"),
+    ("Heart-sensitivity score (same-act)", "heart_sensitivity_score", 4, "summary"),
     ("Same-heart control accuracy", "same_heart_control_accuracy", 4, "summary"),
     ("Heart overreach rate", "heart_overreach_rate", 4, "summary"),
-    ("Mean explanation chars", "mean_explanation_chars", 1, "summary"),
-    ("Paired-order Task B", "task_b_accuracy_ab", 4, "paired"),
+    ("Mean explanation length (chars)", "mean_explanation_chars", 1, "summary"),
+    ("Paired-order Task B accuracy", "task_b_accuracy_ab", 4, "paired"),
     ("Order-flip rate", "task_b_order_flip_rate", 4, "paired"),
     ("Paired-order Task B gap", "task_b_accuracy_gap", 4, "paired"),
-)
-
-
-DELTA_METRICS: Tuple[Tuple[str, str, int], ...] = (
-    ("Delta Task A", "task_a_accuracy", 4),
-    ("Delta Task B", "task_b_accuracy", 4),
-    ("Delta Task C = motive", "p_reason_motive", 4),
-    ("Delta HSS", "heart_sensitivity_score", 4),
-    ("Delta explanation chars", "mean_explanation_chars", 1),
 )
 
 
@@ -58,10 +49,6 @@ def find_row(rows: Iterable[Dict[str, Any]], *, model: str, condition: str) -> D
 
 def format_value(value: float, digits: int) -> str:
     return f"{value:.{digits}f}"
-
-
-def format_delta(value: float, digits: int) -> str:
-    return f"{value:+.{digits}f}"
 
 
 def markdown_condition_label(condition: str) -> str:
@@ -101,12 +88,6 @@ def latex_condition_label(condition: str) -> str:
     return r"\shortstack[c]{" + f"{label}\\\\{{\\footnotesize No religious text}}" + "}"
 
 
-def paired_status(flip_rate: float, gap: float) -> str:
-    if abs(flip_rate) < 1e-9 and abs(gap) < 1e-9:
-        return "yes"
-    return f"flip={flip_rate:.4f}, gap={gap:.4f}"
-
-
 def build_tables(summary: Dict[str, Any], paired_order: Dict[str, Any], model: str) -> Dict[str, Any]:
     summary_map = {
         condition: find_row(summary["summaries"], model=model, condition=condition)
@@ -117,7 +98,6 @@ def build_tables(summary: Dict[str, Any], paired_order: Dict[str, Any], model: s
         for condition in CONDITION_ORDER
     }
 
-    baseline_metrics = summary_map["baseline"]["metrics"]
     absolute_rows: List[List[str]] = []
     for label, metric_key, digits, source in ABSOLUTE_METRICS:
         row = [label]
@@ -129,41 +109,9 @@ def build_tables(summary: Dict[str, Any], paired_order: Dict[str, Any], model: s
             row.append(format_value(value, digits))
         absolute_rows.append(row)
 
-    delta_rows: List[List[str]] = []
-    for condition in CONDITION_ORDER[1:]:
-        metrics = summary_map[condition]["metrics"]
-        paired = paired_map[condition]
-        delta_rows.append(
-            [
-                condition_registry.get_condition_spec(condition)["display_name"],
-                condition_registry.tradition_label(condition) or "Generic scaffold",
-                format_delta(float(metrics["task_a_accuracy"]["point"]) - float(baseline_metrics["task_a_accuracy"]["point"]), 4),
-                format_delta(float(metrics["task_b_accuracy"]["point"]) - float(baseline_metrics["task_b_accuracy"]["point"]), 4),
-                format_delta(float(metrics["p_reason_motive"]["point"]) - float(baseline_metrics["p_reason_motive"]["point"]), 4),
-                format_delta(float(metrics["heart_sensitivity_score"]["point"]) - float(baseline_metrics["heart_sensitivity_score"]["point"]), 4),
-                format_delta(float(metrics["mean_explanation_chars"]["point"]) - float(baseline_metrics["mean_explanation_chars"]["point"]), 1),
-                format_value(float(metrics["same_heart_control_accuracy"]["point"]), 4),
-                format_value(float(metrics["heart_overreach_rate"]["point"]), 4),
-                paired_status(float(paired["task_b_order_flip_rate"]), float(paired["task_b_accuracy_gap"])),
-            ]
-        )
-
     return {
         "absolute_headers": ["Metric", *[markdown_condition_label(condition) for condition in CONDITION_ORDER]],
         "absolute_rows": absolute_rows,
-        "delta_headers": [
-            "Condition",
-            "Tradition / frame",
-            "Delta Task A",
-            "Delta Task B",
-            "Delta Task C = motive",
-            "Delta HSS",
-            "Delta chars",
-            "Same-heart",
-            "Overreach",
-            "Paired-order stable",
-        ],
-        "delta_rows": delta_rows,
         "summary_map": summary_map,
     }
 
@@ -192,20 +140,34 @@ def render_markdown(tables: Dict[str, Any]) -> str:
         "Full project-level cross-tradition matrix for `Qwen-1.5B-Instruct` on the 63-item confirmation slice.",
         "Task A, Task B, and Task C are evaluated on all 63 items; HSS and paired-order Task B are evaluated on the 23 same-act pairs.",
         "",
+        "## How To Read These Tables",
+        "",
+        "- Each column is one prompt condition: `Baseline`, `Heart-focused`, or one tradition-labeled text anchor.",
+        "- All values are proportions from `0` to `1` unless the row says `chars`.",
+        "- Higher is better for Task A, Task B, Task C motive-focus rate, HSS, same-heart control accuracy, and paired-order Task B accuracy.",
+        "- Lower is better for heart overreach, order-flip rate, and paired-order Task B gap.",
+        "- The table below is the main reader-facing comparison: scan across columns to compare each condition with `Baseline`.",
+        "",
+        "## Metric Glossary",
+        "",
+        "| Metric | Plain-English meaning |",
+        "| --- | --- |",
+        "| Task A accuracy | How often the model picks the more morally problematic case overall. |",
+        "| Task B accuracy | How often the model picks the case with the worse inward motive or heart posture. |",
+        "| Task C motive-focus rate | How often the model says motive, rather than act / consequence / rule, is the main reason for its Task A judgment. |",
+        "| HSS | Heart-sensitivity score on the 23 same-act / different-motive pairs. This is the main motive-sensitive metric. |",
+        "| Same-heart control accuracy | How often the model correctly keeps inward orientation matched on guardrail items. |",
+        "| Heart overreach rate | How often the model falsely projects a worse inward heart onto same-heart controls. Lower is better. |",
+        "| Paired-order Task B accuracy | Task B accuracy when the same 23 same-act items are rerun in both A/B orders. |",
+        "| Order-flip rate | How often the model changes which case it thinks has the worse inward orientation when the same item is shown in reverse order. |",
+        "| Paired-order Task B gap | Accuracy difference between the two presentation orders on the same items. Lower is better. |",
+        "",
         "## Table 1. Metric-by-condition matrix",
         "",
         markdown_table(
             tables["absolute_headers"],
             tables["absolute_rows"],
             ["---", "---:", "---:", "---:", "---:", "---:", "---:"],
-        ),
-        "",
-        "## Table 2. Condition-by-delta matrix vs baseline",
-        "",
-        markdown_table(
-            tables["delta_headers"],
-            tables["delta_rows"],
-            ["---", "---", "---:", "---:", "---:", "---:", "---:", "---:", "---:", "---"],
         ),
         "",
         "## Notes",
@@ -225,10 +187,6 @@ def render_latex(tables: Dict[str, Any]) -> str:
         "    " + " & ".join([latex_escape(row[0]), *row[1:]]) + r" \\"
         for row in tables["absolute_rows"]
     )
-    delta_body = "\n".join(
-        "    " + " & ".join(latex_escape(cell) if idx < 2 or cell == "yes" else cell for idx, cell in enumerate(row)) + r" \\"
-        for row in tables["delta_rows"]
-    )
     return rf"""
 \begin{{table}}[H]
 \centering
@@ -245,28 +203,6 @@ def render_latex(tables: Dict[str, Any]) -> str:
 \end{{tabular}}%
 }}
 \end{{table}}
-
-\begin{{table}}[H]
-\centering
-\small
-\caption{{Project-level six-condition delta matrix relative to baseline on the same Qwen-1.5B confirmation slice.}}
-\label{{tab:text-anchor-deltas}}
-\resizebox{{\textwidth}}{{!}}{{%
-\begin{{tabular}}{{llrrrrrrrr}}
-\toprule
-Condition & Tradition / frame & $\Delta$ Task A & $\Delta$ Task B & $\Delta$ Task C = motive & $\Delta$ HSS & $\Delta$ chars & Same-heart & Overreach & Paired-order stable \\
-\midrule
-{delta_body}
-\bottomrule
-\end{{tabular}}%
-}}
-\vspace{{0.25em}}
-
-\parbox{{0.97\textwidth}}{{\footnotesize
-Identical percentages reflect identical discrete counts on a small slice rather than a plotting bug.
-For example, Bhagavad Gita 15.15 and Qur'an 26:88--89 both score 58/63 on Task B and 18/23 on HSS.
-}}
-\end{{table}}
 """.strip() + "\n"
 
 
@@ -278,7 +214,6 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--output-md", required=True)
     parser.add_argument("--output-tex", required=True)
     parser.add_argument("--output-absolute-csv", required=True)
-    parser.add_argument("--output-delta-csv", required=True)
     args = parser.parse_args(argv)
 
     summary = load_json(args.summary)
@@ -288,7 +223,6 @@ def main(argv: Sequence[str] | None = None) -> int:
     Path(args.output_md).write_text(render_markdown(tables), encoding="utf-8")
     Path(args.output_tex).write_text(render_latex(tables), encoding="utf-8")
     write_csv(args.output_absolute_csv, tables["absolute_headers"], tables["absolute_rows"])
-    write_csv(args.output_delta_csv, tables["delta_headers"], tables["delta_rows"])
     return 0
 
 

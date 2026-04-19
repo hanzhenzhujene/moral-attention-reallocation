@@ -14,6 +14,8 @@ annotation/
 results/*
 !results/pilot_live_v11_fullpilot/
 !results/main_same_act_confirmation_v12_mps/
+!results/main_same_act_text_anchor_v1_qwen15b_mps/
+!results/main_same_act_text_anchor_v1_qwen15b_paired_order_mps/
 !results/pilot_revision_scoreboard.json
 !results/pilot_revision_scoreboard.md
 !results/pilot_v11_fullpilot_freeze_manifest.json
@@ -21,6 +23,18 @@ results/*
 !results/pilot_v11_fullpilot_jobs.jsonl
 !results/main_same_act_confirmation_v12_mps/*.json
 !results/main_same_act_confirmation_v12_mps/*.md
+results/main_same_act_text_anchor_v1_qwen15b_mps/*
+!results/main_same_act_text_anchor_v1_qwen15b_mps/confirmation_health.json
+!results/main_same_act_text_anchor_v1_qwen15b_mps/confirmation_readout.json
+!results/main_same_act_text_anchor_v1_qwen15b_mps/confirmation_readout.md
+!results/main_same_act_text_anchor_v1_qwen15b_mps/confirmation_robustness.json
+!results/main_same_act_text_anchor_v1_qwen15b_mps/confirmation_robustness.md
+!results/main_same_act_text_anchor_v1_qwen15b_mps/confirmation_summary.json
+!results/main_same_act_text_anchor_v1_qwen15b_mps/confirmation_text_anchor_family.json
+!results/main_same_act_text_anchor_v1_qwen15b_mps/confirmation_text_anchor_family.md
+results/main_same_act_text_anchor_v1_qwen15b_paired_order_mps/*
+!results/main_same_act_text_anchor_v1_qwen15b_paired_order_mps/paired_order_stability.json
+!results/main_same_act_text_anchor_v1_qwen15b_paired_order_mps/paired_order_stability.md
 
 results/**/*.jsonl
 results/**/*_qualitative_examples.json

@@ -1,0 +1,119 @@
+[
+  {
+    "model": "Qwen-1.5B-Instruct",
+    "baseline_condition": "baseline",
+    "reference_condition": "heart_focused",
+    "per_condition": [
+      {
+        "condition": "proverbs_4_23",
+        "display_name": "Proverbs 4:23",
+        "delta_vs_baseline": {
+          "task_a_accuracy": 0.0,
+          "task_b_accuracy": 0.0794,
+          "heart_sensitivity_score": 0.2173,
+          "p_reason_motive": 0.127,
+          "same_heart_control_accuracy": 0.0,
+          "heart_overreach_rate": 0.0,
+          "mean_explanation_chars": -4.9365
+        },
+        "delta_vs_heart_focused": {
+          "task_a_accuracy": 0.0,
+          "task_b_accuracy": 0.0,
+          "heart_sensitivity_score": 0.0,
+          "p_reason_motive": 0.0635,
+          "same_heart_control_accuracy": 0.0,
+          "heart_overreach_rate": 0.0,
+          "mean_explanation_chars": 2.3492
+        },
+        "stable_same_heart_controls": true,
+        "non_increased_overreach": true,
+        "supportive_anchor": true
+      },
+      {
+        "condition": "dhammapada_34",
+        "display_name": "Dhammapada 34",
+        "delta_vs_baseline": {
+          "task_a_accuracy": 0.0,
+          "task_b_accuracy": 0.0,
+          "heart_sensitivity_score": 0.0,
+          "p_reason_motive": 0.0,
+          "same_heart_control_accuracy": 0.0,
+          "heart_overreach_rate": 0.0,
+          "mean_explanation_chars": -6.3175
+        },
+        "delta_vs_heart_focused": {
+          "task_a_accuracy": 0.0,
+          "task_b_accuracy": -0.0794,
+          "heart_sensitivity_score": -0.2173,
+          "p_reason_motive": -0.0635,
+          "same_heart_control_accuracy": 0.0,
+          "heart_overreach_rate": 0.0,
+          "mean_explanation_chars": 0.9682
+        },
+        "stable_same_heart_controls": true,
+        "non_increased_overreach": true,
+        "supportive_anchor": false
+      },
+      {
+        "condition": "bhagavad_gita_15_15",
+        "display_name": "Bhagavad Gita 15.15",
+        "delta_vs_baseline": {
+          "task_a_accuracy": -0.0317,
+          "task_b_accuracy": 0.0317,
+          "heart_sensitivity_score": 0.0869,
+          "p_reason_motive": 0.0476,
+          "same_heart_control_accuracy": 0.0,
+          "heart_overreach_rate": 0.0,
+          "mean_explanation_chars": 1.7778
+        },
+        "delta_vs_heart_focused": {
+          "task_a_accuracy": -0.0317,
+          "task_b_accuracy": -0.0477,
+          "heart_sensitivity_score": -0.1304,
+          "p_reason_motive": -0.0159,
+          "same_heart_control_accuracy": 0.0,
+          "heart_overreach_rate": 0.0,
+          "mean_explanation_chars": 9.0635
+        },
+        "stable_same_heart_controls": true,
+        "non_increased_overreach": true,
+        "supportive_anchor": true
+      },
+      {
+        "condition": "quran_26_88_89",
+        "display_name": "Qur'an 26:88-89",
+        "delta_vs_baseline": {
+          "task_a_accuracy": -0.0158,
+          "task_b_accuracy": 0.0317,
+          "heart_sensitivity_score": 0.0869,
+          "p_reason_motive": 0.1111,
+          "same_heart_control_accuracy": 0.0,
+          "heart_overreach_rate": 0.0,
+          "mean_explanation_chars": -3.9365
+        },
+        "delta_vs_heart_focused": {
+          "task_a_accuracy": -0.0158,
+          "task_b_accuracy": -0.0477,
+          "heart_sensitivity_score": -0.1304,
+          "p_reason_motive": 0.0476,
+          "same_heart_control_accuracy": 0.0,
+          "heart_overreach_rate": 0.0,
+          "mean_explanation_chars": 3.3492
+        },
+        "stable_same_heart_controls": true,
+        "non_increased_overreach": true,
+        "supportive_anchor": true
+      }
+    ],
+    "family_mean_delta_vs_baseline": {
+      "task_b_accuracy": 0.0357,
+      "heart_sensitivity_score": 0.0978,
+      "p_reason_motive": 0.0714,
+      "same_heart_control_accuracy": 0.0,
+      "heart_overreach_rate": 0.0
+    },
+    "supportive_text_anchor_count": 3,
+    "non_increased_overreach_count": 4,
+    "stable_same_heart_control_count": 4
+  }
+]

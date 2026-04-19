@@ -166,8 +166,6 @@ Current status:
 
 The key follow-up diagnostics are now in the repo:
 
-- Pilot stage report: [`results/pilot_live_text_anchor_v1_mps/text_anchor_stage_report.md`](../results/pilot_live_text_anchor_v1_mps/text_anchor_stage_report.md)
-- Pilot paired-order stability: [`results/pilot_paired_order_text_anchor_same_act_v1_mps/paired_order_stability.md`](../results/pilot_paired_order_text_anchor_same_act_v1_mps/paired_order_stability.md)
 - Confirmation readout: [`results/main_same_act_text_anchor_v1_qwen15b_mps/confirmation_readout.md`](../results/main_same_act_text_anchor_v1_qwen15b_mps/confirmation_readout.md)
 - Confirmation family summary: [`results/main_same_act_text_anchor_v1_qwen15b_mps/confirmation_text_anchor_family.md`](../results/main_same_act_text_anchor_v1_qwen15b_mps/confirmation_text_anchor_family.md)
 - Confirmation paired-order stability: [`results/main_same_act_text_anchor_v1_qwen15b_paired_order_mps/paired_order_stability.md`](../results/main_same_act_text_anchor_v1_qwen15b_paired_order_mps/paired_order_stability.md)
@@ -195,13 +193,14 @@ Interpretation:
 The public entry point is:
 
 ```bash
-bash scripts/reproduce_confirmation_slice.sh results/reproduction_confirmation
+make setup
+make reproduce-confirmation
 ```
 
-This script now creates a portable local config and auto-selects `cuda`, `mps`, or `cpu`, so it is not tied to the original development machine.
+This target creates a portable local config and auto-selects `cuda`, `mps`, or `cpu`, so it is not tied to the original development machine.
 
 Optional paired-order follow-up:
 
 ```bash
-bash scripts/reproduce_confirmation_paired_order_followup.sh results/reproduction_confirmation_paired_order
+make reproduce-paired-order
 ```

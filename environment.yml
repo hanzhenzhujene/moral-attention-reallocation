@@ -5,8 +5,8 @@ dependencies:
   - python=3.11
   - pip
   - pip:
-      - numpy>=1.26
-      - torch>=2.2
-      - transformers>=4.52
-      - safetensors>=0.4
-      - matplotlib>=3.8
+      - numpy==2.4.4
+      - torch==2.11.0
+      - transformers==5.5.4
+      - safetensors==0.7.0
+      - matplotlib==3.10.8

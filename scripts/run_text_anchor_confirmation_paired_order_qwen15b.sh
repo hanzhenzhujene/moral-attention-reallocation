@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Run the public paired-order diagnostic for the 6-condition cross-tradition confirmation slice.
+
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 OUTPUT_DIR="${1:-${ROOT_DIR}/results/main_same_act_text_anchor_v1_qwen15b_paired_order_mps}"
-JOBS_PATH="${ROOT_DIR}/results/text_anchor_confirmation_paired_order_same_act_v1_jobs.jsonl"
+JOBS_PATH="${OUTPUT_DIR}/text_anchor_confirmation_paired_order_jobs.jsonl"
 EXEC_CONFIG="${ROOT_DIR}/configs/confirmation_execution_text_anchor_v1_qwen15b_mps.json"
 PYTHON_BIN="${ROOT_DIR}/.venv/bin/python"
 

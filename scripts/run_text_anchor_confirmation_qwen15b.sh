@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Run the public 6-condition cross-tradition confirmation artifact for Qwen-1.5B-Instruct.
+
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 OUTPUT_DIR="${1:-${ROOT_DIR}/results/main_same_act_text_anchor_v1_qwen15b_mps}"
-JOBS_PATH="${ROOT_DIR}/results/text_anchor_confirmation_v1_jobs.jsonl"
+JOBS_PATH="${OUTPUT_DIR}/text_anchor_confirmation_jobs.jsonl"
 EXEC_CONFIG="${ROOT_DIR}/configs/confirmation_execution_text_anchor_v1_qwen15b_mps.json"
 STUDY_CONFIG="${ROOT_DIR}/configs/text_anchor_study_v1.json"
 BENCHMARK_PATH="${ROOT_DIR}/data/study/paper_first_main_same_act_confirmation_v0.json"
@@ -35,6 +37,19 @@ CONTRASTS=(
 )
 
 mkdir -p "${OUTPUT_DIR}"
+
+OUTPUT_DISPLAY_DIR="$("${PYTHON_BIN}" - <<'PY' "${ROOT_DIR}" "${OUTPUT_DIR}"
+import sys
+from pathlib import Path
+
+root_dir = Path(sys.argv[1]).resolve()
+output_dir = Path(sys.argv[2]).resolve()
+try:
+    print(output_dir.relative_to(root_dir).as_posix())
+except ValueError:
+    print(output_dir.as_posix())
+PY
+)"
 
 if "${PYTHON_BIN}" - <<'PY' >/dev/null 2>&1
 import torch
@@ -139,10 +154,10 @@ fi
   --model "Qwen-1.5B-Instruct" \
   --benchmark-name "paper_first_main_same_act_confirmation_v0" \
   --slice-composition "23 same_act_different_motive + 40 same-heart controls" \
-  --summary-path "results/main_same_act_text_anchor_v1_qwen15b_mps/confirmation_summary.json" \
-  --robustness-path "results/main_same_act_text_anchor_v1_qwen15b_mps/confirmation_robustness.json" \
-  --family-path "results/main_same_act_text_anchor_v1_qwen15b_mps/confirmation_text_anchor_family.json" \
-  --health-path "results/main_same_act_text_anchor_v1_qwen15b_mps/confirmation_health.json" \
+  --summary-path "${OUTPUT_DISPLAY_DIR}/confirmation_summary.json" \
+  --robustness-path "${OUTPUT_DISPLAY_DIR}/confirmation_robustness.json" \
+  --family-path "${OUTPUT_DISPLAY_DIR}/confirmation_text_anchor_family.json" \
+  --health-path "${OUTPUT_DISPLAY_DIR}/confirmation_health.json" \
   --output-json "${OUTPUT_DIR}/confirmation_readout.json" \
   --output-md "${OUTPUT_DIR}/confirmation_readout.md"
 

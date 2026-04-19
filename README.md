@@ -18,6 +18,10 @@
 | --- | --- |
 | [Working paper note](docs/WORKING_PAPER.md) | [Status and next steps](docs/STATUS_AND_NEXT_STEPS.md) |
 
+| Reproduce | Environment |
+| --- | --- |
+| [Root Makefile](Makefile) | [requirements.txt](requirements.txt) · [environment.yml](environment.yml) |
+
 ## Abstract
 
 This repository studies a mechanistic question about moral cognition in language models: whether generic heart-focused framing and cross-tradition religious text anchors change what an LLM treats as morally diagnostic. The project-level design uses six conditions on the same benchmark slice: `Baseline`, a generic `Heart-focused` scaffold, and four frozen study-paraphrased text anchors keyed to cited passages from the Biblical Jewish/Christian tradition (`Proverbs 4:23`), Buddhist tradition (`Dhammapada 34`), Hindu tradition (`Bhagavad Gita 15.15`), and Islamic tradition (`Qur'an 26:88-89`). The benchmark evaluates pairwise moral cases with three tasks: overall moral verdict (Task A), inward-orientation judgment (Task B), and reason focus (Task C), using same-act-different-motive pairs plus same-heart controls to separate motive sensitivity from indiscriminate heart projection. On the current 63-item Qwen-1.5B-Instruct confirmation slice, `Heart-focused` and `Proverbs 4:23` tie for the strongest motive-sensitive improvement (`Task B 0.8889 -> 0.9683`, `HSS 0.6957 -> 0.9130`), `Bhagavad Gita 15.15` and `Qur'an 26:88-89` are smaller positive shifts, and `Dhammapada 34` is effectively null on this slice. All six conditions keep same-heart control accuracy at `1.0`, heart overreach at `0.0`, and paired-order Task B flips at `0.0`. The strongest frozen public claim remains narrower than the full project overview: in the release artifact, `Baseline` vs `Heart-focused` directionally improves inward-motive judgment without increasing same-heart overreach.
@@ -129,10 +133,10 @@ flowchart TD
 
 ## Artifact Matrix
 
-| Artifact | Status | Scope | Strongest supported claim | Canonical file |
+| Artifact | Status | Scope | Strongest supported claim | Canonical<br>link |
 | --- | --- | --- | --- | --- |
-| Cross-tradition project readout | Current repo overview | `63` items, `Qwen-1.5B-Instruct`, `Baseline` + `Heart-focused` + 4 text anchors | motive-sensitive gains are strongest for `Heart-focused` and `Proverbs 4:23`, smaller but positive for `Bhagavad Gita 15.15` and `Qur'an 26:88-89`, null for `Dhammapada 34`, with all six conditions preserving guardrails | `docs/tables/text_anchor_confirmation_tables.md` |
-| Frozen public release artifact | Release-grade narrow claim | `63` items, `Qwen-1.5B-Instruct`, `Baseline` vs `Heart-focused` | heart-focused framing directionally improves inward-motive judgment without increasing same-heart overreach | `results/main_same_act_confirmation_v12_mps/confirmation_readout.md` |
+| Cross-tradition project readout | Current repo overview | `63` items, `Qwen-1.5B-Instruct`, `Baseline` + `Heart-focused` + 4 text anchors | motive-sensitive gains are strongest for `Heart-focused` and `Proverbs 4:23`, smaller but positive for `Bhagavad Gita 15.15` and `Qur'an 26:88-89`, null for `Dhammapada 34`, with all six conditions preserving guardrails | [Tables](docs/tables/text_anchor_confirmation_tables.md) |
+| Frozen public release artifact | Release-grade narrow claim | `63` items, `Qwen-1.5B-Instruct`, `Baseline` vs `Heart-focused` | heart-focused framing directionally improves inward-motive judgment without increasing same-heart overreach | [Readout](results/main_same_act_confirmation_v12_mps/confirmation_readout.md) |
 
 ## Status
 
@@ -180,31 +184,43 @@ The figure below is the detailed four-panel project readout: `Task A` overall ve
 
 Generated table artifact: [docs/tables/text_anchor_confirmation_tables.md](docs/tables/text_anchor_confirmation_tables.md)
 
-CSV exports:
-[docs/tables/condition_metric_matrix.csv](docs/tables/condition_metric_matrix.csv) and [docs/tables/condition_delta_matrix.csv](docs/tables/condition_delta_matrix.csv)
+CSV export:
+[docs/tables/condition_metric_matrix.csv](docs/tables/condition_metric_matrix.csv)
 
 `n = 63` total items. `Task A`, `Task B`, and `Task C` use all `63` items; `HSS` and paired-order Task B use the `23` same-act pairs.
 
+How to read this table:
+
+- each column is one prompt condition: `Baseline`, `Heart-focused`, or one tradition-labeled text anchor
+- all values are proportions from `0` to `1` unless the row says `chars`
+- higher is better for Task A, Task B, Task C motive-focus rate, HSS, same-heart control accuracy, and paired-order Task B accuracy
+- lower is better for heart overreach, order-flip rate, and paired-order Task B gap
+- `Mean explanation length (chars)` is response length, not task quality
+
+Metric guide:
+
+| Metric | What it means |
+| --- | --- |
+| Task A accuracy | How often the model picks the more morally problematic case overall. |
+| Task B accuracy | How often the model picks the case with the worse inward motive or heart posture. |
+| Task C motive-focus rate | How often the model says motive is the main reason for its Task A judgment. |
+| HSS | Heart-sensitivity score on the 23 same-act / different-motive pairs. This is the main motive-sensitive metric. |
+| Same-heart control accuracy | How often the model correctly preserves matched inward orientation on guardrail items. |
+| Heart overreach rate | How often the model falsely projects a worse inward heart onto same-heart controls. |
+| Paired-order Task B accuracy | Task B accuracy when the same 23 same-act items are rerun in both A/B orders. |
+
 | Metric | Baseline<br><sub>No religious text</sub> | Heart-focused<br><sub>Generic scaffold</sub> | Proverbs 4:23<br><sub>Biblical (Jewish/Christian)</sub> | Dhammapada 34<br><sub>Buddhist</sub> | Bhagavad Gita 15.15<br><sub>Hindu</sub> | Qur'an 26:88-89<br><sub>Islamic</sub> |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Task A overall verdict | 0.5079 | 0.5079 | 0.5079 | 0.5079 | 0.4762 | 0.4921 |
-| Task B inward-orientation judgment | 0.8889 | 0.9683 | 0.9683 | 0.8889 | 0.9206 | 0.9206 |
-| Task C motive as primary reason | 0.4127 | 0.4762 | 0.5397 | 0.4127 | 0.4603 | 0.5238 |
-| Heart-sensitivity score | 0.6957 | 0.9130 | 0.9130 | 0.6957 | 0.7826 | 0.7826 |
+| Task A accuracy (overall verdict) | 0.5079 | 0.5079 | 0.5079 | 0.5079 | 0.4762 | 0.4921 |
+| Task B accuracy (inward orientation) | 0.8889 | 0.9683 | 0.9683 | 0.8889 | 0.9206 | 0.9206 |
+| Task C motive-focus rate | 0.4127 | 0.4762 | 0.5397 | 0.4127 | 0.4603 | 0.5238 |
+| Heart-sensitivity score (same-act) | 0.6957 | 0.9130 | 0.9130 | 0.6957 | 0.7826 | 0.7826 |
 | Same-heart control accuracy | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 1.0000 |
 | Heart overreach rate | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 |
-| Mean explanation chars | 112.9 | 105.7 | 108.0 | 106.6 | 114.7 | 109.0 |
-| Paired-order Task B | 0.6957 | 0.9130 | 0.9130 | 0.6957 | 0.7826 | 0.7826 |
+| Mean explanation length (chars) | 112.9 | 105.7 | 108.0 | 106.6 | 114.7 | 109.0 |
+| Paired-order Task B accuracy | 0.6957 | 0.9130 | 0.9130 | 0.6957 | 0.7826 | 0.7826 |
 | Order-flip rate | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 |
 | Paired-order Task B gap | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 |
-
-| Condition | Tradition / frame | Delta Task A | Delta Task B | Delta Task C = motive | Delta HSS | Delta chars | Same-heart | Overreach | Paired-order stable |
-| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |
-| Heart-focused | Generic scaffold | +0.0000 | +0.0794 | +0.0635 | +0.2173 | -7.3 | 1.0000 | 0.0000 | yes |
-| Proverbs 4:23 | Biblical (Jewish/Christian) | +0.0000 | +0.0794 | +0.1270 | +0.2173 | -4.9 | 1.0000 | 0.0000 | yes |
-| Dhammapada 34 | Buddhist | +0.0000 | +0.0000 | +0.0000 | +0.0000 | -6.3 | 1.0000 | 0.0000 | yes |
-| Bhagavad Gita 15.15 | Hindu | -0.0317 | +0.0317 | +0.0476 | +0.0869 | +1.8 | 1.0000 | 0.0000 | yes |
-| Qur'an 26:88-89 | Islamic | -0.0158 | +0.0317 | +0.1111 | +0.0869 | -3.9 | 1.0000 | 0.0000 | yes |
 
 Two quick reading notes:
 
@@ -214,27 +230,25 @@ Two quick reading notes:
 Reproduce this cross-tradition artifact:
 
 ```bash
-bash scripts/run_text_anchor_confirmation_qwen15b.sh results/main_same_act_text_anchor_v1_qwen15b_mps
+make reproduce-text-anchor
 ```
 
 ```bash
-bash scripts/run_text_anchor_confirmation_paired_order_qwen15b.sh results/main_same_act_text_anchor_v1_qwen15b_paired_order_mps
+make reproduce-text-anchor-paired-order
 ```
 
 ## Reproduce The Current Confirmation Slice
 
 This public repo guarantees reproduction of the current `Qwen-1.5B-Instruct` confirmation slice, not the full benchmark-construction workflow. Third-party raw benchmark mirrors are intentionally not vendored here. The reproduction script auto-selects `cuda`, `mps`, or `cpu`, so it is no longer tied to the original Apple Silicon run environment.
 
+Tested public runtime: `Python 3.11`, `torch 2.11.0`, `transformers 5.5.4`, `numpy 2.4.4`, `safetensors 0.7.0`, `matplotlib 3.10.8`.
+
 ```bash
-python3 -m venv .venv && source .venv/bin/activate
+make setup
 ```
 
 ```bash
-pip install -r requirements.txt
-```
-
-```bash
-bash scripts/reproduce_confirmation_slice.sh results/reproduction_confirmation
+make reproduce-confirmation
 ```
 
 Expected outputs:
@@ -249,7 +263,7 @@ Expected outputs:
 Optional later paired-order follow-up:
 
 ```bash
-bash scripts/reproduce_confirmation_paired_order_followup.sh results/reproduction_confirmation_paired_order
+make reproduce-paired-order
 ```
 
 Expected paired-order outputs:
@@ -261,6 +275,7 @@ Expected paired-order outputs:
 
 - `assets/`: figures used on the project page
 - `paper/`: LaTeX manuscript and compiled paper PDF
+- `Makefile`: one-command public setup, reproduction, and paper rebuild targets
 - `docs/WORKING_PAPER.md`: paper-style summary of the public artifact
 - `docs/STATUS_AND_NEXT_STEPS.md`: current state, blockers, and recommended next experiments
 - `configs/`: execution configs for the public confirmation artifact and internal study configs
@@ -281,10 +296,8 @@ Expected paired-order outputs:
 - [Public paired-order follow-up](results/main_same_act_confirmation_v12_mps/confirmation_paired_order_followup.md)
 - [Robustness report](results/main_same_act_confirmation_v12_mps/confirmation_robustness.md)
 - [Swap-gap breakdown](results/main_same_act_confirmation_v12_mps/confirmation_swap_gap_by_pair_type.md)
-- [6-condition stage report](results/pilot_live_text_anchor_v1_mps/text_anchor_stage_report.md)
 - [Cross-tradition 6-condition confirmation readout](results/main_same_act_text_anchor_v1_qwen15b_mps/confirmation_readout.md)
 - [Cross-tradition 6-condition confirmation figure](assets/text-anchor-confirmation-qwen15.svg)
-- [6-condition paired-order stability report](results/pilot_paired_order_text_anchor_same_act_v1_mps/paired_order_stability.md)
 - [Cross-tradition confirmation paired-order stability](results/main_same_act_text_anchor_v1_qwen15b_paired_order_mps/paired_order_stability.md)
 - [Annotation protocol](docs/ANNOTATION_PROTOCOL.md)
 - [Internal runbook](docs/RUNBOOK.md)

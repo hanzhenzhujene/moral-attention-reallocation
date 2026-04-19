@@ -8,43 +8,17 @@
 \toprule
 Metric & \shortstack[c]{Baseline\\{\footnotesize No religious text}} & \shortstack[c]{Heart-focused\\{\footnotesize Generic scaffold}} & \shortstack[c]{Proverbs 4:23\\{\footnotesize Biblical (Jewish/Christian)}} & \shortstack[c]{Dhammapada 34\\{\footnotesize Buddhist}} & \shortstack[c]{Bhagavad Gita 15.15\\{\footnotesize Hindu}} & \shortstack[c]{Qur'an 26:88-89\\{\footnotesize Islamic}} \\
 \midrule
-    Task A overall verdict & 0.5079 & 0.5079 & 0.5079 & 0.5079 & 0.4762 & 0.4921 \\
-    Task B inward-orientation judgment & 0.8889 & 0.9683 & 0.9683 & 0.8889 & 0.9206 & 0.9206 \\
-    Task C motive as primary reason & 0.4127 & 0.4762 & 0.5397 & 0.4127 & 0.4603 & 0.5238 \\
-    Heart-sensitivity score & 0.6957 & 0.9130 & 0.9130 & 0.6957 & 0.7826 & 0.7826 \\
+    Task A accuracy (overall verdict) & 0.5079 & 0.5079 & 0.5079 & 0.5079 & 0.4762 & 0.4921 \\
+    Task B accuracy (inward orientation) & 0.8889 & 0.9683 & 0.9683 & 0.8889 & 0.9206 & 0.9206 \\
+    Task C motive-focus rate & 0.4127 & 0.4762 & 0.5397 & 0.4127 & 0.4603 & 0.5238 \\
+    Heart-sensitivity score (same-act) & 0.6957 & 0.9130 & 0.9130 & 0.6957 & 0.7826 & 0.7826 \\
     Same-heart control accuracy & 1.0000 & 1.0000 & 1.0000 & 1.0000 & 1.0000 & 1.0000 \\
     Heart overreach rate & 0.0000 & 0.0000 & 0.0000 & 0.0000 & 0.0000 & 0.0000 \\
-    Mean explanation chars & 112.9 & 105.7 & 108.0 & 106.6 & 114.7 & 109.0 \\
-    Paired-order Task B & 0.6957 & 0.9130 & 0.9130 & 0.6957 & 0.7826 & 0.7826 \\
+    Mean explanation length (chars) & 112.9 & 105.7 & 108.0 & 106.6 & 114.7 & 109.0 \\
+    Paired-order Task B accuracy & 0.6957 & 0.9130 & 0.9130 & 0.6957 & 0.7826 & 0.7826 \\
     Order-flip rate & 0.0000 & 0.0000 & 0.0000 & 0.0000 & 0.0000 & 0.0000 \\
     Paired-order Task B gap & 0.0000 & 0.0000 & 0.0000 & 0.0000 & 0.0000 & 0.0000 \\
 \bottomrule
 \end{tabular}%
-}
-\end{table}
-
-\begin{table}[H]
-\centering
-\small
-\caption{Project-level six-condition delta matrix relative to baseline on the same Qwen-1.5B confirmation slice.}
-\label{tab:text-anchor-deltas}
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{llrrrrrrrr}
-\toprule
-Condition & Tradition / frame & $\Delta$ Task A & $\Delta$ Task B & $\Delta$ Task C = motive & $\Delta$ HSS & $\Delta$ chars & Same-heart & Overreach & Paired-order stable \\
-\midrule
-    Heart-focused & Generic scaffold & +0.0000 & +0.0794 & +0.0635 & +0.2173 & -7.3 & 1.0000 & 0.0000 & yes \\
-    Proverbs 4:23 & Biblical (Jewish/Christian) & +0.0000 & +0.0794 & +0.1270 & +0.2173 & -4.9 & 1.0000 & 0.0000 & yes \\
-    Dhammapada 34 & Buddhist & +0.0000 & +0.0000 & +0.0000 & +0.0000 & -6.3 & 1.0000 & 0.0000 & yes \\
-    Bhagavad Gita 15.15 & Hindu & -0.0317 & +0.0317 & +0.0476 & +0.0869 & +1.8 & 1.0000 & 0.0000 & yes \\
-    Qur'an 26:88-89 & Islamic & -0.0158 & +0.0317 & +0.1111 & +0.0869 & -3.9 & 1.0000 & 0.0000 & yes \\
-\bottomrule
-\end{tabular}%
-}
-\vspace{0.25em}
-
-\parbox{0.97\textwidth}{\footnotesize
-Identical percentages reflect identical discrete counts on a small slice rather than a plotting bug.
-For example, Bhagavad Gita 15.15 and Qur'an 26:88--89 both score 58/63 on Task B and 18/23 on HSS.
 }
 \end{table}
