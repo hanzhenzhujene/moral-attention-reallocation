@@ -4,7 +4,7 @@ VENV_PY := $(VENV)/bin/python
 VENV_PIP := $(VENV)/bin/pip
 SETUP_STAMP := $(VENV)/.public_runtime_installed
 
-.PHONY: help setup reproduce-confirmation reproduce-paired-order reproduce-text-anchor reproduce-text-anchor-paired-order paper clean
+.PHONY: help setup reproduce-confirmation reproduce-paired-order reproduce-text-anchor reproduce-text-anchor-paired-order refresh-public-artifacts paper clean
 
 help:
 	@printf "Targets:\n"
@@ -13,7 +13,8 @@ help:
 	@printf "  make reproduce-paired-order          Reproduce the public paired-order follow-up\n"
 	@printf "  make reproduce-text-anchor           Reproduce the 6-condition cross-tradition readout\n"
 	@printf "  make reproduce-text-anchor-paired-order  Reproduce the 6-condition paired-order diagnostic\n"
-	@printf "  make paper                           Rebuild the LaTeX paper PDF\n"
+	@printf "  make refresh-public-artifacts        Regenerate the checked-in public figures and tables\n"
+	@printf "  make paper                           Rebuild the paper PDF (prefers tectonic, falls back to pdflatex)\n"
 	@printf "  make clean                           Remove public reproduction outputs and LaTeX aux files\n"
 
 $(SETUP_STAMP): requirements.txt
@@ -36,8 +37,11 @@ reproduce-text-anchor: $(SETUP_STAMP)
 reproduce-text-anchor-paired-order: $(SETUP_STAMP)
 	bash scripts/run_text_anchor_confirmation_paired_order_qwen15b.sh results/reproduction_text_anchor_paired_order
 
+refresh-public-artifacts: $(SETUP_STAMP)
+	bash scripts/refresh_public_artifacts.sh
+
 paper:
-	$(MAKE) -C paper
+	bash scripts/build_paper.sh
 
 clean:
 	$(MAKE) -C paper clean

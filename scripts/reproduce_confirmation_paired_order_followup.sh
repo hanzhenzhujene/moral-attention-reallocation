@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Reproduce the public paired-order follow-up on the same-act confirmation slice.
+
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 OUTPUT_DIR="${1:-${ROOT_DIR}/results/reproduction_confirmation_paired_order}"
 TMP_CONFIG="$(mktemp "${TMPDIR:-/tmp}/confirmation_paired_order_config.XXXXXX.json")"

@@ -12,6 +12,7 @@ data/raw/
 annotation/
 
 results/*
+!results/README.md
 !results/pilot_live_v11_fullpilot/
 !results/main_same_act_confirmation_v12_mps/
 !results/main_same_act_text_anchor_v1_qwen15b_mps/

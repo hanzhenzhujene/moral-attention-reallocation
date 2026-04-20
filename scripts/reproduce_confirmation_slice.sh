@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Reproduce the frozen public Baseline-vs-Heart-focused confirmation artifact.
+
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 OUTPUT_DIR="${1:-${ROOT_DIR}/results/reproduction_confirmation}"
 TMP_CONFIG="$(mktemp "${TMPDIR:-/tmp}/confirmation_repro_config.XXXXXX.json")"

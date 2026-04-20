@@ -6,8 +6,13 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 OUTPUT_DIR="${1:-${ROOT_DIR}/results/main_same_act_text_anchor_v1_qwen15b_paired_order_mps}"
 JOBS_PATH="${OUTPUT_DIR}/text_anchor_confirmation_paired_order_jobs.jsonl"
-EXEC_CONFIG="${ROOT_DIR}/configs/confirmation_execution_text_anchor_v1_qwen15b_mps.json"
 PYTHON_BIN="${ROOT_DIR}/.venv/bin/python"
+TMP_CONFIG="$(mktemp "${TMPDIR:-/tmp}/text_anchor_confirmation_paired_order_config.XXXXXX.json")"
+
+cleanup() {
+  rm -f "${TMP_CONFIG}"
+}
+trap cleanup EXIT
 
 if [[ ! -x "${PYTHON_BIN}" ]]; then
   PYTHON_BIN="python3"
@@ -41,6 +46,54 @@ else
   DEVICE="cpu"
 fi
 
+"${PYTHON_BIN}" - <<'PY' "${ROOT_DIR}" "${TMP_CONFIG}" "${OUTPUT_DIR}"
+import json
+import sys
+from pathlib import Path
+
+root_dir = Path(sys.argv[1]).resolve()
+tmp_config = Path(sys.argv[2]).resolve()
+output_dir = Path(sys.argv[3]).resolve()
+
+config = {
+    "name": "text_anchor_confirmation_paired_order_v1_qwen15b",
+    "benchmark_path": str(root_dir / "data/study/paper_first_main_same_act_confirmation_v0.json"),
+    "jobs_path": str(output_dir / "text_anchor_confirmation_paired_order_jobs.jsonl"),
+    "prompt_dir": str(root_dir / "prompts/pilot_v12"),
+    "task_b_copy_mode": "benchmark_summary",
+    "task_b_order_mode": "canonical_source",
+    "conditions": [
+        "baseline",
+        "heart_focused",
+        "proverbs_4_23",
+        "dhammapada_34",
+        "bhagavad_gita_15_15",
+        "quran_26_88_89",
+    ],
+    "models": [
+        {
+            "alias": "Qwen-1.5B-Instruct",
+            "hf_model_id": "Qwen/Qwen2.5-1.5B-Instruct",
+        }
+    ],
+    "inference": {
+        "prompt_mode": "chat",
+        "temperature": 0.0,
+        "top_p": 1.0,
+        "n": 1,
+        "max_new_tokens": 120,
+        "max_attempts": 2,
+        "device": "auto",
+        "dtype": "auto",
+    },
+    "outputs": {
+        "run_dir": str(output_dir),
+    },
+}
+
+tmp_config.write_text(json.dumps(config, indent=2) + "\n", encoding="utf-8")
+PY
+
 "${PYTHON_BIN}" "${ROOT_DIR}/scripts/build_paired_order_jobs.py" \
   --items "${ROOT_DIR}/data/study/paper_first_main_same_act_confirmation_v0.json" \
   --conditions "${CONDITIONS[@]}" \
@@ -49,7 +102,7 @@ fi
   --prompt-dir "${ROOT_DIR}/prompts"
 
 "${PYTHON_BIN}" "${ROOT_DIR}/scripts/run_transformers_multipass.py" \
-  --config "${EXEC_CONFIG}" \
+  --config "${TMP_CONFIG}" \
   --jobs "${JOBS_PATH}" \
   --model-alias Qwen-1.5B-Instruct \
   --device "${DEVICE}" \

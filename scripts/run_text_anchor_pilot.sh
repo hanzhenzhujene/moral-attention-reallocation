@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Historical live pilot runner for the six-condition text-anchor family.
+
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 OUTPUT_DIR="${1:-${ROOT_DIR}/results/pilot_live_text_anchor_v1_mps}"
 JOBS_PATH="${ROOT_DIR}/results/text_anchor_pilot_v1_jobs.jsonl"

@@ -25,7 +25,7 @@
 \graphicspath{{../assets/}}
 
 \title{Religious Text Anchors and Moral Attention Reallocation in Language Models\\\large heart-focused and cross-tradition framing as probes of motive sensitivity}
-\author{Hanzhen Zhu\\\texttt{hanzhen@umich.edu}}
+\author{Hanzhen Zhu\\\texttt{jennyzhu@g.harvard.edu}}
 \date{April 2026}
 
 \begin{document}
@@ -33,7 +33,7 @@
 \maketitle
 
 \begin{abstract}
-This paper studies a mechanistic question about moral cognition in language models: not whether a religious framing makes a model more moral overall, but whether framing changes what the model treats as morally diagnostic. The broader project uses both a generic heart-focused scaffold and a cross-tradition set of frozen study-paraphrased text anchors keyed to cited Biblical (Jewish/Christian), Buddhist, Hindu, and Islamic passages. The repository therefore has two linked artifact layers: a project-level six-condition cross-tradition readout, and a narrower frozen public release artifact used for the strongest release-grade claim. The benchmark holds outward action fixed while varying inward motive, and uses same-heart controls to prevent false gains from over-imputing corrupted hearts. On the project-level 63-item Qwen-1.5B-Instruct confirmation slice, the Heart-focused scaffold and Proverbs 4:23 tie for the strongest motive-sensitive improvement, Bhagavad Gita 15.15 and Qur'an 26:88--89 are smaller positive shifts, and Dhammapada 34 is null on this slice; all six conditions preserve same-heart controls, keep heart overreach at 0.0, and show clean paired-order stability on the 23 same-act pairs. The frozen release artifact remains narrower: Baseline vs.\ Heart-focused leaves Task A flat at 0.5079, improves Task B from 0.8889 to 0.9524, raises heart-sensitivity from 0.6957 to 0.8696, and does not inflate overreach or explanation length. Under conservative paired testing that release result remains directional rather than decisive. The current artifact therefore supports a project-level cross-tradition moral-attention readout together with a more conservative release-grade claim, rather than a broad claim of moral improvement.
+This paper studies a mechanistic question about moral cognition in language models: not whether a religious framing makes a model more moral overall, but whether framing changes what the model treats as morally diagnostic. The broader project uses both a generic heart-focused scaffold and a cross-tradition set of frozen study-paraphrased text anchors keyed to cited Biblical (Jewish/Christian), Buddhist, Hindu, and Islamic passages. The repository therefore has two linked artifact layers: a project-level six-condition cross-tradition readout and a narrower frozen public release artifact used for the strongest release-grade claim. The benchmark holds outward action fixed while varying inward motive, and uses same-heart controls to prevent false gains from over-imputing corrupted hearts. On the frozen 63-item public slice (23 same-act / different-motive pairs plus 40 same-heart controls), Baseline vs.\ Heart-focused leaves Task A flat at 0.5079, improves Task B from 0.8889 to 0.9524, raises heart-sensitivity from 0.6957 to 0.8696, and keeps same-heart control accuracy at 1.0 with heart overreach at 0.0. The corresponding exact sign test on the 23 same-act pairs remains directional rather than decisive ($p = 0.0625$ one-sided, $p = 0.125$ two-sided), while a later paired-order follow-up shows 0.0 item-level Task B order flips. On the broader project-level 63-item Qwen-1.5B-Instruct confirmation slice, the Heart-focused scaffold and Proverbs 4:23 tie for the strongest motive-sensitive improvement, Bhagavad Gita 15.15 and Qur'an 26:88--89 are smaller positive shifts, and Dhammapada 34 is null on this slice; all six conditions preserve same-heart controls, keep heart overreach at 0.0, and show clean paired-order stability on the same 23 same-act pairs. The current artifact therefore supports a project-level cross-tradition moral-attention readout together with a more conservative release-grade claim, rather than a broad claim of moral improvement.
 \end{abstract}
 
 \section{Introduction}
@@ -43,6 +43,8 @@ Prompt framing effects in large language models are often discussed at the level
 This repository studies that narrower question through a benchmark design centered on \emph{moral attention reallocation}. The broader project uses a generic heart-focused scaffold together with four frozen study-paraphrased text anchors keyed to cited passages: Proverbs 4:23 from the Biblical Jewish/Christian tradition, Dhammapada 34 from the Buddhist tradition, Bhagavad Gita 15.15 from the Hindu tradition, and Qur'an 26:88--89 from the Islamic tradition. The repository intentionally exposes two levels of evidence. At the project level, it shows a six-condition cross-tradition readout on the same confirmation slice. At the release level, it keeps a narrower frozen artifact whose strongest supported claim is still Baseline vs.\ Heart-focused. The claim is intentionally modest: the current evidence does \emph{not} show that any one religiously inflected framing makes language models more moral overall. It shows that, on a clean confirmation slice, motive-sensitive judgment can move without increasing same-heart overreach.
 
 Two benchmark design choices are central. First, the main target items are same-act / different-motive pairs, adapted from Moral Stories \cite{emelin2021moral}. These items hold outward behavior fixed while varying written motive. Second, the benchmark includes same-heart controls, where inward orientation stays fixed while outward action changes. These controls prevent a method from winning by simply projecting worse hearts onto harsher-looking behavior. This emphasis on explanation structure and moral salience also connects to prior work showing that language models can adapt moral rationalizations to framing cues \cite{simmons2023moral}.
+
+Intuitively, the benchmark is asking whether the model continues to read a case mostly from its visible surface, or whether it becomes more likely to notice the moral importance of the heart from which the act flows. If two people perform the same outwardly helpful act, many human readers still distinguish between sincere care and self-display, vanity, or hypocrisy. The question here is whether framing makes that inward distinction more salient to the model without rewarding indiscriminate suspicion.
 
 \section{Benchmark Logic}
 
@@ -58,6 +60,8 @@ These are the key mechanistic items. Each pair keeps the action fixed but varies
 
 If a framing condition reallocates moral attention toward motive, it should improve performance on these items, especially on the inward-orientation task.
 
+The intuition behind these items is that they separate \emph{what was done} from \emph{the moral orientation from which it was done}. A model that mainly tracks behavioral surface may treat the two cases as nearly interchangeable. A model that becomes more motive-sensitive should be more willing to say that the vain or resentful version reveals the worse inward orientation even when the visible action is the same.
+
 \paragraph{Same-heart controls.}
 These are the guardrail items. They keep inward orientation fixed while outward surface changes. A stylized example is:
 
@@ -67,6 +71,8 @@ These are the guardrail items. They keep inward orientation fixed while outward 
 \end{itemize}
 
 These controls ensure that gains do not come from indiscriminate heart-projection.
+
+These controls matter because otherwise an apparent gain could be fake. A method could look better on motive-sensitive items simply by learning a crude shortcut such as ``blunter act means worse heart.'' Same-heart controls check that the model can still preserve matched inward orientation when outward style differs.
 
 \subsection{Three task layers}
 
@@ -96,6 +102,12 @@ The released confirmation artifacts use the same multi-pass structure:
 
 The six-condition prompt family keeps this pipeline fixed. Baseline uses no added frame. Heart-focused adds a generic inward-motive scaffold. Each cross-tradition condition reuses that same heart-focused scaffold and appends one frozen study-paraphrased anchor block keyed to the cited passage.
 
+\subsection{Metrics and robustness checks}
+
+The public artifact reports seven first-class metrics. Task A accuracy is the proportion of items on which the model selects the gold overall moral verdict. Task B accuracy is the proportion of items on which the model selects the gold inward-orientation label. Heart-sensitivity score is Task B accuracy restricted to the 23 same-act / different-motive pairs, which makes it the main motive-sensitive metric. The reason-focus metric ``$P(\mathrm{reason}=\mathrm{motive})$'' is the proportion of items on which Task C selects \emph{motive} as the primary reason. Same-heart control accuracy and heart overreach rate are both measured on the 40 same-heart controls; the former tracks correct \emph{Same} judgments and the latter tracks false projections of worse inward orientation. Mean explanation length is reported as a descriptive guardrail against verbosity-based artifacts rather than as a quality metric.
+
+For condition contrasts, the repository uses paired item-level comparisons. We report paired bootstrap confidence intervals together with exact sign tests that retain ties rather than discarding them. In this paper, we treat the exact sign test as a conservative diagnostic of directional evidence rather than as the sole decision rule. We also report paired-order follow-up runs on the same 23 same-act pairs to distinguish true same-item order instability from split-based swap artifacts that can arise in aggregate summaries.
+
 \section{Frozen Public Release Artifact}
 
 The public artifact in this repository is intentionally narrow and pre-freeze:
@@ -109,7 +121,7 @@ The public artifact in this repository is intentionally narrow and pre-freeze:
   \item \textbf{Decoding:} temperature $= 0$, top-$p = 1.0$, $n = 1$, max\_new\_tokens $= 120$, max\_attempts $= 2$
 \end{itemize}
 
-The frozen public outputs for this slice are stored in the repository's confirmation results directory. The full 160-item main benchmark is not yet frozen.
+The frozen public outputs for this slice are stored in the repository's confirmation results directory. The full 160-item main benchmark is not yet frozen. Later project-level readouts rerun this same 63-item slice with a broader prompt family, but those reruns are not the canonical release-grade claim.
 
 \section{Results}
 
@@ -145,7 +157,11 @@ Figure~\ref{fig:comparison} shows the narrower frozen release result. Task A sta
   \end{tabularx}
 \end{table}
 
-The paired test on the 23 same-act motive pairs remains conservative:
+The release pattern is asymmetric in a way that matters for interpretation. Task B improves by +0.0635 with a paired bootstrap interval of [0.0159, 0.1270], and heart-sensitivity improves by +0.1739 with a paired bootstrap interval of [0.0475, 0.3448]. By contrast, Task A remains exactly flat, the Task C motive-focus shift is smaller and less stable (+0.0635 with interval [-0.0159, 0.1429]), and mean explanation length decreases slightly rather than inflating. That pattern is more consistent with motive-sensitive attention reallocation than with a general increase in moralistic verbosity.
+
+One intuitive way to read this pattern is that the model is not obviously becoming harsher or more morally serious in general. Instead, it is becoming somewhat more likely to treat motive as the thing that breaks a tie between two outwardly similar acts. In other words, the effect shows up more clearly in \emph{what feature the model treats as diagnostic} than in a broad shift in overall condemnation.
+
+The exact paired test on the 23 same-act motive pairs remains conservative:
 
 \begin{itemize}
   \item Better / worse / tie counts for heart-sensitivity: 4 / 0 / 19
@@ -168,6 +184,8 @@ First, the effect appears more clearly in motive-sensitive evaluation than in fi
 
 Second, the guardrail holds. Same-heart control accuracy remains 1.0 and heart overreach remains 0.0 in both conditions. That makes the result more credible than a gain that simply came from reading bad motives into every harsher-looking case.
 
+Stated more plainly, the current effect looks like this: the model does \emph{not} become uniformly more likely to condemn a case, but it does become more likely to say that two outwardly matched acts can still differ morally because they flow from different inner motives. That is the specific sense in which we use the phrase \emph{moral attention reallocation}.
+
 \section{Limitations}
 
 The current public artifact has several explicit boundaries.
@@ -177,6 +195,8 @@ The current public artifact has several explicit boundaries.
   \item The canonical public comparison is Baseline vs.\ Heart-focused framing only; it does not yet include the matched secular comparison as part of the frozen public claim.
   \item The result is directional rather than decisive under conservative paired testing.
   \item The broader transformed Moral Stories benchmark is not yet fully double-annotated and frozen.
+  \item The six-condition cross-tradition readout is currently single-model and should be read as exploratory robustness evidence rather than as a finalized cross-model benchmark result.
+  \item The four anchored conditions are controlled text-anchor probes layered on one shared scaffold, not comprehensive evaluations of religious traditions, translations, or theological systems.
 \end{itemize}
 
 These limitations are part of the intended honesty of the artifact. The repository is meant to present the strongest public claim that is currently supported, rather than a larger claim that would overrun the data.
@@ -193,7 +213,7 @@ These four anchors are implemented as frozen study paraphrases inserted into the
 This readout is not part of the frozen release-grade claim. Its role is to show whether the motive-sensitive pattern remains visible when the framing scaffold is paired with several fixed text anchors rather than a single intuitive wording choice.
 Because this six-condition matrix is a later rerun rather than the frozen release package, its point estimates differ slightly from the narrower release artifact even on the same 63-item slice.
 
-The strongest project-level six-condition readout was run on the same 63-item slice with Qwen-1.5B-Instruct. The resulting pattern is heterogeneous but informative. The Heart-focused condition and the Proverbs 4:23 anchor tie for the strongest improvement, raising Task B from 0.8889 to 0.9683 and heart-sensitivity from 0.6957 to 0.9130. Bhagavad Gita 15.15 and Qur'an 26:88--89 remain directionally positive but smaller, while Dhammapada 34 is effectively null on this slice. All six conditions preserve same-heart control accuracy at 1.0 and keep heart overreach at 0.0.
+The strongest project-level six-condition readout was run on the same 63-item slice with Qwen-1.5B-Instruct. The resulting pattern is heterogeneous but informative. The Heart-focused condition and the Proverbs 4:23 anchor tie for the strongest improvement, raising Task B from 0.8889 to 0.9683 and heart-sensitivity from 0.6957 to 0.9130; for both conditions, the exact sign test on the same-act pairs is $p = 0.03125$ one-sided and $p = 0.0625$ two-sided. Bhagavad Gita 15.15 and Qur'an 26:88--89 remain directionally positive but smaller, while Dhammapada 34 is effectively null on this slice. All six conditions preserve same-heart control accuracy at 1.0 and keep heart overreach at 0.0.
 
 The paired-order follow-up matters as much as the point estimates. A confirmation paired-order pack on the 23 same-act items shows 0.0 item-level Task B order flips and 0.0 paired-order Task B gaps across all six conditions. This means the large split-based swap-gap visible in some aggregate summaries should not be read as same-item order instability on the same-act confirmation slice.
 
@@ -215,7 +235,7 @@ This keeps the project-level readout compact and makes the cross-condition patte
 
 \input{text_anchor_confirmation_tables.tex}
 
-This project-level readout does not justify a new freeze-grade cross-model claim. The earlier pilot remained heterogeneous across models, and the six-condition pattern should still be interpreted more conservatively than the narrower release artifact. But it does strengthen the overall research story in one important way: the core motive-sensitive effect on Qwen-1.5B-Instruct is no longer dependent on only one prompt wording. At least one anchored variant, Proverbs 4:23, matches the strongest heart-focused result on the current confirmation slice while preserving the same guardrails.
+This project-level readout does not justify a new freeze-grade cross-model claim. The earlier pilot remained heterogeneous across models, and the six-condition pattern should still be interpreted more conservatively than the narrower release artifact. It is also important not to overread the four anchor conditions as a head-to-head comparison of whole traditions: because all four anchors are layered on top of the same heart-focused scaffold, the design isolates the effect of a fixed additional text block rather than providing a fair comparison of traditions, translations, or doctrines. Within that narrower interpretation, however, the readout does strengthen the overall research story in one important way: the core motive-sensitive effect on Qwen-1.5B-Instruct is no longer dependent on only one prompt wording. At least one anchored variant, Proverbs 4:23, matches the strongest heart-focused result on the current confirmation slice while preserving the same guardrails.
 
 \section{Artifact Availability}
 
