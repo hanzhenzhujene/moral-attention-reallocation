@@ -8,6 +8,8 @@
 
 > This repo studies whether generic heart-focused framing and cross-tradition religious text anchors change what an LLM treats as morally diagnostic. The strongest public claim remains narrow: on a clean same-act confirmation slice, heart-focused framing directionally improves inward-motive judgment without increasing same-heart overreach.
 
+![Main result figure: baseline versus heart-focused framing on the frozen 63-item confirmation slice](assets/confirmation-comparison-bars.svg)
+
 ## Artifact Index
 
 | Paper | Figures | Tables | Results | Release |
@@ -86,8 +88,6 @@ Current scope:
 
 This is the strongest claim supported by the current public artifact.
 The release comparison is `Baseline` vs `Heart-focused` only.
-
-![Frozen public release figure for baseline vs heart-focused](assets/confirmation-comparison-bars.svg)
 
 | Metric | Baseline | Heart-focused | Delta | Read |
 | --- | ---: | ---: | ---: | --- |
