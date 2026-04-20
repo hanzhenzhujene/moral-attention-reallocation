@@ -59,7 +59,7 @@ config = {
     "name": "text_anchor_confirmation_paired_order_v1_qwen15b",
     "benchmark_path": str(root_dir / "data/study/paper_first_main_same_act_confirmation_v0.json"),
     "jobs_path": str(output_dir / "text_anchor_confirmation_paired_order_jobs.jsonl"),
-    "prompt_dir": str(root_dir / "prompts/pilot_v12"),
+    "prompt_dir": str(root_dir / "project/prompts/pilot_v12"),
     "task_b_copy_mode": "benchmark_summary",
     "task_b_order_mode": "canonical_source",
     "conditions": [
@@ -99,7 +99,7 @@ PY
   --conditions "${CONDITIONS[@]}" \
   --pair-types same_act_different_motive \
   --output "${JOBS_PATH}" \
-  --prompt-dir "${ROOT_DIR}/prompts"
+  --prompt-dir "${ROOT_DIR}/project/prompts"
 
 "${PYTHON_BIN}" "${ROOT_DIR}/scripts/run_transformers_multipass.py" \
   --config "${TMP_CONFIG}" \

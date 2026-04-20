@@ -45,10 +45,10 @@ fi
   --conditions "${CONDITIONS[@]}" \
   --pair-types same_act_different_motive \
   --output "${JOBS_PATH}" \
-  --prompt-dir "${ROOT_DIR}/prompts"
+  --prompt-dir "${ROOT_DIR}/project/prompts"
 
 "${PYTHON_BIN}" "${ROOT_DIR}/scripts/run_transformers_multipass.py" \
-  --config "${ROOT_DIR}/configs/pilot_execution_text_anchor_v1_mps.json" \
+  --config "${ROOT_DIR}/project/configs/pilot_execution_text_anchor_v1_mps.json" \
   --jobs "${JOBS_PATH}" \
   --model-alias Qwen-0.5B-Instruct \
   --device "${DEVICE}" \
@@ -57,7 +57,7 @@ fi
   --trace-output "${OUTPUT_DIR}/qwen_0_5b_paired_order_trace.jsonl"
 
 "${PYTHON_BIN}" "${ROOT_DIR}/scripts/run_transformers_multipass.py" \
-  --config "${ROOT_DIR}/configs/pilot_execution_text_anchor_v1_mps.json" \
+  --config "${ROOT_DIR}/project/configs/pilot_execution_text_anchor_v1_mps.json" \
   --jobs "${JOBS_PATH}" \
   --model-alias Qwen-1.5B-Instruct \
   --device "${DEVICE}" \

@@ -136,7 +136,7 @@ It is whether the benchmark-assisted `v11` variant is acceptable as the main Tas
 
 Held-out package:
 
-- `configs/pilot_execution_v11_fullpilot.json`
+- `project/configs/pilot_execution_v11_fullpilot.json`
 - `results/pilot_v11_fullpilot_jobs.jsonl`
 - `results/pilot_v11_fullpilot_freeze_manifest.json`
 

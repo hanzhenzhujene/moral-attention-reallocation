@@ -1,0 +1,40 @@
+{
+  "name": "text_anchor_pilot_v1_mps",
+  "study_config_path": "/Users/hanzhenzhu/Desktop/moral-attention-reallocation/project/configs/text_anchor_study_v1.json",
+  "benchmark_path": "/Users/hanzhenzhu/Desktop/moral-attention-reallocation/data/study/paper_first_pilot_v1.json",
+  "jobs_path": "/Users/hanzhenzhu/Desktop/moral-attention-reallocation/results/text_anchor_pilot_v1_jobs.jsonl",
+  "prompt_dir": "/Users/hanzhenzhu/Desktop/moral-attention-reallocation/project/prompts/pilot_v12",
+  "task_b_copy_mode": "benchmark_summary",
+  "task_b_order_mode": "canonical_source",
+  "conditions": [
+    "baseline",
+    "heart_focused",
+    "proverbs_4_23",
+    "dhammapada_34",
+    "bhagavad_gita_15_15",
+    "quran_26_88_89"
+  ],
+  "models": [
+    {
+      "alias": "Qwen-0.5B-Instruct",
+      "hf_model_id": "Qwen/Qwen2.5-0.5B-Instruct"
+    },
+    {
+      "alias": "Qwen-1.5B-Instruct",
+      "hf_model_id": "Qwen/Qwen2.5-1.5B-Instruct"
+    }
+  ],
+  "inference": {
+    "prompt_mode": "chat",
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "n": 1,
+    "max_new_tokens": 120,
+    "max_attempts": 2,
+    "device": "mps",
+    "dtype": "auto"
+  },
+  "outputs": {
+    "run_dir": "/Users/hanzhenzhu/Desktop/moral-attention-reallocation/results/pilot_live_text_anchor_v1_mps"
+  }
+}

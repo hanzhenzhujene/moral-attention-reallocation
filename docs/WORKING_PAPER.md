@@ -5,8 +5,8 @@ The canonical landing page for first-time readers is [README.md](../README.md); 
 
 Formal LaTeX paper:
 
-- PDF: [paper/main.pdf](../paper/main.pdf)
-- Source: [paper/main.tex](../paper/main.tex)
+- PDF: [project/paper/main.pdf](../project/paper/main.pdf)
+- Source: [project/paper/main.tex](../project/paper/main.tex)
 
 ## Title
 
@@ -58,7 +58,7 @@ The frozen release claim centers on `Task B` and heart-sensitivity, with `Task C
 ## Implementation Notes
 
 - The released artifacts are prompting-only inference runs; no model training or fine-tuning is performed in this repo.
-- The shared runtime is `scripts/run_transformers_multipass.py` with the `prompts/pilot_v12` prompt package.
+- The shared runtime is `scripts/run_transformers_multipass.py` with the `project/prompts/pilot_v12` prompt package.
 - `Task A` and `Task C` are answered from the two full case texts.
 - In the released configs, `Task B` uses `task_b_copy_mode=benchmark_summary`, so the intention-only comparison is built from the benchmark `motive_summary` strings rather than a model-generated copy pass.
 - A relation gate first checks whether the two intention texts express the same or different inward orientation; only `different` items proceed to the final inward-orientation choice.
@@ -172,7 +172,7 @@ The key follow-up diagnostics are now in the repo:
 - Confirmation readout: [`results/main_same_act_text_anchor_v1_qwen15b_mps/confirmation_readout.md`](../results/main_same_act_text_anchor_v1_qwen15b_mps/confirmation_readout.md)
 - Confirmation family summary: [`results/main_same_act_text_anchor_v1_qwen15b_mps/confirmation_text_anchor_family.md`](../results/main_same_act_text_anchor_v1_qwen15b_mps/confirmation_text_anchor_family.md)
 - Confirmation paired-order stability: [`results/main_same_act_text_anchor_v1_qwen15b_paired_order_mps/paired_order_stability.md`](../results/main_same_act_text_anchor_v1_qwen15b_paired_order_mps/paired_order_stability.md)
-- Confirmation figure: [`assets/text-anchor-confirmation-qwen15.svg`](../assets/text-anchor-confirmation-qwen15.svg)
+- Confirmation figure: [`assets/text-anchor-confirmation-qwen15.svg`](assets/text-anchor-confirmation-qwen15.svg)
 
 That confirmation paired-order pack matters because it shows `0.0` item-level Task B order flips and `0.0` paired-order Task B gaps across all six conditions on the 23 same-act confirmation items. So the large split-based swap-gap seen in some aggregate confirmation summaries should not be read as same-item order instability on that slice.
 
@@ -185,8 +185,8 @@ Interpretation:
 
 ## Figures And Readouts
 
-- Frozen release figure: [`assets/confirmation-comparison-bars.svg`](../assets/confirmation-comparison-bars.svg)
-- Project overview figure: [`assets/text-anchor-confirmation-qwen15.svg`](../assets/text-anchor-confirmation-qwen15.svg)
+- Frozen release figure: [`assets/confirmation-comparison-bars.svg`](assets/confirmation-comparison-bars.svg)
+- Project overview figure: [`assets/text-anchor-confirmation-qwen15.svg`](assets/text-anchor-confirmation-qwen15.svg)
 - Readout: [`results/main_same_act_confirmation_v12_mps/confirmation_readout.md`](../results/main_same_act_confirmation_v12_mps/confirmation_readout.md)
 - Public paired-order follow-up: [`results/main_same_act_confirmation_v12_mps/confirmation_paired_order_followup.md`](../results/main_same_act_confirmation_v12_mps/confirmation_paired_order_followup.md)
 - Robustness report: [`results/main_same_act_confirmation_v12_mps/confirmation_robustness.md`](../results/main_same_act_confirmation_v12_mps/confirmation_robustness.md)

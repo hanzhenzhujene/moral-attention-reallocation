@@ -34,7 +34,7 @@ python3 "${ROOT_DIR}/scripts/build_paired_order_jobs.py" \
   --items "${ROOT_DIR}/data/study/paper_first_main_same_act_confirmation_v0.json" \
   --conditions baseline heart_focused \
   --pair-types same_act_different_motive \
-  --prompt-dir "${ROOT_DIR}/prompts/pilot_v12" \
+  --prompt-dir "${ROOT_DIR}/project/prompts/pilot_v12" \
   --output "${TMP_JOBS}"
 
 python3 - <<'PY' "${ROOT_DIR}" "${TMP_CONFIG}" "${OUTPUT_DIR}" "${TMP_JOBS}"
@@ -51,7 +51,7 @@ config = {
     "name": "public_confirmation_paired_order_reproduction",
     "benchmark_path": str(root_dir / "data/study/paper_first_main_same_act_confirmation_v0.json"),
     "jobs_path": str(jobs_path),
-    "prompt_dir": str(root_dir / "prompts/pilot_v12"),
+    "prompt_dir": str(root_dir / "project/prompts/pilot_v12"),
     "task_b_copy_mode": "benchmark_summary",
     "task_b_order_mode": "canonical_source",
     "conditions": ["baseline", "heart_focused"],

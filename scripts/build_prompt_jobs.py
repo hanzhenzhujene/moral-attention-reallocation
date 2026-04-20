@@ -16,7 +16,7 @@ import condition_registry
 
 
 ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_PROMPT_DIR = ROOT / "prompts"
+DEFAULT_PROMPT_DIR = ROOT / "project/prompts"
 DEFAULT_SCRIPTURE_BLOCK = "\n".join(
     [
         "- 1 Samuel 16:7",

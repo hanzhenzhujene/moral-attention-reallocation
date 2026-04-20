@@ -6,7 +6,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 OUTPUT_DIR="${1:-${ROOT_DIR}/results/pilot_live_text_anchor_v1_mps}"
 JOBS_PATH="${ROOT_DIR}/results/text_anchor_pilot_v1_jobs.jsonl"
-STUDY_CONFIG="${ROOT_DIR}/configs/text_anchor_study_v1.json"
+STUDY_CONFIG="${ROOT_DIR}/project/configs/text_anchor_study_v1.json"
 PYTHON_BIN="${ROOT_DIR}/.venv/bin/python"
 
 if [[ ! -x "${PYTHON_BIN}" ]]; then
@@ -57,17 +57,17 @@ fi
   --items "${ROOT_DIR}/data/study/paper_first_pilot_v1.json" \
   --conditions "${CONDITIONS[@]}" \
   --output "${JOBS_PATH}" \
-  --prompt-dir "${ROOT_DIR}/prompts"
+  --prompt-dir "${ROOT_DIR}/project/prompts"
 
 "${PYTHON_BIN}" "${ROOT_DIR}/scripts/report_prompt_diagnostics.py" \
-  --prompt-dir "${ROOT_DIR}/prompts/pilot_v12" \
+  --prompt-dir "${ROOT_DIR}/project/prompts/pilot_v12" \
   --conditions "${CONDITIONS[@]}" \
   --model-id "Qwen/Qwen2.5-1.5B-Instruct" \
   --output-json "${OUTPUT_DIR}/prompt_diagnostics.json" \
   --output-md "${OUTPUT_DIR}/prompt_diagnostics.md"
 
 "${PYTHON_BIN}" "${ROOT_DIR}/scripts/run_transformers_multipass.py" \
-  --config "${ROOT_DIR}/configs/pilot_execution_text_anchor_v1_mps.json" \
+  --config "${ROOT_DIR}/project/configs/pilot_execution_text_anchor_v1_mps.json" \
   --model-alias Qwen-0.5B-Instruct \
   --device "${DEVICE}" \
   --output "${OUTPUT_DIR}/qwen_0_5b_text_anchor_runs.jsonl" \
@@ -75,7 +75,7 @@ fi
   --trace-output "${OUTPUT_DIR}/qwen_0_5b_text_anchor_trace.jsonl"
 
 "${PYTHON_BIN}" "${ROOT_DIR}/scripts/run_transformers_multipass.py" \
-  --config "${ROOT_DIR}/configs/pilot_execution_text_anchor_v1_mps.json" \
+  --config "${ROOT_DIR}/project/configs/pilot_execution_text_anchor_v1_mps.json" \
   --model-alias Qwen-1.5B-Instruct \
   --device "${DEVICE}" \
   --output "${OUTPUT_DIR}/qwen_1_5b_text_anchor_runs.jsonl" \

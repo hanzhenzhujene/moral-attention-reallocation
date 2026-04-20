@@ -120,7 +120,7 @@ Check candidate progress, quota coverage, domain concentration, and source-story
 
 ```bash
 python3 scripts/check_candidate_batch_progress.py \
-  --config configs/paper_first_study_v1.json \
+  --config project/configs/paper_first_study_v1.json \
   --candidate-items data/moral_stories/moral_stories_transformed_candidate_batch_v0.json \
   --controls data/moral_stories/moral_stories_controls_v1.json \
   --pilot-items data/study/paper_first_pilot_v1.json \
@@ -157,7 +157,7 @@ Check the freeze/release gates:
 
 ```bash
 python3 scripts/check_release_gates.py \
-  --config configs/paper_first_study_v1.json \
+  --config project/configs/paper_first_study_v1.json \
   --main-items data/study/paper_first_main_partial_v0.json \
   --pilot-items data/study/paper_first_pilot_v1.json \
   --output results/paper_first_release_gates_v1.json
@@ -188,12 +188,12 @@ Write a freeze manifest that hashes the benchmark, jobs, prompts, and schemas:
 
 ```bash
 python3 scripts/write_pilot_freeze_manifest.py \
-  --execution-config configs/pilot_execution_v3.json \
-  --study-config configs/paper_first_study_v1.json \
+  --execution-config project/configs/pilot_execution_v3.json \
+  --study-config project/configs/paper_first_study_v1.json \
   --benchmark data/study/paper_first_pilot_v1.json \
   --jobs results/paper_first_pilot_jobs_v3.jsonl \
-  --run-schema schemas/run_record.schema.json \
-  --response-schema schemas/model_response.schema.json \
+  --run-schema project/schemas/run_record.schema.json \
+  --response-schema project/schemas/model_response.schema.json \
   --output results/pilot_freeze_manifest_v3.json
 ```
 
@@ -233,13 +233,13 @@ The local pilot runner is:
 
 ```bash
 python3 scripts/run_transformers_jobs.py \
-  --config configs/pilot_execution_v3.json \
+  --config project/configs/pilot_execution_v3.json \
   --model-alias Qwen-0.5B-Instruct \
   --output results/pilot_live_v3/qwen_0_5b_pilot_v3.jsonl \
   --failures-output results/pilot_live_v3/qwen_0_5b_pilot_failures_v3.jsonl
 
 python3 scripts/run_transformers_jobs.py \
-  --config configs/pilot_execution_v3.json \
+  --config project/configs/pilot_execution_v3.json \
   --model-alias Qwen-1.5B-Instruct \
   --output results/pilot_live_v3/qwen_1_5b_pilot_v3.jsonl \
   --failures-output results/pilot_live_v3/qwen_1_5b_pilot_failures_v3.jsonl
@@ -247,7 +247,7 @@ python3 scripts/run_transformers_jobs.py \
 
 Notes:
 
-- `configs/pilot_execution_v3.json` freezes the model ids, job file, decoding settings, and output directory.
+- `project/configs/pilot_execution_v3.json` freezes the model ids, job file, decoding settings, and output directory.
 - The runner defaults to CPU because Qwen on this Apple M4 environment crashed on MPS during pilot smoke tests.
 - The runner now writes each successful record to disk immediately, so a long run can be resumed without losing completed jobs.
 - Retries are only used for parse / schema failures, and they reuse the same prompt and decoding settings.
@@ -321,7 +321,7 @@ This script evaluates the method-health signals the pilot is meant to gate:
 
 ```bash
 python3 scripts/evaluate_pilot_health.py \
-  --config configs/paper_first_study_v1.json \
+  --config project/configs/paper_first_study_v1.json \
   --jobs results/paper_first_pilot_jobs_v3.jsonl \
   --models Qwen-0.5B-Instruct Qwen-1.5B-Instruct \
   --runs results/pilot_live_v3/qwen_0_5b_pilot_v3.jsonl results/pilot_live_v3/qwen_1_5b_pilot_v3.jsonl \
@@ -364,7 +364,7 @@ If you want one fixed wrapper for all four post-pilot steps, use:
 
 ```bash
 python3 scripts/postprocess_pilot.py \
-  --config configs/paper_first_study_v1.json \
+  --config project/configs/paper_first_study_v1.json \
   --jobs results/paper_first_pilot_jobs_v3.jsonl \
   --benchmark data/study/paper_first_pilot_v1.json \
   --models Qwen-0.5B-Instruct Qwen-1.5B-Instruct \
@@ -401,7 +401,7 @@ Use the dedicated multipass runner for `v10` and later branches:
 
 ```bash
 python3 scripts/run_transformers_multipass.py \
-  --config configs/pilot_execution_v10.json \
+  --config project/configs/pilot_execution_v10.json \
   --jobs results/pilot_v10_smoke_jobs.jsonl \
   --model-alias Qwen-0.5B-Instruct \
   --output results/pilot_live_v10/qwen_0_5b_smoke_v10.jsonl \
@@ -409,7 +409,7 @@ python3 scripts/run_transformers_multipass.py \
   --trace-output results/pilot_live_v10/qwen_0_5b_smoke_trace_v10.jsonl
 ```
 
-For the benchmark-summary-assisted variant, swap in `configs/pilot_execution_v11.json` and the `results/pilot_v11_*` paths.
+For the benchmark-summary-assisted variant, swap in `project/configs/pilot_execution_v11.json` and the `results/pilot_v11_*` paths.
 
 After the run records are written, score the multipass traces:
 
@@ -434,7 +434,7 @@ Build the frozen held-out jobs:
 python3 scripts/build_prompt_jobs.py \
   --items data/study/paper_first_pilot_v1.json \
   --conditions baseline heart_focused secular_matched \
-  --prompt-dir prompts/pilot_v10 \
+  --prompt-dir project/prompts/pilot_v10 \
   --output results/pilot_v11_fullpilot_jobs.jsonl
 ```
 
@@ -450,12 +450,12 @@ Write the held-out freeze manifest:
 
 ```bash
 python3 scripts/write_pilot_freeze_manifest.py \
-  --execution-config configs/pilot_execution_v11_fullpilot.json \
-  --study-config configs/paper_first_study_v1.json \
+  --execution-config project/configs/pilot_execution_v11_fullpilot.json \
+  --study-config project/configs/paper_first_study_v1.json \
   --benchmark data/study/paper_first_pilot_v1.json \
   --jobs results/pilot_v11_fullpilot_jobs.jsonl \
-  --run-schema schemas/run_record.schema.json \
-  --response-schema schemas/model_response.schema.json \
+  --run-schema project/schemas/run_record.schema.json \
+  --response-schema project/schemas/model_response.schema.json \
   --output results/pilot_v11_fullpilot_freeze_manifest.json
 ```
 
@@ -463,7 +463,7 @@ Run both models:
 
 ```bash
 python3 scripts/run_transformers_multipass.py \
-  --config configs/pilot_execution_v11_fullpilot.json \
+  --config project/configs/pilot_execution_v11_fullpilot.json \
   --model-alias Qwen-0.5B-Instruct \
   --output results/pilot_live_v11_fullpilot/qwen_0_5b_fullpilot_v11.jsonl \
   --failures-output results/pilot_live_v11_fullpilot/qwen_0_5b_fullpilot_failures_v11.jsonl \
@@ -472,7 +472,7 @@ python3 scripts/run_transformers_multipass.py \
 
 ```bash
 python3 scripts/run_transformers_multipass.py \
-  --config configs/pilot_execution_v11_fullpilot.json \
+  --config project/configs/pilot_execution_v11_fullpilot.json \
   --model-alias Qwen-1.5B-Instruct \
   --output results/pilot_live_v11_fullpilot/qwen_1_5b_fullpilot_v11.jsonl \
   --failures-output results/pilot_live_v11_fullpilot/qwen_1_5b_fullpilot_failures_v11.jsonl \
@@ -483,7 +483,7 @@ Run the fixed postprocess bundle:
 
 ```bash
 python3 scripts/postprocess_pilot.py \
-  --config configs/paper_first_study_v1.json \
+  --config project/configs/paper_first_study_v1.json \
   --jobs results/pilot_v11_fullpilot_jobs.jsonl \
   --benchmark data/study/paper_first_pilot_v1.json \
   --models Qwen-0.5B-Instruct Qwen-1.5B-Instruct \
@@ -548,7 +548,7 @@ Key outputs from this extension:
 - `results/pilot_live_text_anchor_v1_mps/text_anchor_stage_report.md`
 - `results/main_same_act_text_anchor_v1_qwen15b_mps/confirmation_readout.md`
 - `results/main_same_act_text_anchor_v1_qwen15b_paired_order_mps/paired_order_stability.md`
-- `assets/text-anchor-confirmation-qwen15.svg`
+- `docs/assets/text-anchor-confirmation-qwen15.svg`
 
 ## 8. Freeze The Dataset State
 

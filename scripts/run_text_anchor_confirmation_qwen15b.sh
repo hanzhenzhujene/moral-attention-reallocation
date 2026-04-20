@@ -6,7 +6,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 OUTPUT_DIR="${1:-${ROOT_DIR}/results/main_same_act_text_anchor_v1_qwen15b_mps}"
 JOBS_PATH="${OUTPUT_DIR}/text_anchor_confirmation_jobs.jsonl"
-STUDY_CONFIG="${ROOT_DIR}/configs/text_anchor_study_v1.json"
+STUDY_CONFIG="${ROOT_DIR}/project/configs/text_anchor_study_v1.json"
 BENCHMARK_PATH="${ROOT_DIR}/data/study/paper_first_main_same_act_confirmation_v0.json"
 PYTHON_BIN="${ROOT_DIR}/.venv/bin/python"
 TMP_CONFIG="$(mktemp "${TMPDIR:-/tmp}/text_anchor_confirmation_config.XXXXXX.json")"
@@ -84,10 +84,10 @@ output_dir = Path(sys.argv[3]).resolve()
 
 config = {
     "name": "text_anchor_confirmation_v1_qwen15b",
-    "study_config_path": str(root_dir / "configs/text_anchor_study_v1.json"),
+    "study_config_path": str(root_dir / "project/configs/text_anchor_study_v1.json"),
     "benchmark_path": str(root_dir / "data/study/paper_first_main_same_act_confirmation_v0.json"),
     "jobs_path": str(output_dir / "text_anchor_confirmation_jobs.jsonl"),
-    "prompt_dir": str(root_dir / "prompts/pilot_v12"),
+    "prompt_dir": str(root_dir / "project/prompts/pilot_v12"),
     "task_b_copy_mode": "benchmark_summary",
     "task_b_order_mode": "canonical_source",
     "conditions": [
@@ -133,7 +133,7 @@ PY
   --items "${BENCHMARK_PATH}" \
   --conditions "${CONDITIONS[@]}" \
   --output "${JOBS_PATH}" \
-  --prompt-dir "${ROOT_DIR}/prompts"
+  --prompt-dir "${ROOT_DIR}/project/prompts"
 
 "${PYTHON_BIN}" "${ROOT_DIR}/scripts/check_job_balance.py" \
   --input "${JOBS_PATH}" \
@@ -144,12 +144,12 @@ PY
   --study-config "${STUDY_CONFIG}" \
   --benchmark "${BENCHMARK_PATH}" \
   --jobs "${JOBS_PATH}" \
-  --run-schema "${ROOT_DIR}/schemas/run_record.schema.json" \
-  --response-schema "${ROOT_DIR}/schemas/model_response.schema.json" \
+  --run-schema "${ROOT_DIR}/project/schemas/run_record.schema.json" \
+  --response-schema "${ROOT_DIR}/project/schemas/model_response.schema.json" \
   --output "${OUTPUT_DIR}/confirmation_freeze_manifest.json"
 
 "${PYTHON_BIN}" "${ROOT_DIR}/scripts/report_prompt_diagnostics.py" \
-  --prompt-dir "${ROOT_DIR}/prompts/pilot_v12" \
+  --prompt-dir "${ROOT_DIR}/project/prompts/pilot_v12" \
   --conditions "${CONDITIONS[@]}" \
   --model-id "Qwen/Qwen2.5-1.5B-Instruct" \
   --output-json "${OUTPUT_DIR}/prompt_diagnostics.json" \

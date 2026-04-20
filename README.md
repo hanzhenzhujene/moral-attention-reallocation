@@ -4,21 +4,21 @@
 ![Status](https://img.shields.io/badge/status-pre--freeze%20confirmation%20artifact-0f766e?style=flat-square)
 ![Public Scope](https://img.shields.io/badge/public%20scope-Qwen--1.5B%20confirmation%20slice-12805c?style=flat-square)
 ![License](https://img.shields.io/badge/license-Apache--2.0-2563eb?style=flat-square)
-[![Paper PDF](https://img.shields.io/badge/paper-LaTeX%20PDF-b45309?style=flat-square)](paper/main.pdf)
+[![Paper PDF](https://img.shields.io/badge/paper-LaTeX%20PDF-b45309?style=flat-square)](project/paper/main.pdf)
 
 > This repo studies whether generic heart-focused framing and cross-tradition religious text anchors change what an LLM treats as morally diagnostic. The strongest public claim remains narrow: on a clean same-act confirmation slice, heart-focused framing directionally improves inward-motive judgment without increasing same-heart overreach.
 
-![Main result figure: baseline versus heart-focused framing on the frozen 63-item confirmation slice](assets/confirmation-comparison-bars.svg)
+![Main result figure: baseline versus heart-focused framing on the frozen 63-item confirmation slice](docs/assets/confirmation-comparison-bars.svg)
 
 ## Artifact Index
 
 | Paper | Figures | Tables | Results | Release |
 | --- | --- | --- | --- | --- |
-| [PDF](paper/main.pdf) · [LaTeX](paper/main.tex) | [Frozen release](assets/confirmation-comparison-bars.svg) · [Project overview](assets/text-anchor-confirmation-qwen15.svg) | [Cross-tradition matrix](docs/tables/text_anchor_confirmation_tables.md) | [Frozen readout](results/main_same_act_confirmation_v12_mps/confirmation_readout.md) · [Paired-order](results/main_same_act_confirmation_v12_mps/confirmation_paired_order_followup.md) · [6-condition readout](results/main_same_act_text_anchor_v1_qwen15b_mps/confirmation_readout.md) | [v0.1-confirmation](https://github.com/hanzhenzhujene/moral-attention-reallocation/releases/tag/v0.1-confirmation) |
+| [PDF](project/paper/main.pdf) · [LaTeX](project/paper/main.tex) | [Frozen release](docs/assets/confirmation-comparison-bars.svg) · [Project overview](docs/assets/text-anchor-confirmation-qwen15.svg) | [Cross-tradition matrix](docs/tables/text_anchor_confirmation_tables.md) | [Frozen readout](results/main_same_act_confirmation_v12_mps/confirmation_readout.md) · [Paired-order](results/main_same_act_confirmation_v12_mps/confirmation_paired_order_followup.md) · [6-condition readout](results/main_same_act_text_anchor_v1_qwen15b_mps/confirmation_readout.md) | [v0.1-confirmation](https://github.com/hanzhenzhujene/moral-attention-reallocation/releases/tag/v0.1-confirmation) |
 
 | Narrative | Status | Reproduce | Environment |
 | --- | --- | --- | --- |
-| [Working paper note](docs/WORKING_PAPER.md) · [Docs guide](docs/README.md) | [Status and next steps](docs/STATUS_AND_NEXT_STEPS.md) | [Root Makefile](Makefile) · [scripts/README.md](scripts/README.md) | [requirements.txt](requirements.txt) · [environment.yml](environment.yml) · [paper/README.md](paper/README.md) |
+| [Working paper note](docs/WORKING_PAPER.md) · [Docs guide](docs/README.md) | [Status and next steps](docs/STATUS_AND_NEXT_STEPS.md) | [Root Makefile](Makefile) · [scripts/README.md](scripts/README.md) | [requirements.txt](project/requirements.txt) · [environment.yml](project/environment.yml) · [project/paper/README.md](project/paper/README.md) |
 
 ## Overview
 
@@ -127,7 +127,7 @@ Why it matters:
 - all six conditions preserve same-heart control accuracy at `1.0` and heart overreach at `0.0`
 - the paired-order follow-up shows `0.0` item-level Task B order flips across all six conditions
 
-![Cross-tradition project overview figure for the 63-item confirmation slice](assets/text-anchor-confirmation-qwen15.svg)
+![Cross-tradition project overview figure for the 63-item confirmation slice](docs/assets/text-anchor-confirmation-qwen15.svg)
 
 | Condition | Tradition / frame | Task A | Task B | Task C = motive | HSS | Same-heart | Overreach | Read |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
@@ -206,7 +206,7 @@ Implementation note:
 
 - the released artifacts are inference-only; no model is trained or fine-tuned in this repo
 - `Task A` and `Task C` are prompted on the full case pair
-- `Task B` is run through a separate multi-pass intention-only pipeline using `prompts/pilot_v12`
+- `Task B` is run through a separate multi-pass intention-only pipeline using `project/prompts/pilot_v12`
 - the released configs use `task_b_copy_mode=benchmark_summary` and `task_b_order_mode=canonical_source`
 
 ## Claim Boundary
@@ -319,18 +319,19 @@ make paper
 Paper build note:
 
 - `make paper` prefers `tectonic` when available and otherwise falls back to `pdflatex`
-- exact paper build prerequisites are documented in [paper/README.md](paper/README.md)
+- exact paper build prerequisites are documented in [project/paper/README.md](project/paper/README.md)
 
 ## Repository Map
 
-- `assets/`: figures used on the project page
-- `configs/README.md`: which configs are canonical public configs versus historical revision snapshots
-- `paper/`: LaTeX manuscript, paper build notes, and compiled paper PDF
+- `docs/assets/`: figures used on the project page
+- `project/README.md`: guide to the grouped implementation internals
+- `project/configs/README.md`: which configs are canonical public configs versus historical revision snapshots
+- `project/paper/`: LaTeX manuscript, paper build notes, and compiled paper PDF
 - `Makefile`: one-command public setup, reproduction, and paper rebuild targets
 - `docs/README.md`: directory guide for narrative docs, methodology notes, and archive material
 - `docs/WORKING_PAPER.md`: paper-style summary of the public artifact
 - `docs/STATUS_AND_NEXT_STEPS.md`: current state, blockers, and recommended next experiments
-- `configs/`: execution configs for the public confirmation artifact and internal study configs
+- `project/configs/`: execution configs for the public confirmation artifact and internal study configs
 - `results/README.md`: guide to canonical public results versus historical local outputs
 - `results/main_same_act_confirmation_v12_mps/`: canonical public result files for the current strongest narrow claim
 - `results/main_same_act_text_anchor_v1_qwen15b_mps/`: project-level 6-condition confirmation artifact; `_mps` here is provenance, not a runtime requirement
@@ -366,8 +367,8 @@ Paper build note:
 Use the GitHub release artifact for citation when referencing this repository:
 
 - Working paper draft: [docs/WORKING_PAPER.md](docs/WORKING_PAPER.md)
-- Paper PDF: [paper/main.pdf](paper/main.pdf)
-- Paper source: [paper/main.tex](paper/main.tex)
+- Paper PDF: [project/paper/main.pdf](project/paper/main.pdf)
+- Paper source: [project/paper/main.tex](project/paper/main.tex)
 - Release: [v0.1-confirmation](https://github.com/hanzhenzhujene/moral-attention-reallocation/releases/tag/v0.1-confirmation)
 - Citation metadata: [CITATION.cff](CITATION.cff)
 - Preprint: no public preprint is linked yet

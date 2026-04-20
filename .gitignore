@@ -41,9 +41,9 @@ results/**/*.jsonl
 results/**/*_qualitative_examples.json
 results/mock_*
 
-paper/*.aux
-paper/*.log
-paper/*.out
-paper/*.toc
-paper/*.fls
-paper/*.fdb_latexmk
+project/paper/*.aux
+project/paper/*.log
+project/paper/*.out
+project/paper/*.toc
+project/paper/*.fls
+project/paper/*.fdb_latexmk

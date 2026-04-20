@@ -34,7 +34,7 @@ Interpretation:
 
 Artifacts:
 
-- `prompts/pilot_v4/`
+- `project/prompts/pilot_v4/`
 - `results/pilot_live_v4/pilot_v4_smoke_bundle_health.json`
 - `results/pilot_live_v4/pilot_v4_smoke_bundle_qualitative_review.md`
 
@@ -59,9 +59,9 @@ Interpretation:
 
 Artifacts:
 
-- `prompts/pilot_v5/`
-- `schemas/model_response_decomposed.schema.json`
-- `schemas/run_record_decomposed.schema.json`
+- `project/prompts/pilot_v5/`
+- `project/schemas/model_response_decomposed.schema.json`
+- `project/schemas/run_record_decomposed.schema.json`
 - `results/pilot_live_v5/pilot_v5_smoke_bundle_health.json`
 - `results/pilot_live_v5/pilot_v5_smoke_bundle_run_diagnostics.json`
 - `results/pilot_live_v5/pilot_v5_smoke_bundle_qualitative_review.md`
@@ -104,7 +104,7 @@ Most likely next options:
 
 Artifacts:
 
-- `prompts/pilot_v6/`
+- `project/prompts/pilot_v6/`
 - `results/pilot_live_v6/pilot_v6_smoke_bundle_health.json`
 - `results/pilot_live_v6/pilot_v6_smoke_bundle_summary.json`
 - `results/pilot_live_v6/pilot_v6_smoke_bundle_qualitative_review.md`
@@ -134,7 +134,7 @@ Interpretation:
 
 Artifacts:
 
-- `prompts/pilot_v7/`
+- `project/prompts/pilot_v7/`
 - `results/pilot_live_v7/pilot_v7_smoke_bundle_health.json`
 - `results/pilot_live_v7/pilot_v7_smoke_bundle_summary.json`
 - `results/pilot_live_v7/pilot_v7_smoke_bundle_qualitative_review.md`
@@ -167,7 +167,7 @@ Interpretation:
 
 Artifacts:
 
-- `prompts/pilot_v8/`
+- `project/prompts/pilot_v8/`
 - `results/pilot_live_v8/pilot_v8_smoke_bundle_health.json`
 - `results/pilot_live_v8/pilot_v8_smoke_bundle_summary.json`
 - `results/pilot_live_v8/pilot_v8_smoke_bundle_qualitative_review.md`
@@ -198,8 +198,8 @@ Interpretation:
 
 Artifacts:
 
-- `prompts/pilot_v9/`
-- `configs/pilot_execution_v9.json`
+- `project/prompts/pilot_v9/`
+- `project/configs/pilot_execution_v9.json`
 - `results/pilot_live_v9/pilot_v9_smoke_bundle_health.json`
 - `results/pilot_live_v9/pilot_v9_smoke_bundle_summary.json`
 - `results/pilot_live_v9/pilot_v9_smoke_bundle_qualitative_review.md`
@@ -232,7 +232,7 @@ Interpretation:
 
 Artifacts:
 
-- `configs/pilot_execution_v10.json`
+- `project/configs/pilot_execution_v10.json`
 - `scripts/run_transformers_multipass.py`
 - `scripts/evaluate_multipass_traces.py`
 - `results/pilot_live_v10/pilot_v10_smoke_bundle_health.json`
@@ -274,11 +274,11 @@ Interpretation:
 
 Artifacts:
 
-- `configs/pilot_execution_v11.json`
+- `project/configs/pilot_execution_v11.json`
 - `results/pilot_live_v11/pilot_v11_smoke_bundle_health.json`
 - `results/pilot_live_v11/pilot_v11_smoke_bundle_summary.json`
 - `results/pilot_live_v11/pilot_v11_smoke_trace_summary.json`
-- `configs/pilot_execution_v11_fullpilot.json`
+- `project/configs/pilot_execution_v11_fullpilot.json`
 - `results/pilot_v11_fullpilot_jobs.jsonl`
 - `results/pilot_v11_fullpilot_freeze_manifest.json`
 - `results/pilot_live_v11_fullpilot/pilot_v11_fullpilot_bundle_health.json`

@@ -42,7 +42,7 @@ config = {
     "name": "public_confirmation_reproduction",
     "benchmark_path": str(root_dir / "data/study/paper_first_main_same_act_confirmation_v0.json"),
     "jobs_path": str(root_dir / "results/paper_first_main_same_act_confirmation_jobs_v1.jsonl"),
-    "prompt_dir": str(root_dir / "prompts/pilot_v12"),
+    "prompt_dir": str(root_dir / "project/prompts/pilot_v12"),
     "task_b_copy_mode": "benchmark_summary",
     "task_b_order_mode": "canonical_source",
     "conditions": ["baseline", "heart_focused"],
@@ -89,7 +89,7 @@ python3 "${ROOT_DIR}/scripts/evaluate_runs.py" \
   --output "${OUTPUT_DIR}/confirmation_summary.json"
 
 if ! python3 "${ROOT_DIR}/scripts/evaluate_pilot_health.py" \
-  --config "${ROOT_DIR}/configs/paper_first_study_v1.json" \
+  --config "${ROOT_DIR}/project/configs/paper_first_study_v1.json" \
   --jobs "${ROOT_DIR}/results/paper_first_main_same_act_confirmation_jobs_v1.jsonl" \
   --runs "${OUTPUT_DIR}/qwen_1_5b_confirmation_runs.jsonl" \
   --models Qwen-1.5B-Instruct \

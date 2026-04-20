@@ -17,10 +17,10 @@ help:
 	@printf "  make paper                           Rebuild the paper PDF (prefers tectonic, falls back to pdflatex)\n"
 	@printf "  make clean                           Remove public reproduction outputs and LaTeX aux files\n"
 
-$(SETUP_STAMP): requirements.txt
+$(SETUP_STAMP): project/requirements.txt
 	$(PYTHON) -m venv $(VENV)
 	$(VENV_PIP) install --upgrade pip
-	$(VENV_PIP) install -r requirements.txt
+	$(VENV_PIP) install -r project/requirements.txt
 	touch $(SETUP_STAMP)
 
 setup: $(SETUP_STAMP)
@@ -44,7 +44,7 @@ paper:
 	bash scripts/build_paper.sh
 
 clean:
-	$(MAKE) -C paper clean
+	$(MAKE) -C project/paper clean
 	rm -rf results/reproduction_confirmation
 	rm -rf results/reproduction_confirmation_paired_order
 	rm -rf results/reproduction_text_anchor_confirmation
